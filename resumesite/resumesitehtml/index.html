@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Thomas Baldock's Resume Site - hosted by AWS</title>
+  <script>
+    fetch('https://sqlmxogyu8.execute-api.ap-southeast-2.amazonaws.com/Prod/put')
+            .then(() => fetch('https://sqlmxogyu8.execute-api.ap-southeast-2.amazonaws.com/Prod/get'))
+            .then(response => response.json())
+            .then((data) => {
+                document.getElementById('replaceme').innerText = data.count
+            })
+  </script>
+</head>
+
+  <h1>Thomas Baldock</h1>
+  
+<hr>
+<h4><pre>Email:On request       Mobile:On request       LinkedIn:/thomas-m-baldock        Github:/ThomasBaldock</h4>
+<hr>
+  
+  <body>
+<p>An ambitious AWS re/Start program learner – working towards my AWS Certified
+Cloud Practitioner badge. Restarting my career after 4 years in sales and business
+management in my family’s manufacturing company. Finally matching a lifelong
+  passion for technology with my career goals.</p>
+<p>Looking to throw myself fully into this new field with my outgoing and friendly nature.</p>
+  <h3>Achievements</h3>
+  <hr>
+  <ul>
+<li> Beat out thousands of applicants to be selected for the Victoria Digital Jobs
+  Program which lead to the AWS program</li>
+    <li>Recruited as a Player-Coach for a cricket club in the Netherlands, leading six sides and honing my leadership, communication and teamwork skills.</li>
+<li>In another application for an ASIO role, I was flown interstate for the final
+  round of interviews and was among the top 30 of over 10,000 applicants. </li></ul>
+  <h3>Projects</h3>
+    <hr>
+<ul>
+  <li>Pushed hard to be given the chance to modernise the website for my previous
+company. Did so without guidance and was happy with the result. Effectively
+  rebranded the company. australianroadcovers.com.au</li>
+<li>Also shifted that company’s paper-based production process to digital which
+allowed me to use some basic data analysis to identify inefficiencies and
+  improve workflow.</li>
+<li>I have undertaken ‘the Cloud Resume Challenge’ as a personal project -
+independent of my study - in order to build my technical skills in S3 Static site
+  deployment, DynamoDB databases, Infrastructure as Code and CI/CD. </li>
+    </ul>
+  <h3>Employment</h3>
+  <hr>
+  <ul>
+<li>2018 - 2022: <b>Assistant Manager</b> at Australian Road Covers Pty. Ltd.<br>
+- Worked in various roles for my family company in the manufacturing industry, mostly sales, management and technical design.<br>
+- Starting at the lowest rank, I earnt the respect of my peers and worked my way up,learning nearly all facets of the business.<br>
+-I often worked long hours, and even out-of-hours thinking about problems and potential solutions, teaching me the importance of hard-work, dedication and sacrifice in running a business.<br>
+-By the time I left I was a huge asset to the company due to my all-round skills and adaptability, although I left with my family’s full support.
+<li>2018: <b>Player-Coach</b> for Ajax Cricket Club in Netherlands.
+Focused on developing the game in the region; including senior (Men and Womens) and
+junior coaching, and hosting clinics for school children and business people.</li>
+<li>2016: <b>Sponsored Overseas Player</b> in North Wales.
+While in Wales I was also employed at Snowdonia Nurseries as a general hand, and at
+Denbigh Plant Hire as a motor mechanic.</li>
+<li>2015-16: <b>Match Reporter</b> at Football Federation of Victoria.</li>
+<li>2015: <b>Cadet Journalist</b> at Herald Sun and Bauer Media.
+Two journalism internships at prominent media companies with work published.</li>
+<li>2007-2015: <b>Soccer Referee</b> with the Football Federation of Victoria
+Officiated both senior and junior levels as a teenager, including in National U21
+competitions.</li>
+  <li>2007-2011: <b>Farmhand</b> at Australian Green Growers Organic Produce.</li>
+  </ul>
+  <h3>Education</h3>
+  <hr>
+  <ul>
+    <li>2022: <b>AWS Re/Start Program</b> - Goanna Education</li>
+    <li>2013 - 2015: <b>Bachelor of Journalism</b> - Monash University</li>
+      </ul>
+  <h3>Soft Skills</h3>
+  <hr>
+    <ul>
+<li>Teamwork</li>
+<li>Communication</li>
+<li>Emotional Intelligence</li>
+<li>Strong work ethic</li>
+<li>Resilience</li>
+    <li>Problem-solving</li>
+      </ul>
+ <h3>Fun facts about me </h3>
+  <hr>
+I’m still waiting for my letter from Hogwarts. I like photography and live to travel. I’m
+learning Spanish. I’m secretly a huge fan of bird-watching... Please don’t tell
+anybody. I can make a mean asado (and if you don’t know what that is, you’ll have to employ me to find out...).<br>
+  <br>
+<p>
+  You are visitor number
+  <span id="replaceme" /> 
+</p>
+</html>
