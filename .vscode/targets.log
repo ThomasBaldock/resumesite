@@ -6,8 +6,11 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # PARTICULAR PURPOSE.
 
 # This program built for i386-apple-darwin11.3.0
+ 
+make: *** No rule to make target `all'.  Stop.
 
-# Make data base, printed on Wed Jul 20 08:16:45 2022
+
+# Make data base, printed on Thu Jul 21 13:01:42 2022
 
 # Variables
 
@@ -32,33 +35,27 @@ _ = /usr/bin/make
 # makefile
 MAKEFILE_LIST := 
 # environment
-VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
-# environment
 __CFBundleIdentifier = com.microsoft.VSCode
 # environment
 VSCODE_CWD = /
 # environment
-GOPROXY = https://proxy.golang.org,direct
-# environment
 PATH = /opt/local/bin:/opt/local/sbin:/usr/local/mysql/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/usr/local/share/dotnet:/opt/X11/bin:~/.dotnet/tools:/Library/Frameworks/Mono.framework/Versions/Current/Commands
-# environment
-GOPATH = /Users/thomasbaldock/go
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.6PFcuCXfMV/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.e0zztQyaqz/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
-DISPLAY = /private/tmp/com.apple.launchd.Z70BfOsvy1/org.macosforge.xquartz:0
+DISPLAY = /private/tmp/com.apple.launchd.TsdVdWRgRo/org.macosforge.xquartz:0
 # environment
 PWD = /Users/thomasbaldock/resumesite
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = undefined
 # environment
-GOMODCACHE = /Users/thomasbaldock/go/pkg/mod
+VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
 HOME = /Users/thomasbaldock
 # default
@@ -68,7 +65,7 @@ VSCODE_CODE_CACHE_PATH = /Users/thomasbaldock/Library/Application Support/Code/C
 # environment
 LOGNAME = thomasbaldock
 # environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # automatic
@@ -134,9 +131,9 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 1866
+VSCODE_PID = 2696
 # variable set hash-table stats:
-# Load=62/1024=6%, Rehash=0, Collisions=2/83=2%
+# Load=59/1024=6%, Rehash=0, Collisions=1/80=1%
 
 # Pattern-specific Variable Values
 
@@ -144,9 +141,9 @@ VSCODE_PID = 1866
 
 # Directories
 
-# . (device 16777223, inode 12963205689): 5 files, no impossibilities.
+# . (device 16777223, inode 12963205689): 8 files, no impossibilities.
 
-# 5 files, no impossibilities in 1 directories.
+# 8 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -218,8 +215,6 @@ GNUmakefile:
 # strcache size: total = 0 / max = 0 / min = 4096 / avg = 0
 # strcache free: total = 0 / max = 0 / min = 4096 / avg = 0
 
-# Finished Make data base on Wed Jul 20 08:16:45 2022
+# Finished Make data base on Thu Jul 21 13:01:42 2022
 
  
-make: *** No rule to make target `all'.  Stop.
-
