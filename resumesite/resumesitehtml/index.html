@@ -1,102 +1,86 @@
 <html>
 <head>
-   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title>Thomas Baldock's Resume Site - hosted by AWS</title>
-  <script>
-    fetch('https://sqlmxogyu8.execute-api.ap-southeast-2.amazonaws.com/Prod/put')
-            .then(() => fetch('https://sqlmxogyu8.execute-api.ap-southeast-2.amazonaws.com/Prod/get'))
-            .then(response => response.json())
-            .then((data) => {
-                document.getElementById('replaceme').innerText = data.count
-            })
-    </script>
     <link href='https://fonts.googleapis.com/css?family=Playfair+Display:400,700,900,400italic,700italic,900italic|Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="test.css">
-    <title>ThomasBaldockResumeSite</title>
+    <title>Thomas Baldock's Resume Site</title>
     <meta name="viewport" content="width=device-width">
 
 </head>
 <body>
-<img src="images/cloud-practioner-badge.png" alt="Certified Cloud Practioner Badge" width="100" height="100" class="badge">
-<div class="weatherforcastbox"><span style="font-style: italic;">You are visitor number:  <span id="replaceme"></div>
-<div style="text-align:center;">
-<header>Thomas Baldock</header>
+<div class="head">
+  <header>Thomas Baldock</header>
+<div class="subhead"> Melbourne, Australia - 
+  <div class="display-date">
+      <span id="day">day</span>,
+      <span id="daynum">00</span>
+      <span id="month">month</span>
+      <span id="year">0000</span>
+    </div></div>
+    <div class="visitorcount"><span style="font-style: italic;">You are visitor number:</span></div>
 </div>
-   
-<div class="subhead">Melbourne, Australia - 
-      <div class="display-date">
-        <span id="day">day</span>,
-        <span id="daynum">00</span>
-        <span id="month">month</span>
-        <span id="year">0000</span>
-      </div>
-      <div class="display-time"></div>
-    </div>
+<div class="badges"><img src="images/cloud-practioner-badge.png" alt="Certified Cloud Practioner Badge" width="100" height="100"><img src="images/restart-graduate-badge.png" alt="AWS Re/Start Graduate Badge" width="100" height="100"></div>
+<hr class="descriptionline">
 <br>
-<P class="blocktext">An ambitious and passionate AWS re/Start program learner – working towards my AWS Certified Cloud Practitioner badge (Aug 11). Restarting career after 4 years in sales and business management at a manufacturing company. Finally matching a lifelong passion for technology and learning with career goals.</p>
-<P class="blocktext">Looking to enhance my knowledge and utilise all my skills in my career with a positive and growth mindset.</p>
-<h3 class="blocktext">Achievements and Projects</h3>
-<hr>
-<ul>
-<li> Selected from over a thousand applicants for the Victorian Digital Jobs Program after several rounds of interviews and psychometric testing which lead to current AWS Re/Start course.</li>
-    <li>Recruited as Player-Coach for a cricket club in the Netherlands, leading six sides and honing leadership, communication and teamwork skills.</li>
-<li>In 9 weeks I’ve gone from zero cloud and programming knowledge to leading my class (top 3 out of 25 in weekly quizzes for past 3 weeks) among peers who have mostly all studied computer science. </li>
-  <li>In same period I undertook the ‘Cloud Resume Challenge’ - separate from coursework - in order to build skills and understanding of Continuous Improvement / Continuous Development, Infrastructure as Code and well-architected principles.</li>
-<li>Utilised AWS SAM for entire deployment, configuring Github, OpenID Connect Identity Provider, S3 buckets, DynamoDB, Lambda and an API gateway, all integrated with a Cloudflare domain, to ensure low latency, secure and tested deployment of my resume website.</li>
-<li>In course we have covered AWS services, the management console, best practices and the shared responsibility model as well as foundations in: Linux, Networking, Security, Python and Databases.</li>
-<li> Modernised the website for previous company without prior experience.</li>
-    <li>For same company, I lead the transition from traditional manufacturing processes to those recommended by auditor SAI Global which lead to achieving the ‘5 Ticks StandardsMark’ Quality ISO 9001 certification, and was estimated to eliminate fabrications errors by over 40%, saving over $10,000 per month.</li>
-<li>Also created a digital inventory database system with no prior experience to replace what was a paper- based system. This provided data analytics which calculated the average quantities of material used per day which halved the frequency of deliveries, minimising the disruptive task of loading tonnes of steel into racking. </li>
-  <li>In an application for an Australian Security Intelligence Organisation role - after rigorous application process - was flown interstate for final round of interviews and was among top 30 from over 10,000 applicants.</li>
-<li>I have been attending Australian Computer Society hackathons, AWS Melb User Group Meetings and other networking events in order to learn as much about the cloud computing community as possible.</li>
-    </ul>
-  <h3>Experience</h3>
-  <hr>
-  <ul>
-<li>2018 - 2022: <b>Assistant Manager</b> at Australian Road Covers Pty. Ltd.<br>
-- Sales, management and technical design responsibilities.<br>
-- Started at lowest rank to learn all facets of business and earn respect of peers.<br>
-- Went from zero knowledge and experience in field to knowing the business inside and out, showing my adaptability.<br>
-- Business had a strong focus on customer satisfaction and speedy service. This created many loyal customers which taught me the hidden value industry goodwill adds to a business.<br>
-- Know firsthand the hard-work, dedication and sacrifice required to run a business.<br>
-<li>2018: <b>Player-Coach</b> for Ajax Cricket Club in Netherlands.
-Focused on developing the game in the region; including senior (Men and Womens) and
-junior coaching, and hosting clinics for school children and business people.</li>
-<li>2016: <b>Sponsored Overseas Player</b> in North Wales.
-While in Wales I was also employed at Snowdonia Nurseries as a general hand, and at
-Denbigh Plant Hire as a motor mechanic.</li>
-<li>2015-16: <b>Match Reporter</b> at Football Federation of Victoria.</li>
-<li>2015: <b>Cadet Journalist</b> at Herald Sun and Bauer Media.
-Two journalism internships at prominent media companies with work published.</li>
-<li>2007-2015: <b>Soccer Referee</b> with the Football Federation of Victoria
-Officiated both senior and junior levels as a teenager, including in National U21
-competitions.</li>
-  <li>2007-2011: <b>Farmhand</b> at Australian Green Growers Organic Produce.</li>
-  </ul>
-  <h3>Education</h3>
-  <hr>
-  <ul>
-    <li>2022: <b>AWS Re/Start Program</b> - Goanna Education</li>
-    <li>2013 - 2015: <b>Bachelor of Journalism</b> - Monash University</li>
-    <li>2022: <b>CS50's Introduction to Computer Science</b> - Harvard University via edX</li>
-    <li>2022: <b>Learn Spanish: Basic Spanish Vocabulary</b> - University of California via Coursera via Coursera</li>
-    <li>2022: <b>Learningn How to Learn</b> - Deep Teaching Solutions via Coursera</li>
-      </ul>
-  <h3>Soft Skills</h3>
-  <hr>
-<ul>
-<li>Teamwork</li>
-<li>Communication</li>
-<li>Emotional Intelligence</li>
-<li>Strong work ethic</li>
-<li>Resilience</li>
-    <li>Problem-solving</li>
-      </ul>
- <h3>Fun facts about me </h3>
-  <hr>
-<P class="blocktext2">I’m still waiting for my letter from Hogwarts. I like photography and live to travel. I’m
-learning Spanish. I’m secretly a huge fan of bird-watching... Please don’t tell
-anybody. I can make a mean asado (and if you don’t know what that is, you’ll have to employ me to find out...).</p>
+<div class="description">A passionate AWS re/Start program graduate with an AWS Certified Cloud Practitioner badge. Switching from a manufacturing and journalism background.
+<br>
+<br>  
+Matching a lifelong passion for tech and learning with career goals.</div>
+<br>
+<hr class="descriptionline">
+
+<div class="contentb">
+        <div class="collumnb"><div class="head"><span class="headline hl1">Projects</span></div>
+          <p>• Selected from over a thousand applicants for the Victorian Digital Jobs Program after several rounds of interviews and psychometric testing which lead to current AWS Re/Start course.</p><br>
+          <p>• Recruited as Player-Coach for a cricket club in the Netherlands, leading six sides and honing leadership, communication and teamwork skills.</p><br>
+          <p>• In 9 weeks I’ve gone from zero cloud and programming knowledge to leading my class (top 3 out of 25 in weekly quizzes for past 3 weeks) among peers who have mostly all studied computer science.</p><br>
+          <p>• In same period I undertook the ‘Cloud Resume Challenge’ - separate from coursework - in order to build skills and understanding of Continuous Improvement / Continuous Development, Infrastructure as Code and well-architected principles.</p><br>
+          <p>• Utilised AWS SAM for entire deployment, configuring Github, OpenID Connect Identity Provider, S3 buckets, DynamoDB, Lambda and an API gateway, all integrated with a Cloudflare domain, to ensure low latency, secure and tested deployment of my resume website.</p><br>
+          <p>• In course we have covered AWS services, the management console, best practices and the shared responsibility model as well as foundations in: Linux, Networking, Security, Python and Databases.</p><br>
+          <p>• Modernised the website for previous company without prior experience.</p><br>
+          <p>• For same company, I lead the transition from traditional manufacturing processes to those recommended by auditor SAI Global which lead to achieving the ‘5 Ticks StandardsMark’ Quality ISO 9001 certification, and was estimated to eliminate fabrications errors by over 40%, saving over $10,000 per month.</p><br>
+          <p>• Also created a digital inventory database system with no prior experience to replace what was a paper- based system. This provided data analytics which calculated the average quantities of material used per day which halved the frequency of deliveries, minimising the disruptive task of loading tonnes of steel into racking.</p><br>
+          <p>• In an application for an Australian Security Intelligence Organisation role - after rigorous application process - was flown interstate for final round of interviews and was among top 30 from over 10,000 applicants.</p><br>
+          <p> • I have been attending Australian Computer Society hackathons, AWS Melb User Group Meetings and other networking events in order to learn as much about the cloud computing community as possible.</p>
+</div>
+<hr class="descriptionline">
+<div class="content">
+  <div class="collumns">
+      <div class="collumn">
+          <div class="head"><span class="headline hl1">Experience</span></div>
+         
+          <p>
+
+          <li>2018 - 2022: <b>Assistant Manager</b> at Australian Road Covers Pty. Ltd.<br>
+            - Sales, management and technical design responsibilities.<br>
+            - Started at lowest rank to learn all facets of business and earn respect of peers.<br>
+            - Went from zero knowledge and experience in field to knowing the business inside and out, showing my adaptability.<br>
+            - Business had a strong focus on customer satisfaction and speedy service. This created many loyal customers which taught me the hidden value industry goodwill adds to a business.<br>
+            - Know firsthand the hard-work, dedication and sacrifice required to run a business.<br><br>
+            <li>2018: <b>Player-Coach</b> for Ajax Cricket Club in Netherlands.
+            Focused on developing the game in the region; including senior (Men and Womens) and
+            junior coaching, and hosting clinics for school children and business people.</li><br>
+            <li>2016: <b>Sponsored Overseas Player</b> in North Wales.
+            While in Wales I was also employed at Snowdonia Nurseries as a general hand, and at
+            Denbigh Plant Hire as a motor mechanic.</li><br>
+            <li>2015-16: <b>Match Reporter</b> at Football Federation of Victoria.</li><br>
+            <li>2015: <b>Cadet Journalist</b> at Herald Sun and Bauer Media.
+            Two journalism internships at prominent media companies with work published.</li><br>
+            <li>2007-2015: <b>Soccer Referee</b> with the Football Federation of Victoria
+            Officiated both senior and junior levels as a teenager, including in National U21
+            competitions.</li><br>
+              <li>2007-2011: <b>Farmhand</b> at Australian Green Growers Organic Produce.</li>
+            </p><hr class="descriptionline">
+        </div>
+      <div class="collumn">
+        <div class="head"><span class="headline hl1">Education</span></div>
+        <p><ul>
+          <li>2022: <b>AWS Re/Start Program</b> - Goanna Education</li><br>
+          <li>2013 - 2015: <b>Bachelor of Journalism</b> - Monash University</li><br>
+          <li>2022: <b>CS50's Introduction to Computer Science</b> - Harvard University via edX</li><br>
+          <li>2022: <b>Learn Spanish: Basic Spanish Vocabulary</b> - University of California via Coursera via Coursera</li><br>
+          <li>2022: <b>Learningn How to Learn</b> - Deep Teaching Solutions via Coursera</li><br>
+          </ul></p><hr class="descriptionline">          
+</div>
 <script src="date.js"></script>
 </body>
 </html>

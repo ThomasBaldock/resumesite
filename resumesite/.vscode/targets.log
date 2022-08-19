@@ -6,11 +6,8 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # PARTICULAR PURPOSE.
 
 # This program built for i386-apple-darwin11.3.0
- 
-make: *** No rule to make target `all'.  Stop.
 
-
-# Make data base, printed on Fri Aug 19 14:33:28 2022
+# Make data base, printed on Fri Aug 19 17:27:56 2022
 
 # Variables
 
@@ -20,7 +17,6 @@ make: *** No rule to make target `all'.  Stop.
 ?F = $(notdir $?)
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
- 
 # automatic
 @D = $(patsubst %/,%,$(dir $@))
 # automatic
@@ -36,11 +32,17 @@ _ = /usr/bin/make
 # makefile (from `Makefile', line 1)
 MAKEFILE_LIST :=  Makefile
 # environment
+VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
+# environment
 __CFBundleIdentifier = com.microsoft.VSCode
 # environment
 VSCODE_CWD = /
 # environment
+GOPROXY = https://proxy.golang.org,direct
+# environment
 PATH = /Library/Frameworks/Python.framework/Versions/3.10/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin
+# environment
+GOPATH = /Users/Tommy/go
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # default
@@ -54,7 +56,7 @@ PWD = /Users/Tommy/Dropbox/MyWebsite/resumesite/resumesite
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = undefined
 # environment
-VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
+GOMODCACHE = /Users/Tommy/go/pkg/mod
 # environment
 HOME = /Users/Tommy
 # default
@@ -130,7 +132,7 @@ LANG = C
 # environment
 VSCODE_PID = 19443
 # variable set hash-table stats:
-# Load=57/1024=6%, Rehash=0, Collisions=1/80=1%
+# Load=60/1024=6%, Rehash=0, Collisions=2/83=2%
 
 # Pattern-specific Variable Values
 
@@ -148,7 +150,6 @@ VSCODE_PID = 19443
 
 # Files
 
- 
 # Not a target:
 all:
 #  Command-line target.
@@ -238,6 +239,8 @@ deploy-site:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Fri Aug 19 14:33:28 2022
+# Finished Make data base on Fri Aug 19 17:27:56 2022
 
  
+make: *** No rule to make target `all'.  Stop.
+
