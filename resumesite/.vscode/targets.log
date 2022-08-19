@@ -6,8 +6,11 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # PARTICULAR PURPOSE.
 
 # This program built for i386-apple-darwin11.3.0
+ 
+make: *** No rule to make target `all'.  Stop.
 
-# Make data base, printed on Fri Aug 19 11:26:20 2022
+
+# Make data base, printed on Fri Aug 19 14:33:28 2022
 
 # Variables
 
@@ -17,6 +20,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 ?F = $(notdir $?)
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
+ 
 # automatic
 @D = $(patsubst %/,%,$(dir $@))
 # automatic
@@ -32,17 +36,11 @@ _ = /usr/bin/make
 # makefile (from `Makefile', line 1)
 MAKEFILE_LIST :=  Makefile
 # environment
-VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
-# environment
 __CFBundleIdentifier = com.microsoft.VSCode
 # environment
 VSCODE_CWD = /
 # environment
-GOPROXY = https://proxy.golang.org,direct
-# environment
 PATH = /Library/Frameworks/Python.framework/Versions/3.10/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin
-# environment
-GOPATH = /Users/Tommy/go
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # default
@@ -56,7 +54,7 @@ PWD = /Users/Tommy/Dropbox/MyWebsite/resumesite/resumesite
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = undefined
 # environment
-GOMODCACHE = /Users/Tommy/go/pkg/mod
+VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
 HOME = /Users/Tommy
 # default
@@ -132,7 +130,7 @@ LANG = C
 # environment
 VSCODE_PID = 19443
 # variable set hash-table stats:
-# Load=60/1024=6%, Rehash=0, Collisions=2/83=2%
+# Load=57/1024=6%, Rehash=0, Collisions=1/80=1%
 
 # Pattern-specific Variable Values
 
@@ -140,9 +138,9 @@ VSCODE_PID = 19443
 
 # Directories
 
-# . (device 16777220, inode 18888388): 11 files, no impossibilities.
+# . (device 16777220, inode 18888388): 12 files, no impossibilities.
 
-# 11 files, no impossibilities in 1 directories.
+# 12 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -150,6 +148,7 @@ VSCODE_PID = 19443
 
 # Files
 
+ 
 # Not a target:
 all:
 #  Command-line target.
@@ -239,8 +238,6 @@ deploy-site:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Fri Aug 19 11:26:20 2022
+# Finished Make data base on Fri Aug 19 14:33:28 2022
 
  
-make: *** No rule to make target `all'.  Stop.
-
