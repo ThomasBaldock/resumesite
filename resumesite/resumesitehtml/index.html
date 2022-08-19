@@ -7,7 +7,7 @@
             .then(() => fetch('https://sqlmxogyu8.execute-api.ap-southeast-2.amazonaws.com/Prod/get'))
             .then(response => response.json())
             .then((data) => {
-                document.getElementById('replaceme').innerText = data.count
+                document.getElementById('replaceME').innerText = data.count
             })
     </script>
     <link href='https://fonts.googleapis.com/css?family=Playfair+Display:400,700,900,400italic,700italic,900italic|Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
@@ -21,8 +21,9 @@
     <div class="headerobjectswrapper">
         <div class="weatherforcastbox"><span style="font-style: italic;">You are visitor number:  <span id="replaceme" />  </div>
         <header>Thomas Baldock</header>
-    </div>
-    
+        <div class="example"><img src="images/cloud-practioner-badge.png" alt="Certified Cloud Practioner Badge" width="100" height="100"></header></div>
+    </div> 
+   
     <div class="subhead">Melbourne, Australia - 
       <div class="display-date">
         <span id="day">day</span>,
@@ -33,11 +34,12 @@
       <div class="display-time"></div>
     </div>
 </div>
+<br>
 <P class="blocktext">An ambitious and passionate AWS re/Start program learner – working towards my AWS Certified Cloud Practitioner badge (Aug 11). Restarting career after 4 years in sales and business management at a manufacturing company. Finally matching a lifelong passion for technology and learning with career goals.</p>
 <P class="blocktext">Looking to enhance my knowledge and utilise all my skills in my career with a positive and growth mindset.</p>
-  <h3>Achievements and Projects</h3>
-  <hr>
-  <ul>
+<h3 class="blocktext">Achievements and Projects</h3>
+<hr>
+<ul>
 <li> Selected from over a thousand applicants for the Victorian Digital Jobs Program after several rounds of interviews and psychometric testing which lead to current AWS Re/Start course.</li>
     <li>Recruited as Player-Coach for a cricket club in the Netherlands, leading six sides and honing leadership, communication and teamwork skills.</li>
 <li>In 9 weeks I’ve gone from zero cloud and programming knowledge to leading my class (top 3 out of 25 in weekly quizzes for past 3 weeks) among peers who have mostly all studied computer science. </li>
@@ -84,7 +86,7 @@ competitions.</li>
       </ul>
   <h3>Soft Skills</h3>
   <hr>
-    <ul>
+<ul>
 <li>Teamwork</li>
 <li>Communication</li>
 <li>Emotional Intelligence</li>
@@ -94,10 +96,9 @@ competitions.</li>
       </ul>
  <h3>Fun facts about me </h3>
   <hr>
-I’m still waiting for my letter from Hogwarts. I like photography and live to travel. I’m
+<P class="blocktext2">I’m still waiting for my letter from Hogwarts. I like photography and live to travel. I’m
 learning Spanish. I’m secretly a huge fan of bird-watching... Please don’t tell
-anybody. I can make a mean asado (and if you don’t know what that is, you’ll have to employ me to find out...).<br>
-  <br>
+anybody. I can make a mean asado (and if you don’t know what that is, you’ll have to employ me to find out...).</p>
 <script src="date.js"></script>
 </body>
 </html>

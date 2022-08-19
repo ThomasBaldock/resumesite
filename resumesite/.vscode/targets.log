@@ -7,7 +7,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 
 # This program built for i386-apple-darwin11.3.0
 
-# Make data base, printed on Tue Jul 19 22:31:15 2022
+# Make data base, printed on Fri Aug 19 11:26:20 2022
 
 # Variables
 
@@ -22,7 +22,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # automatic
 @F = $(notdir $@)
 # makefile
-CURDIR := /Users/thomasbaldock/resumesite
+CURDIR := /Users/Tommy/Dropbox/MyWebsite/resumesite/resumesite
 # makefile
 SHELL = /bin/sh
 # environment
@@ -40,35 +40,33 @@ VSCODE_CWD = /
 # environment
 GOPROXY = https://proxy.golang.org,direct
 # environment
-PATH = /opt/local/bin:/opt/local/sbin:/usr/local/mysql/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/usr/local/share/dotnet:/opt/X11/bin:~/.dotnet/tools:/Library/Frameworks/Mono.framework/Versions/Current/Commands
+PATH = /Library/Frameworks/Python.framework/Versions/3.10/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin
 # environment
-GOPATH = /Users/thomasbaldock/go
+GOPATH = /Users/Tommy/go
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.g8ctyuIzK2/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.Ed5RdsXyGG/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
-DISPLAY = /private/tmp/com.apple.launchd.9u5xVgjuf3/org.macosforge.xquartz:0
-# environment
-PWD = /Users/thomasbaldock/resumesite
+PWD = /Users/Tommy/Dropbox/MyWebsite/resumesite/resumesite
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = undefined
 # environment
-GOMODCACHE = /Users/thomasbaldock/go/pkg/mod
+GOMODCACHE = /Users/Tommy/go/pkg/mod
 # environment
-HOME = /Users/thomasbaldock
+HOME = /Users/Tommy
 # default
 MAKEFILEPATH = $(shell /usr/bin/xcode-select -print-path 2>/dev/null || echo /Developer)/Makefiles
 # environment
-VSCODE_CODE_CACHE_PATH = /Users/thomasbaldock/Library/Application Support/Code/CachedData/3b889b090b5ad5793f524b5d1d39fda662b96a2a
+VSCODE_CODE_CACHE_PATH = /Users/Tommy/Library/Application Support/Code/CachedData/e4503b30fc78200f846c62cf8091b76ff5547662
 # environment
-LOGNAME = thomasbaldock
+LOGNAME = Tommy
 # environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # automatic
@@ -84,7 +82,7 @@ SHLVL = 2
 # default
 MAKE_VERSION := 3.81
 # environment
-USER = thomasbaldock
+USER = Tommy
 # makefile
 .DEFAULT_GOAL := build
 # automatic
@@ -94,11 +92,11 @@ MAKE_COMMAND := /Library/Developer/CommandLineTools/usr/bin/make
 # default
 .VARIABLES := 
 # environment
-TMPDIR = /var/folders/g3/0nq77k4x3fxdckzfhrsf9ywc0000gn/T/
+TMPDIR = /var/folders/cj/gb3zp5693nx4kjg0nlntcjs40000gp/T/
 # automatic
 *F = $(notdir $*)
 # environment
-VSCODE_IPC_HOOK = /Users/thomasbaldock/Library/Application Support/Code/1.69.2-main.sock
+VSCODE_IPC_HOOK = /Users/Tommy/Library/Application Support/Code/1.70.2-main.sock
 # environment
 MallocNanoZone = 0
 # makefile
@@ -108,13 +106,13 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-XPC_SERVICE_NAME = application.com.microsoft.VSCode.12963037101.12963037107
+XPC_SERVICE_NAME = application.com.microsoft.VSCode.18930190.18930196
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # automatic
 +F = $(notdir $+)
 # environment
-__CF_USER_TEXT_ENCODING = 0x1F5:0x0:0xF
+__CF_USER_TEXT_ENCODING = 0x1F6:0x0:0xF
 # environment
 COMMAND_MODE = unix2003
 # default
@@ -127,16 +125,14 @@ LC_ALL = C
 ^F = $(notdir $^)
 # default
 SUFFIXES := 
-# default
-.INCLUDE_DIRS = /usr/local/include
 # environment
 MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 1784
+VSCODE_PID = 19443
 # variable set hash-table stats:
-# Load=62/1024=6%, Rehash=0, Collisions=2/86=2%
+# Load=60/1024=6%, Rehash=0, Collisions=2/83=2%
 
 # Pattern-specific Variable Values
 
@@ -144,9 +140,9 @@ VSCODE_PID = 1784
 
 # Directories
 
-# . (device 16777223, inode 12963205689): 8 files, no impossibilities.
+# . (device 16777220, inode 18888388): 11 files, no impossibilities.
 
-# 8 files, no impossibilities in 1 directories.
+# 11 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -177,7 +173,7 @@ all:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-07-19 22:28:26
+#  Last modified 2022-08-18 16:14:56
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -198,8 +194,40 @@ build:
 #  Modification time never checked.
 #  File has not been updated.
 
+invoke-put:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 16):
+	sam build && aws-vault exec my-user --no-session -- sam local invoke PutFunction
+	
+
+invoke-get:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 13):
+	sam build && aws-vault exec my-user --no-session -- sam local invoke GetFunction
+	
+
+deploy-infra:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 7):
+	make build && aws-vault exec my-user --no-session -- sam deploy --no-confirm-changeset
+	
+
+deploy-site:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 10):
+	aws-vault exec my-user --no-session -- aws s3 sync ./resumesite s3://www.thomasbaldock.com --exclude "*DS_Store"
+	
+
 # files hash-table stats:
-# Load=6/1024=1%, Rehash=0, Collisions=0/19=0%
+# Load=10/1024=1%, Rehash=0, Collisions=0/23=0%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -211,7 +239,7 @@ build:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Tue Jul 19 22:31:15 2022
+# Finished Make data base on Fri Aug 19 11:26:20 2022
 
  
 make: *** No rule to make target `all'.  Stop.

@@ -11,13 +11,33 @@ header{
     text-transform: uppercase;
     display: inline-block;
     line-height: 72px;
-    margin-bottom: 20px;
+    margin-top: 10px;
+    margin-bottom: 30px;
 
 }
 p{
     margin-top: 0;
     margin-bottom: 20px;
 }
+
+li{
+    width:900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h3{
+    width:900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+hr{
+    width:1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .head{
     text-align: center;
     position: relative;
@@ -36,14 +56,15 @@ p{
 
 }
 .weatherforcastbox{
-    position: relative;
+    position: absolute;
     width: 12%;
-    left: 10px;
+    left: 20px;
     border: 3px double #2f2f2f;
     padding: 10px 15px 10px 15px;
     line-height: 20px;
     display: inline-block;
-    margin: 0 50px 20px -360px;
+    margin: 20px 15px -50px 10px;
+    margin-top: 35px;
 }
 .content{
     font-size: 0;
@@ -285,5 +306,18 @@ p{
 P.blocktext {
     margin-left: auto;
     margin-right: auto;
-    width: 650px
+    width: 800px
 }
+
+P.blocktext2 {
+    margin-left: auto;
+    margin-right: auto;
+    width: 900px
+}
+
+.example {
+    position: absolute;
+    right: 150px;
+    bottom: 0px;
+    top: 0px;
+  }
