@@ -30,7 +30,7 @@ a:link {
   }
 
 a:hover {
-    color: blue;
+    color: rgb(0, 0, 0);
   }
 
   a:visited {
