@@ -4,9 +4,17 @@
     <link rel="stylesheet" href="test.css">
     <title>Thomas Baldock's Resume Site</title>
     <meta name="viewport" content="width=device-width">
-
+    <script>
+      fetch('https://sqlmxogyu8.execute-api.ap-southeast-2.amazonaws.com/Prod/put')
+              .then(() => fetch('https://sqlmxogyu8.execute-api.ap-southeast-2.amazonaws.com/Prod/get'))
+              .then(response => response.json())
+              .then((data) => {
+                  document.getElementById('replaceme').innerText = data.count
+              })
+      </script>
 </head>
 <body>
+<div class="links"><a href=mailto:thomas.m.baldock@gmail.com>thomas.m.baldock@gmail.com</a> &emsp;&emsp; <a href=https://www.linkedin.com/in/thomas-m-baldock>LinkedIn: /thomas-m-baldock</a>  &emsp;&emsp; <a href=https://github.com/ThomasBaldock>Github: /ThomasBaldock</a>  </div>
 <div class="head">
   <header>Thomas Baldock</header>
 <div class="subhead"> Melbourne, Australia - 
@@ -16,7 +24,7 @@
       <span id="month">month</span>
       <span id="year">0000</span>
     </div></div>
-    <div class="visitorcount"><span style="font-style: italic;">You are visitor number:</span></div>
+    <div class="visitorcount"><span style="font-style: italic;">You are visitor number: </span></div>
 </div>
 <div class="badges"><img src="images/cloud-practioner-badge.png" alt="Certified Cloud Practioner Badge" width="100" height="100"><img src="images/restart-graduate-badge.png" alt="AWS Re/Start Graduate Badge" width="100" height="100"></div>
 <hr class="descriptionline">
