@@ -13,9 +13,9 @@ jobs:
         with:
           python-version: ${{ env.Python_version }}
       - name: test getFunction
-        run: cd resumesite/getFunction && python test -v ./ && cd ../../
+        run: cd resumesite/getFunction && python test.py -v ./ && cd ../../
       - name: test putFunction
-        run: cd resumesite/putFunction && python test -v ./ && cd ../../
+        run: cd resumesite/putFunction && python test.py -v ./ && cd ../../
 
   build-and-deploy-infra:
     needs: test-infra
