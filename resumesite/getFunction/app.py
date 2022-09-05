@@ -1,4 +1,4 @@
-import simplejson as json
+import json
 import boto3
 
 #define variables: dynamodb as a boto3 resource, table_name as the DynamoDB table name, and table as the functional table resource
