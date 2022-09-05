@@ -12,4 +12,4 @@ class TestAPI(unittest.TestCase):
         self.assertEqual(result['statusCode'], 200)
 
 if __name__ == '__main__':
-    unittest.main()
+    unittest.main(argv=['first-arg-is-ignored'], exit=False)
