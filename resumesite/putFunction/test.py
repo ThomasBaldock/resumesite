@@ -1,5 +1,4 @@
 import unittest
-import simplejson
 
 from app import lambda_handler
 
