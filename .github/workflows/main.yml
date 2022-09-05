@@ -20,7 +20,7 @@ jobs:
       - name: test getFunction
         run: cd resumesite/getFunction && python test.py -v ./ && cd ../../
       - name: test putFunction
-        run: cd resumesite/putFunction && python test -v ./ && cd ../../
+        run: cd resumesite/putFunction && python test.py -v ./ && cd ../../
 
   build-and-deploy-infra:
     needs: test-infra
@@ -33,7 +33,6 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ap-southeast-2
       - run: sam build
         working-directory: resumesite
       - run: sam deploy --no-confirm-changeset --no-fail-on-empty-changeset
