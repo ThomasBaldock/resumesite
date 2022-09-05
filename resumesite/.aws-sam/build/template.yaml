@@ -19,13 +19,13 @@ Resources:
     Properties:
       WebsiteConfiguration:
         RedirectAllRequestsTo:
-          HostName: www.thomasbaldock.com.s3-website-ap-southeast-2.amazonaws.com
-          Protocol: http
+          HostName: www.thomasbaldock.com
+          Protocol: https
       BucketName: thomasbaldock.com
   DynamoDBTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: cloud-resume-challenge
+      TableName: visitors
       BillingMode: PAY_PER_REQUEST
       AttributeDefinitions:
       - AttributeName: ID
@@ -76,17 +76,18 @@ Resources:
     Properties:
       Policies:
       - DynamoDBCrudPolicy:
-          TableName: cloud-resume-challenge
+          TableName: visitors
       CodeUri: GetFunction
-      Handler: get-function
-      Runtime: go1.x
-      Tracing: Active
+      Handler: app.lambda_handler
+      Runtime: python3.9
+      Architectures:
+      - x86_64
       Events:
-        CatchAll:
+        GetFunction:
           Type: Api
           Properties:
             Path: /get
-            Method: GET
+            Method: get
     Metadata:
       SamResourceId: GetFunction
   PutFunction:
@@ -94,16 +95,17 @@ Resources:
     Properties:
       Policies:
       - DynamoDBCrudPolicy:
-          TableName: cloud-resume-challenge
+          TableName: visitors
       CodeUri: PutFunction
-      Handler: put-function
-      Runtime: go1.x
-      Tracing: Active
+      Handler: app.lambda_handler
+      Runtime: python3.9
+      Architectures:
+      - x86_64
       Events:
-        CatchAll:
+        PutFunction:
           Type: Api
           Properties:
             Path: /put
-            Method: GET
+            Method: get
     Metadata:
       SamResourceId: PutFunction
