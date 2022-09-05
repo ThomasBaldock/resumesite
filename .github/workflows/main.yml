@@ -1,28 +1,28 @@
 name: main
 on: push
 env:
-  GO_VERSION: 1.15.x
+  Python_version: '3.9.x'
 
 jobs:
   test-infra:
     runs-on: ubuntu-latest
     timeout-minutes: 2
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-go@v2.1.3
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
         with:
-          go-version: ${{ env.GO_VERSION }}
+          python-version: ${{ env.Python_version }}
       - name: test get-function
-        run: cd resumesite/get-function && go test -v ./ && cd ../../
+        run: cd resumesite/getFunction && go test -v ./ && cd ../../
       - name: test put-function
-        run: cd resumesite/put-function && go test -v ./ && cd ../../
+        run: cd resumesite/putFunction && go test -v ./ && cd ../../
 
   build-and-deploy-infra:
     needs: test-infra
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
       - uses: aws-actions/setup-sam@v1
       - uses: aws-actions/configure-aws-credentials@v1
         with:
