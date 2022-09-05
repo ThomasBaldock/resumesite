@@ -29,7 +29,7 @@ Resources:
   DynamoDBTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: cloud-resume-challenge
+      TableName: visitors
       BillingMode: PAY_PER_REQUEST
       AttributeDefinitions:
         - AttributeName: "ID"
@@ -76,36 +76,40 @@ Resources:
                   - 197.234.240.0/22
                   - 198.41.128.0/17
 
+#Create Get Lambda Function that pulls visitor count from my DynamoDB
   GetFunction:
-    Type: AWS::Serverless::Function
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       Policies:
         - DynamoDBCrudPolicy:
-            TableName: cloud-resume-challenge
-      CodeUri: get-function/
-      Handler: get-function
-      Runtime: go1.x
-      Tracing: Active
+            TableName: visitors
+      CodeUri: getFunction/
+      Handler: app.lambda_handler
+      Runtime: python3.9
+      Architectures:
+        - x86_64
       Events:
-        CatchAll:
-          Type: Api
+        GetFunction:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
             Path: /get
-            Method: GET
+            Method: get
 
+#Create Put Function that increases viewer count on refresh and stores new number in my DynamoDB Table
   PutFunction:
-    Type: AWS::Serverless::Function
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       Policies:
         - DynamoDBCrudPolicy:
-            TableName: cloud-resume-challenge
-      CodeUri: put-function/
-      Handler: put-function
-      Runtime: go1.x
-      Tracing: Active
+            TableName: visitors
+      CodeUri: putFunction/
+      Handler: app.lambda_handler
+      Runtime: python3.9
+      Architectures:
+        - x86_64
       Events:
-        CatchAll:
-          Type: Api
+        PutFunction:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
             Path: /put
-            Method: GET
+            Method: get
