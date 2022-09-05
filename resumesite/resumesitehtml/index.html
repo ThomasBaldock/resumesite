@@ -5,8 +5,8 @@
     <title>Thomas Baldock's Resume Site</title>
     <meta name="viewport" content="width=device-width">
     <script>
-      fetch('https://kg4dptul17.execute-api.ap-southeast-2.amazonaws.com/Prod/put')
-            .then(() => fetch('https://kg4dptul17.execute-api.ap-southeast-2.amazonaws.com/Prod/get'))
+      fetch('https://57vvf01f32.execute-api.ap-southeast-2.amazonaws.com/Prod/put')
+            .then(() => fetch('https://57vvf01f32.execute-api.ap-southeast-2.amazonaws.com/Prod/get'))
             .then(response => response.json())
             .then(data => {
                 document.getElementById('visitorCount').innerText = data['counter']
