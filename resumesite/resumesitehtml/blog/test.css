@@ -23,7 +23,7 @@ p{
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 80%;
+    width: 95%;
 }
 
 .links{
@@ -94,9 +94,31 @@ a:hover {
     word-spacing: -.31em;
     display: inline-block;
     text-align: center;
-    margin-left: 15%;
-    margin-right: 15%;
+    margin-left: 26%;
+    margin-right: 26%;
 }   
+@media screen and (max-width: 600px) {
+    .contentb{
+        font-size: 0;
+        line-height: 0;
+        word-spacing: -.31em;
+        display: inline-block;
+        text-align: center;
+        margin-left: 1%;
+        margin-right: 1%;
+}  
+}
+@media screen and (min-width: 2000px) {
+    .contentb{
+        font-size: 0;
+        line-height: 0;
+        word-spacing: -.31em;
+        display: inline-block;
+        text-align: center;
+        margin-left: 30%;
+        margin-right: 30%;
+}  
+}
 
 .collumnsb{
 
@@ -105,7 +127,7 @@ a:hover {
 .collumnb{
     font-size: 14px;
     line-height: 20px;
-    width: 80%;
+    width: 95%;
     display: inline-block;
     padding: 0 1% 0 1%;
     vertical-align: top;

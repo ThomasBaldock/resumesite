@@ -89,8 +89,18 @@ a:hover {
     text-align: center;
     margin-left: 3%;
     margin-right: 3%;
-}   
-
+}
+@media screen and (max-width: 600px) {
+    .contentb{
+        font-size: 0;
+        line-height: 0;
+        word-spacing: -.31em;
+        display: inline-block;
+        text-align: center;
+        margin-left: 1%;
+        margin-right: 1%;   
+    }
+}
 .collumnsb{
 
 }
@@ -106,7 +116,19 @@ a:hover {
     transition: all .7s;
     text-align: left;
 }
-
+@media screen and (max-width: 600px) {
+    .collumnb{
+        font-size: 14px;
+        line-height: 20px;
+        width: 99%;
+        display: inline-block;
+        padding: 0 1% 0 1%;
+        vertical-align: top;
+        margin-bottom: 10px;
+        transition: all .7s;
+        text-align: left;
+    }
+}
 .collumnb + .collumn { 
   border-left: 1px solid #2f2f2f;
   
@@ -526,4 +548,15 @@ a:hover {
         overflow: hidden;
     }
 
+}
+@media screen and (max-width: 600px) {
+    .li{
+        font-size: 0;
+        line-height: 0;
+        word-spacing: -.31em;
+        display: inline-block;
+        text-align: center;
+        margin-left: 1%;
+        margin-right: 1%;   
+    }
 }
