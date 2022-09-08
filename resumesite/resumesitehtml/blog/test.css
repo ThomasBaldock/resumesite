@@ -25,7 +25,20 @@ p{
     margin-right: auto;
     width: 95%;
 }
-
+.head {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+@media screen and (min-width: 1500px) {
+    .head {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 35%;
+    }
+}    
 .links{
     text-align: center;
     font-size: 13px;
