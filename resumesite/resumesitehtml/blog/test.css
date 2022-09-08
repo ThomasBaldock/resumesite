@@ -31,7 +31,7 @@ p{
     margin-right: auto;
     width: 50%;
 }
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 1300px) {
     .cloudhead {
         display: block;
         margin-left: auto;
