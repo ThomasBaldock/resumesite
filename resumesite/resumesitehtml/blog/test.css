@@ -25,18 +25,18 @@ p{
     margin-right: auto;
     width: 95%;
 }
-.head {
+.cloudhead {
     display: block;
     margin-left: auto;
     margin-right: auto;
     width: 50%;
 }
-@media screen and (min-width: 1500px) {
-    .head {
+@media screen and (min-width: 800px) {
+    .cloudhead {
         display: block;
         margin-left: auto;
         margin-right: auto;
-        width: 35%;
+        width: 400px;
     }
 }    
 .links{
@@ -70,6 +70,8 @@ a:hover {
     border-bottom: 2px solid #2f2f2f;
     border-top: 2px solid #2f2f2f;
     padding: 12px 0 12px 0;
+    text-align: center;
+    position: relative;
 }
 
 .display-date {
@@ -79,6 +81,8 @@ a:hover {
 .visitorcount{
     border-bottom: 4px double #2f2f2f;
     padding: 12px 0 12px 0;
+    text-align: center;
+    position: relative;
     
 }
 
@@ -97,8 +101,10 @@ a:hover {
 }
 
 .descriptionline{
-    margin-left: 30%;
-    margin-right: 30%;
+    margin-left: 20%;
+    margin-right: 20%;
+    overflow: hidden;
+    position: relative
 }
 
 .contentb{
@@ -237,7 +243,7 @@ a:hover {
 
 .collumnb .headline.hl5{
     font-weight: 400;
-    font-size: 75px;
+    font-size: 60px;
     text-transform: uppercase;
     font-style: italic;
     box-sizing: border-box;
