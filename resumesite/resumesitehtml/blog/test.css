@@ -12,6 +12,8 @@ header{
     display: inline-block;
     line-height: 72px;
     margin-bottom: 20px;
+    text-align: center;
+    position: relative;
 
 }
 .blogheadline{

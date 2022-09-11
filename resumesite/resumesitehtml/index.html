@@ -41,11 +41,11 @@ Matching a lifelong passion for tech and learning with career goals.</div>
       <br><br>
       <label>Email:</label>
       <input name="email">
-      <button>Receive my Resume via Email</button>
+      <button onClick="formToApi(event,'email')">Send an Email</button>
       <br><br>
       <label>SMS:</label>
       <input name="sms">
-      <button>Receive my contact details via SMS</button>
+      <button onClick="formToApi(event,'sms')">Send a SMS</button>
   </div>
 </form>
 <hr class="descriptionline">
@@ -125,5 +125,6 @@ Matching a lifelong passion for tech and learning with career goals.</div>
 </div>
 <hr class="descriptionline">
 <script src="date.js"></script>
+<script src="formtoAPI.js"></script>
 </body>
 </html>
