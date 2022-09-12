@@ -1,0 +1,60 @@
+<html>
+<head>
+    <link href='https://fonts.googleapis.com/css?family=Playfair+Display:400,700,900,400italic,700italic,900italic|Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="test.css">
+    <title>Thomas Baldock's Blog</title>
+    <meta name="viewport" content="width=device-width">
+    <script>
+      fetch('https://57vvf01f32.execute-api.ap-southeast-2.amazonaws.com/Prod/put')
+            .then(() => fetch('https://57vvf01f32.execute-api.ap-southeast-2.amazonaws.com/Prod/get'))
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('visitorCount').innerText = data['counter']
+            })
+      </script>
+</head>
+<body>
+<div class="links"><a href=mailto:thomas.m.baldock@gmail.com>Email</a> &emsp; <a href="https://www.linkedin.com/in/thomas-m-baldock" target="_blank">LinkedIn</a>  &emsp; <a href="https://github.com/ThomasBaldock" target="_blank">Github</a> &emsp; <a href="/blog">Blog</a>  </div>
+<div class="head">
+<div class="thomasbaldockheader"><a href="/" style="text-decoration: none">Thomas Baldock</a></div>
+<div class="subhead"> Melbourne, Australia - 
+  <div class="display-date">
+      <span id="day">day</span>,
+      <span id="month">month</span>
+      <span id="daynum">00</span>
+      <span id="year">0000</span>
+    </div></div>
+    <div class="visitorcount"><span style="font-style: italic;">You are visitor number: <span id="visitorCount">loading...</span></div>
+</div>
+<div class="badges"><img src="images/cloud-practioner-badge.png" alt="Certified Cloud Practioner Badge" width="100" height="100"><img src="images/restart-graduate-badge.png" alt="AWS Re/Start Graduate Badge" width="100" height="100"></div><br>
+<div class="contentb">
+  <div class="collumnb">
+    <hr class="descriptionline"><br>
+    <img src="images/head-in-the-cloud.png" alt="Head in the cloud" class="cloudhead"><br>
+    <hr class="descriptionline">
+  <h3>Thursday, 8th of September</h3>
+    <p>Hello world! It's been quite some time since my last blog, back at the beginning of my journalism career.<br><br> 
+      Now I found myself neither gainfully employed as a member of the press nor in the manufacturing field I followed it into. And yet, here I am, more excited for the future than I have ever been. So what exactly am I so excited about? Before I start, I'd like to acknowledge I will be breaking the cardinal rule of journalism: never, EVER put yourself in the story. However, not only am I allowing myself to ignore my training - but in this era of personal branding - it is encouraged. I can BE the story.<br><br> 
+      So then, what is my story?<br><br></p>
+      <span class="blogheadline">MAN TAKES LEAP OF FAITH INTO CLOUD</span><br><br> 
+      <p>There are many ways to follow this headline. The truest account - and please respect what remains of my journalistic integrity - goes something like this.<br><br> 
+      I've always harboured an interest in computers so when the Digital Jobs Program came on my radar I jumped at the opportunity - even though I was employed at the time as an assistant manager at a manufacturing company. I choose the AWS Re/Start course because it covered a wide variety of topics and would provide a decent foundation for a career change. I didn't know much about cloud computing but the syllabus really appealed to me and I was ready to give it my all.<br><br> 
+      During my course I was struck by overwhelming enthusiasm for my studies and I wanted to take every opportunity put this learning into practice. I then came across Forest Brazeal's 'Cloud Resume Challenge' which is touted as the ultimate test for anyone looking to get into a cloud career. The premise of the project is simple - host your resume in the cloud. There are, however, several conditions.<br><br> 
+      <b>1.</b> Get an AWS certification<br>
+      <b>2.</b> Write the resume in HTML & styled with CSS<br>
+      <b>3.</b> Deploy as an Amazon S3 Static website<br>
+      <b>4.</b> Use a custom DNS Domain name with HTTPS security<br>
+      <b>5.</b> Include a visitor counter made from Javascript, DynamoDB, API Gateways and Lambda functions (written in Python)<br>
+      <b>6.</b> Python tests for Lambda<br>
+      <b>7.</b> Deploy all resources via a Serverless Application Model (SAM) template instead of using the console!<br>
+      <b>8.</b> Use Github as source control, and Github Actions for CI/CD<br><br>
+      Needless to say, I had never done anything like this before. It was a huge challenge, and took me several weeks alongside my coursework. There where many evenings when I had no clue how to tackle the next step. But with a little bit of research and a lot of head-scratching, I'm happy to report I overcame the challenge!</p>
+      <img src="images/architecture.png" alt="Certified Cloud Practioner Badge" class="architecture"><br>
+      <p>I made this diagram showing my architecture and you can see the finished project <a href="/">here</a>. It was such a rewarding experience and my confidence in my practical skills has skyrocketed.<br><br> 
+      If you've made it this far - I highly recommend the challenge if you're looking to test your skills! There's a supportive community and a plethora of learning materials available at the <a href="cloudresumechallenge.dev/docs/the-challenge/">Cloud Resume Challenge</a>. Finally, I'd like to thank Forest Brazeal and the CRC community for their efforts in making the cloud accessible to all.<br>
+    </p>
+</div>
+<hr class="descriptionline">
+<script src="date.js"></script>
+</body>
+</html>
