@@ -107,7 +107,7 @@ a:hover {
     margin-left: 26%;
     margin-right: 26%;
 }
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 700px) {
     .contentb{
         font-size: 0;
         line-height: 0;
