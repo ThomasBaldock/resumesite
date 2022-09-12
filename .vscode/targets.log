@@ -7,7 +7,11 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 
 # This program built for i386-apple-darwin11.3.0
 
-# Make data base, printed on Mon Sep  5 14:36:14 2022
+<<<<<<< Updated upstream
+# Make data base, printed on Fri Sep  9 15:13:34 2022
+=======
+# Make data base, printed on Mon Sep 12 12:52:50 2022
+>>>>>>> Stashed changes
 
 # Variables
 
@@ -32,23 +36,17 @@ _ = /usr/bin/make
 # makefile
 MAKEFILE_LIST := 
 # environment
-VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
-# environment
 __CFBundleIdentifier = com.microsoft.VSCode
 # environment
 VSCODE_CWD = /
 # environment
-GOPROXY = https://proxy.golang.org,direct
-# environment
 PATH = /Library/Frameworks/Python.framework/Versions/3.10/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin
-# environment
-GOPATH = /Users/Tommy/go
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.FmaF6v9OLA/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.xl5k5h1QoR/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
@@ -56,7 +54,7 @@ PWD = /Users/Tommy/Dropbox/MyWebsite/resumesite
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = undefined
 # environment
-GOMODCACHE = /Users/Tommy/go/pkg/mod
+VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
 HOME = /Users/Tommy
 # default
@@ -132,9 +130,9 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 3860
+VSCODE_PID = 2480
 # variable set hash-table stats:
-# Load=61/1024=6%, Rehash=0, Collisions=2/82=2%
+# Load=58/1024=6%, Rehash=0, Collisions=1/79=1%
 
 # Pattern-specific Variable Values
 
@@ -142,7 +140,7 @@ VSCODE_PID = 3860
 
 # Directories
 
-# . (device 16777220, inode 19622881): 7 files, no impossibilities.
+# . (device 16777224, inode 19622881): 7 files, no impossibilities.
 
 # 7 files, no impossibilities in 1 directories.
 
@@ -216,7 +214,11 @@ GNUmakefile:
 # strcache size: total = 0 / max = 0 / min = 4096 / avg = 0
 # strcache free: total = 0 / max = 0 / min = 4096 / avg = 0
 
-# Finished Make data base on Mon Sep  5 14:36:14 2022
+<<<<<<< Updated upstream
+# Finished Make data base on Fri Sep  9 15:13:34 2022
+=======
+# Finished Make data base on Mon Sep 12 12:52:50 2022
+>>>>>>> Stashed changes
 
  
 make: *** No rule to make target `all'.  Stop.
