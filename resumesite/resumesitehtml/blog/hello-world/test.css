@@ -30,6 +30,18 @@ body{
             
     }
 }
+.blogheadline{
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 50px;
+    text-transform: uppercase;
+    display: inline-block;
+    text-align: center;
+    line-height: 60px;
+    margin-bottom: 20px;
+    position: relative;
+        
+}
 p{
     margin-top: 0;
     margin-bottom: 20px;
