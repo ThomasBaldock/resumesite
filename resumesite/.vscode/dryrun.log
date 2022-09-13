@@ -1,5 +1,5 @@
 make --dry-run --always-make --keep-going --print-directory
-make: Entering directory `/Users/Tommy/Dropbox/MyWebsite/resumesite/resumesite'
+make: Entering directory `/Users/thomasbaldock/Dropbox/MyWebsite/resumesite/resumesite'
 sam build
-make: Leaving directory `/Users/Tommy/Dropbox/MyWebsite/resumesite/resumesite'
+make: Leaving directory `/Users/thomasbaldock/Dropbox/MyWebsite/resumesite/resumesite'
  
