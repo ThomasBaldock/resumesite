@@ -6,11 +6,8 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # PARTICULAR PURPOSE.
 
 # This program built for i386-apple-darwin11.3.0
- 
-make: *** No rule to make target `all'.  Stop.
 
-
-# Make data base, printed on Wed Sep 14 11:50:13 2022
+# Make data base, printed on Wed Oct  5 16:14:58 2022
 
 # Variables
 
@@ -45,11 +42,11 @@ ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.CO2KAQSwNm/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.1Imz6JvJj8/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
-DISPLAY = /private/tmp/com.apple.launchd.ovt3x4OLes/org.macosforge.xquartz:0
+DISPLAY = /private/tmp/com.apple.launchd.ctwNRgbDD1/org.macosforge.xquartz:0
 # environment
 PWD = /Users/thomasbaldock/Dropbox/MyWebsite/resumesite/resumesite
 # environment
@@ -61,7 +58,7 @@ HOME = /Users/thomasbaldock
 # default
 MAKEFILEPATH = $(shell /usr/bin/xcode-select -print-path 2>/dev/null || echo /Developer)/Makefiles
 # environment
-VSCODE_CODE_CACHE_PATH = /Users/thomasbaldock/Library/Application Support/Code/CachedData/784b0177c56c607789f9638da7b6bf3230d47a8c
+VSCODE_CODE_CACHE_PATH = /Users/thomasbaldock/Library/Application Support/Code/CachedData/74b1f979648cc44d385a2286793c226e611f59e7
 # environment
 LOGNAME = thomasbaldock
 # environment
@@ -95,7 +92,7 @@ TMPDIR = /var/folders/g3/0nq77k4x3fxdckzfhrsf9ywc0000gn/T/
 # automatic
 *F = $(notdir $*)
 # environment
-VSCODE_IPC_HOOK = /Users/thomasbaldock/Library/Application Support/Code/1.71.0-main.sock
+VSCODE_IPC_HOOK = /Users/thomasbaldock/Library/Application Support/Code/1.71.2-main.sock
 # environment
 MallocNanoZone = 0
 # makefile
@@ -105,7 +102,7 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-XPC_SERVICE_NAME = application.com.microsoft.VSCode.12966028203.12966028209
+XPC_SERVICE_NAME = application.com.microsoft.VSCode.12967205018.12967205024
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # automatic
@@ -133,7 +130,7 @@ CLICOLOR = 1
 # environment
 LANG = C
 # environment
-VSCODE_PID = 25520
+VSCODE_PID = 3638
 # variable set hash-table stats:
 # Load=60/1024=6%, Rehash=0, Collisions=1/84=1%
 
@@ -143,7 +140,7 @@ VSCODE_PID = 25520
 
 # Directories
 
-# . (device 16777223, inode 12965211738): 13 files, no impossibilities.
+# . (device 16777223, inode 12967208460): 13 files, no impossibilities.
 
 # 13 files, no impossibilities in 1 directories.
 
@@ -176,7 +173,7 @@ all:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-05 18:36:38
+#  Last modified 2022-10-05 16:05:59
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -242,6 +239,8 @@ deploy-site:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Wed Sep 14 11:50:13 2022
+# Finished Make data base on Wed Oct  5 16:14:58 2022
 
  
+make: *** No rule to make target `all'.  Stop.
+

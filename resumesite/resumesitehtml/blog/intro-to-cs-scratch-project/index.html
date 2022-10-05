@@ -1,0 +1,64 @@
+<html>
+<head>
+    <link href='https://fonts.googleapis.com/css?family=Playfair+Display:400,700,900,400italic,700italic,900italic|Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="test.css">
+    <title>Introduction to Computer Science - Scratch Project</title>
+    <meta name="viewport" content="width=device-width">
+    <script>
+      fetch('https://57vvf01f32.execute-api.ap-southeast-2.amazonaws.com/Prod/put')
+            .then(() => fetch('https://57vvf01f32.execute-api.ap-southeast-2.amazonaws.com/Prod/get'))
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('visitorCount').innerText = data['counter']
+            })
+      </script>
+</head>
+<body>
+<div class="links"><a href=mailto:thomas.m.baldock@gmail.com>Email</a> &emsp; <a href="https://www.linkedin.com/in/thomas-m-baldock" target="_blank">LinkedIn</a>  &emsp; <a href="https://github.com/ThomasBaldock" target="_blank">Github</a> &emsp; <a href="/blog">Blog</a>  </div>
+<div class="head">
+<div class="thomasbaldockheader"><a href="/" style="text-decoration: none">Thomas Baldock</a></div>
+<div class="subhead"> Melbourne, Australia - 
+  <div class="display-date">
+      <span id="day">day</span>,
+      <span id="month">month</span>
+      <span id="daynum">00</span>
+      <span id="year">0000</span>
+    </div></div>
+    <div class="visitorcount"><span style="font-style: italic;">You are visitor number: <span id="visitorCount">loading...</span></div>
+</div>
+<div class="badges"><img src="images/cloud-practioner-badge.png" alt="Certified Cloud Practioner Badge" width="100" height="100"><img src="images/restart-graduate-badge.png" alt="AWS Re/Start Graduate Badge" width="100" height="100"></div><br>
+<div class="contentb">
+  <div class="collumnb">
+    <hr class="descriptionline">
+  <h3>Wednesday, 5th of October</h3>
+  <span class="blogheadline">The Shell Game</span><br><br> 
+  <img src="images/conjurer.jpg" alt="The Shell Game" class="cloudhead"><br>
+    <p>Just a quick one here. I have started <a href="https://www.edx.org/course/introduction-computer-science-harvardx-cs50x" target="_blank">cs50's Introduction to Computer Science</a> and made it through week 0. In this block we were introduced to the concepts of computer science, which fundamentally, is a form of problem solving. It was broken down simply to two components - input, and output.<br><br>
+      We touched on how the binary system can be used to represent all kinds of information e.g. text, images, videos, sounds, emojis, etc. We discussed how computer science connects inputs and outputs of problems - that being, through algorithms (step-by-step instructions which are used to solve complex problem).<br><br>
+      Through a basic example (finding a name in a phone book) we visualised how an algorithms efficiency can be calculated. We then used this example to chart efficiency using a simple chart<br><br>
+  <img src="images/algorithmic-efficiency.png" alt="Algorithmic-efficiency" class="cloudhead"><br>
+      We then experminted with writing 'pseudocode' using quasi functions (pick up), conditionals (if, else if), loops (for, return to line x) and boolean expressions (is person on page? yes or no). The pseudocode we came up with for finding a name in the phone book was:<br><br>
+      1  &nbsp;Pick up phone book<br>
+      2  &nbsp;Open to middle of phone book<br>
+      3  &nbsp;Look at page<br>
+      4  &nbsp;If person is on page<br>
+      5  &nbsp;&emsp;Call person<br>
+      6  &nbsp;Else if person is earlier in book<br>
+      7  &nbsp;&emsp;Open to middle of left half of book<br>
+      8  &nbsp;&emsp;Go back to line 3<br>
+      9  &nbsp;Else if person is later in book<br>
+      10 &nbsp;&emsp;Open to middle of right half of book<br>
+      11 &nbsp;&emsp;Go back to line 3<br>
+      12 &nbsp;Else<br>
+      13 &nbsp;&emsp;Quit<br><br>
+      We then finished with an introduction to the graphical programming language called <a href="https://scratch.mit.edu/" target="_blank">Scratch</a>, developed by MIT. This language bridges the gap between pseudocode and computer code, in a highly human-readable form. We had a look at some examples of previous student's projects, before we were sent out into the ether to come up with our own work.<br><br>
+      After a short time experimenting with the language, I decided to recreate the Shell Game in Scratch. Here's my finished project.<br><hr class="descriptionline"><br>
+      <iframe src="https://scratch.mit.edu/projects/741040546/embed" class="cloudhead" allowtransparency="true" width="485" height="402" frameborder="0" scrolling="no" allowfullscreen></iframe><br><hr class="descriptionline"><br>
+      I've had someone experience making a small game with python (battleship) however this time my efforts were unguided. Admittedly, Scratch is very intuitive - however working through the entire process helped reinforce some concepts for me. Most notably - the concept of exit status. It took some time for me to work how to integrate the seperate 'puzzle pieces' of my project, until I discovered the 'broadcast message' feature of Scratch. From this point, it was much clearer how I would integrate my puzzle pieces together.<br><br>
+      I had a lot of fun with this week's block - particularly David J. Malan's energetic stage presence. He's the Freddie Mercury of the Computer Science world! I'm really looking forward to next week's learning.
+    </p>
+</div>
+<hr class="descriptionline">
+<script src="date.js"></script>
+</body>
+</html>
