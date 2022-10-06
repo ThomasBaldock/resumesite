@@ -59,6 +59,22 @@ p{
     margin-right: auto;
     width: 50%;
 }
+
+.game{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 90%;
+}
+
+@media screen and (max-width: 600px) {
+    .game{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        height: 200;
+    }
+}
 @media screen and (min-width: 1300px) {
     .cloudhead {
         display: block;
