@@ -1,0 +1,696 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Deploying Your First Terraform Configuration</title><style>
+    /* cspell:disable-file */
+    /* webkit printing magic: print all background colors */
+    html {
+        -webkit-print-color-adjust: exact;
+    }
+    * {
+        box-sizing: border-box;
+        -webkit-print-color-adjust: exact;
+    }
+    
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+    }
+    @media only screen {
+        body {
+            margin: 2em auto;
+            max-width: 900px;
+            color: rgb(55, 53, 47);
+        }
+    }
+    
+    body {
+        line-height: 1.5;
+        white-space: pre-wrap;
+    }
+    
+    a,
+    a.visited {
+        color: inherit;
+        text-decoration: underline;
+    }
+    
+    .pdf-relative-link-path {
+        font-size: 80%;
+        color: #444;
+    }
+    
+    h1,
+    h2,
+    h3 {
+        letter-spacing: -0.01em;
+        line-height: 1.2;
+        font-weight: 600;
+        margin-bottom: 0;
+    }
+    
+    .page-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-top: 0;
+        margin-bottom: 0.75em;
+    }
+    
+    h1 {
+        font-size: 1.875rem;
+        margin-top: 1.875rem;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+        margin-top: 1.5rem;
+    }
+    
+    h3 {
+        font-size: 1.25rem;
+        margin-top: 1.25rem;
+    }
+    
+    .source {
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        padding: 1.5em;
+        word-break: break-all;
+    }
+    
+    .callout {
+        border-radius: 3px;
+        padding: 1rem;
+    }
+    
+    figure {
+        margin: 1.25em 0;
+        page-break-inside: avoid;
+    }
+    
+    figcaption {
+        opacity: 0.5;
+        font-size: 85%;
+        margin-top: 0.5em;
+    }
+    
+    mark {
+        background-color: transparent;
+    }
+    
+    .indented {
+        padding-left: 1.5em;
+    }
+    
+    hr {
+        background: transparent;
+        display: block;
+        width: 100%;
+        height: 1px;
+        visibility: visible;
+        border: none;
+        border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+    }
+    
+    img {
+        max-width: 100%;
+    }
+    
+    @media only print {
+        img {
+            max-height: 100vh;
+            object-fit: contain;
+        }
+    }
+    
+    @page {
+        margin: 1in;
+    }
+    
+    .collection-content {
+        font-size: 0.875rem;
+    }
+    
+    .column-list {
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .column {
+        padding: 0 1em;
+    }
+    
+    .column:first-child {
+        padding-left: 0;
+    }
+    
+    .column:last-child {
+        padding-right: 0;
+    }
+    
+    .table_of_contents-item {
+        display: block;
+        font-size: 0.875rem;
+        line-height: 1.3;
+        padding: 0.125rem;
+    }
+    
+    .table_of_contents-indent-1 {
+        margin-left: 1.5rem;
+    }
+    
+    .table_of_contents-indent-2 {
+        margin-left: 3rem;
+    }
+    
+    .table_of_contents-indent-3 {
+        margin-left: 4.5rem;
+    }
+    
+    .table_of_contents-link {
+        text-decoration: none;
+        opacity: 0.7;
+        border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+    }
+    
+    table,
+    th,
+    td {
+        border: 1px solid rgba(55, 53, 47, 0.09);
+        border-collapse: collapse;
+    }
+    
+    table {
+        border-left: none;
+        border-right: none;
+    }
+    
+    th,
+    td {
+        font-weight: normal;
+        padding: 0.25em 0.5em;
+        line-height: 1.5;
+        min-height: 1.5em;
+        text-align: left;
+    }
+    
+    th {
+        color: rgba(55, 53, 47, 0.6);
+    }
+    
+    ol,
+    ul {
+        margin: 0;
+        margin-block-start: 0.6em;
+        margin-block-end: 0.6em;
+    }
+    
+    li > ol:first-child,
+    li > ul:first-child {
+        margin-block-start: 0.6em;
+    }
+    
+    ul > li {
+        list-style: disc;
+    }
+    
+    ul.to-do-list {
+        text-indent: -1.7em;
+    }
+    
+    ul.to-do-list > li {
+        list-style: none;
+    }
+    
+    .to-do-children-checked {
+        text-decoration: line-through;
+        opacity: 0.375;
+    }
+    
+    ul.toggle > li {
+        list-style: none;
+    }
+    
+    ul {
+        padding-inline-start: 1.7em;
+    }
+    
+    ul > li {
+        padding-left: 0.1em;
+    }
+    
+    ol {
+        padding-inline-start: 1.6em;
+    }
+    
+    ol > li {
+        padding-left: 0.2em;
+    }
+    
+    .mono ol {
+        padding-inline-start: 2em;
+    }
+    
+    .mono ol > li {
+        text-indent: -0.4em;
+    }
+    
+    .toggle {
+        padding-inline-start: 0em;
+        list-style-type: none;
+    }
+    
+    /* Indent toggle children */
+    .toggle > li > details {
+        padding-left: 1.7em;
+    }
+    
+    .toggle > li > details > summary {
+        margin-left: -1.1em;
+    }
+    
+    .selected-value {
+        display: inline-block;
+        padding: 0 0.5em;
+        background: rgba(206, 205, 202, 0.5);
+        border-radius: 3px;
+        margin-right: 0.5em;
+        margin-top: 0.3em;
+        margin-bottom: 0.3em;
+        white-space: nowrap;
+    }
+    
+    .collection-title {
+        display: inline-block;
+        margin-right: 1em;
+    }
+    
+    .simple-table {
+        margin-top: 1em;
+        font-size: 0.875rem;
+        empty-cells: show;
+    }
+    .simple-table td {
+        height: 29px;
+        min-width: 120px;
+    }
+    
+    .simple-table th {
+        height: 29px;
+        min-width: 120px;
+    }
+    
+    .simple-table-header-color {
+        background: rgb(247, 246, 243);
+        color: black;
+    }
+    .simple-table-header {
+        font-weight: 500;
+    }
+    
+    time {
+        opacity: 0.5;
+    }
+    
+    .icon {
+        display: inline-block;
+        max-width: 1.2em;
+        max-height: 1.2em;
+        text-decoration: none;
+        vertical-align: text-bottom;
+        margin-right: 0.5em;
+    }
+    
+    img.icon {
+        border-radius: 3px;
+    }
+    
+    .user-icon {
+        width: 1.5em;
+        height: 1.5em;
+        border-radius: 100%;
+        margin-right: 0.5rem;
+    }
+    
+    .user-icon-inner {
+        font-size: 0.8em;
+    }
+    
+    .text-icon {
+        border: 1px solid #000;
+        text-align: center;
+    }
+    
+    .page-cover-image {
+        display: block;
+        object-fit: cover;
+        width: 100%;
+        max-height: 30vh;
+    }
+    
+    .page-header-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+    
+    .page-header-icon-with-cover {
+        margin-top: -0.72em;
+        margin-left: 0.07em;
+    }
+    
+    .page-header-icon img {
+        border-radius: 3px;
+    }
+    
+    .link-to-page {
+        margin: 1em 0;
+        padding: 0;
+        border: none;
+        font-weight: 500;
+    }
+    
+    p > .user {
+        opacity: 0.5;
+    }
+    
+    td > .user,
+    td > time {
+        white-space: nowrap;
+    }
+    
+    input[type="checkbox"] {
+        transform: scale(1.5);
+        margin-right: 0.6em;
+        vertical-align: middle;
+    }
+    
+    p {
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
+    }
+    
+    .image {
+        border: none;
+        margin: 1.5em 0;
+        padding: 0;
+        border-radius: 0;
+        text-align: center;
+    }
+    
+    .code,
+    code {
+        background: rgba(135, 131, 120, 0.15);
+        border-radius: 3px;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+        font-size: 85%;
+        tab-size: 2;
+    }
+    
+    code {
+        color: #eb5757;
+    }
+    
+    .code {
+        padding: 1.5em 1em;
+    }
+    
+    .code-wrap {
+        white-space: pre-wrap;
+        word-break: break-all;
+    }
+    
+    .code > code {
+        background: none;
+        padding: 0;
+        font-size: 100%;
+        color: inherit;
+    }
+    
+    blockquote {
+        font-size: 1.25em;
+        margin: 1em 0;
+        padding-left: 1em;
+        border-left: 3px solid rgb(55, 53, 47);
+    }
+    
+    .bookmark {
+        text-decoration: none;
+        max-height: 8em;
+        padding: 0;
+        display: flex;
+        width: 100%;
+        align-items: stretch;
+    }
+    
+    .bookmark-title {
+        font-size: 0.85em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        height: 1.75em;
+        white-space: nowrap;
+    }
+    
+    .bookmark-text {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .bookmark-info {
+        flex: 4 1 180px;
+        padding: 12px 14px 14px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    
+    .bookmark-image {
+        width: 33%;
+        flex: 1 1 180px;
+        display: block;
+        position: relative;
+        object-fit: cover;
+        border-radius: 1px;
+    }
+    
+    .bookmark-description {
+        color: rgba(55, 53, 47, 0.6);
+        font-size: 0.75em;
+        overflow: hidden;
+        max-height: 4.5em;
+        word-break: break-word;
+    }
+    
+    .bookmark-href {
+        font-size: 0.75em;
+        margin-top: 0.25em;
+    }
+    
+    .sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+    .code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+    .serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+    .mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+    .pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+    .pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+    .pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+    .pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+    .pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+    .pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+    .pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+    .pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+    .pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+    .pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+    .pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+    .pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+    .pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+    .pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+    .pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+    .pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+    .highlight-default {
+        color: rgba(55, 53, 47, 1);
+    }
+    .highlight-gray {
+        color: rgba(120, 119, 116, 1);
+        fill: rgba(120, 119, 116, 1);
+    }
+    .highlight-brown {
+        color: rgba(159, 107, 83, 1);
+        fill: rgba(159, 107, 83, 1);
+    }
+    .highlight-orange {
+        color: rgba(217, 115, 13, 1);
+        fill: rgba(217, 115, 13, 1);
+    }
+    .highlight-yellow {
+        color: rgba(203, 145, 47, 1);
+        fill: rgba(203, 145, 47, 1);
+    }
+    .highlight-teal {
+        color: rgba(68, 131, 97, 1);
+        fill: rgba(68, 131, 97, 1);
+    }
+    .highlight-blue {
+        color: rgba(51, 126, 169, 1);
+        fill: rgba(51, 126, 169, 1);
+    }
+    .highlight-purple {
+        color: rgba(144, 101, 176, 1);
+        fill: rgba(144, 101, 176, 1);
+    }
+    .highlight-pink {
+        color: rgba(193, 76, 138, 1);
+        fill: rgba(193, 76, 138, 1);
+    }
+    .highlight-red {
+        color: rgba(212, 76, 71, 1);
+        fill: rgba(212, 76, 71, 1);
+    }
+    .highlight-gray_background {
+        background: rgba(241, 241, 239, 1);
+    }
+    .highlight-brown_background {
+        background: rgba(244, 238, 238, 1);
+    }
+    .highlight-orange_background {
+        background: rgba(251, 236, 221, 1);
+    }
+    .highlight-yellow_background {
+        background: rgba(251, 243, 219, 1);
+    }
+    .highlight-teal_background {
+        background: rgba(237, 243, 236, 1);
+    }
+    .highlight-blue_background {
+        background: rgba(231, 243, 248, 1);
+    }
+    .highlight-purple_background {
+        background: rgba(244, 240, 247, 0.8);
+    }
+    .highlight-pink_background {
+        background: rgba(249, 238, 243, 0.8);
+    }
+    .highlight-red_background {
+        background: rgba(253, 235, 236, 1);
+    }
+    .block-color-default {
+        color: inherit;
+        fill: inherit;
+    }
+    .block-color-gray {
+        color: rgba(120, 119, 116, 1);
+        fill: rgba(120, 119, 116, 1);
+    }
+    .block-color-brown {
+        color: rgba(159, 107, 83, 1);
+        fill: rgba(159, 107, 83, 1);
+    }
+    .block-color-orange {
+        color: rgba(217, 115, 13, 1);
+        fill: rgba(217, 115, 13, 1);
+    }
+    .block-color-yellow {
+        color: rgba(203, 145, 47, 1);
+        fill: rgba(203, 145, 47, 1);
+    }
+    .block-color-teal {
+        color: rgba(68, 131, 97, 1);
+        fill: rgba(68, 131, 97, 1);
+    }
+    .block-color-blue {
+        color: rgba(51, 126, 169, 1);
+        fill: rgba(51, 126, 169, 1);
+    }
+    .block-color-purple {
+        color: rgba(144, 101, 176, 1);
+        fill: rgba(144, 101, 176, 1);
+    }
+    .block-color-pink {
+        color: rgba(193, 76, 138, 1);
+        fill: rgba(193, 76, 138, 1);
+    }
+    .block-color-red {
+        color: rgba(212, 76, 71, 1);
+        fill: rgba(212, 76, 71, 1);
+    }
+    .block-color-gray_background {
+        background: rgba(241, 241, 239, 1);
+    }
+    .block-color-brown_background {
+        background: rgba(244, 238, 238, 1);
+    }
+    .block-color-orange_background {
+        background: rgba(251, 236, 221, 1);
+    }
+    .block-color-yellow_background {
+        background: rgba(251, 243, 219, 1);
+    }
+    .block-color-teal_background {
+        background: rgba(237, 243, 236, 1);
+    }
+    .block-color-blue_background {
+        background: rgba(231, 243, 248, 1);
+    }
+    .block-color-purple_background {
+        background: rgba(244, 240, 247, 0.8);
+    }
+    .block-color-pink_background {
+        background: rgba(249, 238, 243, 0.8);
+    }
+    .block-color-red_background {
+        background: rgba(253, 235, 236, 1);
+    }
+    .select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+    .select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+    .select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+    .select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+    .select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+    .select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+    .select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+    .select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+    .select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+    .select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+    
+    .checkbox {
+        display: inline-flex;
+        vertical-align: text-bottom;
+        width: 16;
+        height: 16;
+        background-size: 16px;
+        margin-left: 2px;
+        margin-right: 5px;
+    }
+    
+    .checkbox-on {
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+    }
+    
+    .checkbox-off {
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+    }
+        
+    </style></head><body><article id="a9181028-f31c-4472-bdda-b811a0f51c7c" class="page sans"><header><h1 class="page-title">Deploying Your First Terraform Configuration</h1></header><div class="page-body"><p id="d208dbb1-6cdb-4af3-80a5-ae80c725701d" class=""><time>@02/02/2023</time> </p><p id="28466e71-da29-4d48-9e3b-22db6f958108" class="block-color-gray_background">Overview</p><ul id="e4e0f34b-5df7-4acd-8a8c-6efca62bded9" class="bulleted-list"><li style="list-style-type:disc">What is Terraform<ul id="08211367-9fbc-4630-9065-bbfe4e4bab18" class="bulleted-list"><li style="list-style-type:circle">Workflow</li></ul><ul id="d9ba8d3c-ac40-48b3-9b3b-09813507e013" class="bulleted-list"><li style="list-style-type:circle">Installation</li></ul></li></ul><ul id="fa23f63a-37ab-4c00-9609-9b310e00da02" class="bulleted-list"><li style="list-style-type:disc">‘Globomantics’ scenario</li></ul><ul id="8164d0c7-3a17-4aa7-a72b-6d02903b0f79" class="bulleted-list"><li style="list-style-type:disc">Walk through ‘Terraform: Hello world’ demonstration</li></ul><p id="066c7113-169d-4103-8205-37d2ac222123" class="">
+    </p><p id="ab1ea754-fa59-40c8-84a7-0ad43bcfc0bb" class="block-color-gray_background">What is Terraform</p><ul id="42f6e3d8-446a-4c2f-87e8-5bbe980121e0" class="bulleted-list"><li style="list-style-type:disc">Infrastructure <strong>automation tool</strong><ul id="094c8299-064b-4eb1-9091-9749df706f7b" class="bulleted-list"><li style="list-style-type:circle">infra meaning a layer of technology that a developer consumes with having to deploy and manage it i.e.networking, virtual machines and containers</li></ul></li></ul><ul id="a0b4c240-08d8-46ad-862a-21e4ebb5f20b" class="bulleted-list"><li style="list-style-type:disc">the core is an <strong>open-source project </strong>maintained by Hashicorp, there are paid version</li></ul><ul id="8b598cd1-8308-4ebc-a616-83b05d872e3a" class="bulleted-list"><li style="list-style-type:disc">it is also <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>vendor agnostic</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong> meaning it has no preference of any particular cloud or service, works with most</li></ul><ul id="b70b3847-aa63-4511-aef0-3186341f94a9" class="bulleted-list"><li style="list-style-type:disc">The single binary is compiled from Go available for multiple OS</li></ul><ul id="91eef415-2918-47b0-9e48-91feed94a408" class="bulleted-list"><li style="list-style-type:disc">Uses a <strong>declarative syntax, </strong><ul id="846f6082-9dbd-4bf5-be51-3f3e1480eea6" class="bulleted-list"><li style="list-style-type:circle">describe how you want the env, TF does the rest</li></ul></li></ul><ul id="b1022b58-2c29-440b-bc00-812c3c0dd981" class="bulleted-list"><li style="list-style-type:disc">Config files are written in Hashicorp Configuarion Language (HCL) or JSON</li></ul><ul id="3b8aa0e2-52a2-4a3f-b0f0-b6a1fe725400" class="bulleted-list"><li style="list-style-type:disc"><strong>Push</strong> based deployment</li></ul><p id="faa70f33-f241-4fe8-a415-05b90fc3ec8c" class="">
+    </p><p id="ad7d1dbf-9540-402a-96c1-87015f798384" class="block-color-gray_background">Core components</p><ol type="1" id="726da020-2399-4ae1-aa26-2b34bc3334da" class="numbered-list" start="1"><li><strong>Executable</strong><ol type="a" id="955ef2b3-5a45-4449-ac9d-976eb9862a0c" class="numbered-list" start="1"><li>single binary file you call to run Terraform, contains all core functionality</li></ol></li></ol><ol type="1" id="b49bd040-1cb2-4e23-89bf-08da860b3856" class="numbered-list" start="2"><li><strong><strong><strong>HCL Configuration files </strong></strong></strong><ol type="a" id="beb685cd-63d9-45b9-8933-c64c54bb7bd2" class="numbered-list" start="1"><li>the config you are deploying is contained in HCL Configuration files, with extension .tf usually</li></ol><ol type="a" id="cf5177ec-71e6-45a9-a5d8-cc361e456a97" class="numbered-list" start="2"><li>when there are multiple .tf files in a directory, Terraform stitches them together</li></ol></li></ol><ol type="1" id="34b05081-bd5e-4389-833d-95d7433a1f94" class="numbered-list" start="3"><li><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Provider Plugins</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong><ol type="a" id="b302366b-6866-488b-9948-772248900f12" class="numbered-list" start="1"><li>executables invoked by Terraform to interact with a service’s API, ie AWS</li></ol><ol type="a" id="6206545d-4fab-4a43-802a-7c2dab2ad0f9" class="numbered-list" start="2"><li>most common plugins are hosted on the public terraform registry<ol type="i" id="3e40030e-258c-48a9-b0a1-68466446cac1" class="numbered-list" start="1"><li><a href="http://registry.terraform.io">registry.terraform.io</a></li></ol></li></ol></li></ol><ol type="1" id="e65d868a-7b7f-4ed6-b3b6-f4d45aa3eba3" class="numbered-list" start="4"><li><strong><strong><strong><strong>State data</strong></strong></strong></strong><ol type="a" id="d1d6de2a-5752-4dfd-97e6-3c70364441b9" class="numbered-list" start="1"><li>how Terraform keeps track of what’s been deployed</li></ol><ol type="a" id="2d8d36d5-f0e9-4dda-aabd-74e4c1f0975a" class="numbered-list" start="2"><li>state data contains current info about deployment</li></ol><ol type="a" id="d4dc29c1-88be-4136-b546-727283a4f074" class="numbered-list" start="3"><li>a mapping of whats defined in config to what exists in target env.</li></ol><ol type="a" id="a534fa35-a6b9-4f38-b43c-e7340a7c45fe" class="numbered-list" start="4"><li>Terraform, when deploying:<ol type="i" id="f7aa1980-9a9b-4edf-ac7a-7423dae1b20b" class="numbered-list" start="1"><li>compares updated config files to state data file</li></ol><ol type="i" id="40bb2d1f-aa2a-4428-8bdd-956f1b3d1082" class="numbered-list" start="2"><li>calculates changes needed to make them match,</li></ol><ol type="i" id="0fa0303f-0059-460f-bc85-703c0721a40f" class="numbered-list" start="3"><li>makes changes </li></ol><ol type="i" id="50a88e32-6a29-4c7b-8d5a-b0019e471e78" class="numbered-list" start="4"><li>then updates state data</li></ol></li></ol></li></ol><p id="a535c969-f342-47a7-b575-d374820e90bf" class="">
+    </p><p id="6e1c96e2-9cf7-4389-bc63-e6c2bb40717c" class="block-color-gray_background">Installing Terraform</p><ol type="1" id="a8bb3254-7212-4d82-af88-f3436acf6bb8" class="numbered-list" start="1"><li>Download executable for platform</li></ol><ol type="1" id="34bdca4d-e30a-4935-b259-659a5bf496c3" class="numbered-list" start="2"><li>Add to your PATH environment variable</li></ol><p id="2987d4e5-7224-4c76-ad90-65df056c5b05" class="">
+    </p><ul id="5f172c76-9f90-4624-9bc7-52af3ad605ab" class="bulleted-list"><li style="list-style-type:disc">Terraform is available in common packet managers and even as a docker container.</li></ul><p id="177253e9-9fd3-4c55-b9db-0a94fd8188c8" class=""><strong>You can find the installer info for Terraform here:</strong></p><p id="a5b454e2-9685-4157-a900-a970f9f30ba4" class=""><a href="https://www.terraform.io/downloads.html">https://www.terraform.io/downloads.htm</a></p><p id="2281f8ab-a505-4bb4-9fd8-3a3d5e390c60" class=""><strong>NOTE</strong></p><ul id="503166a3-0e1b-4aae-81a7-f8f93ea9f8df" class="bulleted-list"><li style="list-style-type:disc">I had trouble using brew because the xcode install tool was going to take a long time to download </li></ul><ul id="5c3d587d-a9cb-461a-bb20-b2b269a22818" class="bulleted-list"><li style="list-style-type:disc">so I bypassed and downloaded mac binary directly and unzipped into /opt/terraform directory</li></ul><ul id="ed26af32-a737-4a97-8bb5-ff6eadb11d91" class="bulleted-list"><li style="list-style-type:disc">and added the following to my ~/.bash_profile using nano<p id="49acb61c-78d7-44dc-875c-067ba5d2bc7c" class=""><em>PATH=&quot;/opt/terraform:${PATH}&quot;</em></p></li></ul><p id="db5b9f7b-7d90-4a64-98f1-357775dce8ab" class=""><strong>source</strong>:</p><p id="500331ba-6dc2-45f8-9a0d-d9cf8269ebf4" class=""><em><a href="https://www.coachdevops.com/2020/04/how-to-install-terraform-on-mac-os.html">https://www.coachdevops.com/2020/04/how-to-install-terraform-on-mac-os.html</a></em></p><ul id="11451ceb-f505-479a-b78a-28d5042dabf6" class="bulleted-list"><li style="list-style-type:disc">be sure to curl latest version of binary, address available on terraform downloads page</li></ul><p id="f53c8e9d-4fc3-4023-aee5-34b98cdce67d" class="">
+    </p><p id="19f64cd8-58d5-4a8f-9016-f26c8da2565b" class="block-color-gray_background">Using the CLI</p><p id="26e71c8d-4d60-42e3-bd61-4a4230035fae" class="">Usage: <div class="indented"><ul id="77a5e1b4-3a58-4546-a258-8646c0f69343" class="bulleted-list"><li style="list-style-type:disc">terraform [global options] &lt;subcommand&gt; [args]</li></ul><ul id="b1693f5d-19c1-4a51-b78c-e0dde10f96ec" class="bulleted-list"><li style="list-style-type:disc">terraform -help<ul id="0597f2ed-119b-4212-bf9b-e7fee48898dc" class="bulleted-list"><li style="list-style-type:circle">Show this help output, or the help for a specified subcommand</li></ul></li></ul><ul id="606ac4d4-c80e-414e-bcf1-a3834c2b99f0" class="bulleted-list"><li style="list-style-type:disc"><em>terraform -version</em> <ul id="45afdc5c-c144-4256-9944-0135919ee160" class="bulleted-list"><li style="list-style-type:circle">An alias for the &quot;version&quot; subcommand.</li></ul></li></ul></div></p><ul id="bc463769-2ec9-48c7-ab90-75d37e95b7aa" class="bulleted-list"><li style="list-style-type:disc">Will accept  double -- dash or single - dash for arguments, even if they are more than single characters</li></ul><ul id="05bd2bb6-3d00-4dfd-a08c-f1b708696381" class="bulleted-list"><li style="list-style-type:disc"> Single is preferred syntax</li></ul><p id="f1e07f09-eda8-4276-b09a-c90666ce1bf0" class="">
+    </p><p id="8fac342f-e8da-47f3-a958-be7b1fa248d6" class="block-color-gray_background">Terraform Object Types</p><ol type="1" id="ed058de2-5d09-4595-904e-6f84eebdde4f" class="numbered-list" start="1"><li><strong>Providers</strong><ol type="a" id="a4ddd662-8f18-4d75-b616-c16e11845351" class="numbered-list" start="1"><li>define information about provider you want to use. </li></ol><ol type="a" id="6150b576-1264-4dec-b939-5c77f65238cc" class="numbered-list" start="2"><li>i.e. AWS, which account, which region</li></ol></li></ol><ol type="1" id="e73afcc5-2632-43a0-8374-5c2912f9559c" class="numbered-list" start="2"><li><strong>Resources</strong><ol type="a" id="04c1384e-2afd-40f2-ae7a-125f4f98a158" class="numbered-list" start="1"><li>things to create in target env ie Ec2, network, database</li></ol><ol type="a" id="c127b19d-289e-4eb2-98e6-675ff4961b12" class="numbered-list" start="2"><li>bulk of what you write</li></ol><ol type="a" id="6eb838f3-997d-4d73-b3c7-276586ec7932" class="numbered-list" start="3"><li>each resource is associated with a provider and usually requires additional config information</li></ol></li></ol><ol type="1" id="ba68c3db-7c1d-42ae-9204-430f669216e7" class="numbered-list" start="3"><li><strong>Data Sources</strong><ol type="a" id="7c660085-b1a4-420d-a90e-d1f6b302435c" class="numbered-list" start="1"><li>a way to query information from provider</li></ol><ol type="a" id="e782269f-feba-439f-beb6-b3e5a667af27" class="numbered-list" start="2"><li>not creating anything</li></ol><ol type="a" id="ae4a69fb-d702-4045-8560-83f840851bb2" class="numbered-list" start="3"><li>just asking for data may need to use in config</li></ol><ol type="a" id="f4f1ea18-6d82-4659-be6f-c0e30c9787a3" class="numbered-list" start="4"><li>also linked to a provider</li></ol><ol type="a" id="38a57526-5067-4e7c-8eaa-3a508b40b482" class="numbered-list" start="5"><li>e.g. ami for an ec2 instance, list of Availability Zones in a region</li></ol></li></ol><p id="3cd3812b-07b9-41e3-bdf3-5018fa401569" class="">
+    </p><p id="49cb9b05-e74e-4de2-94b0-b5bce04d126e" class="block-color-gray_background">General Block Syntax</p><ul id="bf65f2d9-a7f3-4e13-97e2-1a3634ec90db" class="bulleted-list"><li style="list-style-type:disc">uses block syntax</li></ul><ul id="9f9ca1bd-fc5e-457b-b92c-858f073653e6" class="bulleted-list"><li style="list-style-type:disc">easier to read</li></ul><ul id="3268c24c-fe08-4ee2-9c0b-5972edd626dd" class="bulleted-list"><li style="list-style-type:disc">permits inline comments</li></ul><ul id="0c6c3876-a453-4337-ae24-8786f87b62c0" class="bulleted-list"><li style="list-style-type:disc">simplified version of JSON</li></ul><ul id="9df84fd6-f492-484b-a983-feedf89437be" class="bulleted-list"><li style="list-style-type:disc">a sample block looks like<p id="0ad819c9-f4d7-4559-a20f-290a5bf65176" class=""><mark class="highlight-blue">block_type </mark><mark class="highlight-red">“label” “name_label” </mark>{<div class="indented"><p id="88b0ab5a-aa21-4757-aa0b-a06b4efab2cc" class=""><mark class="highlight-teal">key</mark> = <mark class="highlight-red">“value”</mark></p><p id="45bda6db-0fc5-458a-b617-29866da5176e" class=""><mark class="highlight-teal">nested_block</mark> {<div class="indented"><p id="27de1e22-14b5-41f3-a35b-462d5065f73d" class=""><mark class="highlight-teal">key</mark> = <mark class="highlight-red">“value”</mark></p></div></p><p id="0b1a8b23-fd4a-4781-9495-0c611ab94fcf" class="">}</p></div></p><p id="e01c22c3-b2ad-4bce-a636-b05718991f79" class="">}</p></li></ul><ol type="1" id="212e97a7-9a33-4ee3-84c3-a30e6733cda9" class="numbered-list" start="1"><li>each lines begins with <strong>block_type</strong> <ol type="a" id="1e7e2fca-5490-49b4-9170-48e25d836780" class="numbered-list" start="1"><li>which specifies type of object being described</li></ol></li></ol><ol type="1" id="31e1dc9f-4025-4a47-aada-a7f80649a24d" class="numbered-list" start="2"><li>next are a series of <strong>labels</strong> which depend on what object we are dealing with<ol type="a" id="4a6448dd-a898-41c3-81a3-377aa58edbf7" class="numbered-list" start="1"><li>last label is usually the name label, provides a way to refer back to object in config</li></ol></li></ol><ol type="1" id="501ce8c5-afd9-4895-b10e-dc5be2a2b261" class="numbered-list" start="3"><li>next in block we have one or more <strong>key value pairs </strong>which make use of available arguments for object type<ol type="a" id="1d15cffd-d71a-4a49-a52a-93398209305c" class="numbered-list" start="1"><li>each key is a string and value can be any of Terraform’s data types</li></ol></li></ol><ol type="1" id="88eec635-dc87-478f-842a-36a1ac15f516" class="numbered-list" start="4"><li>can also have <strong>nested blocks</strong> inside main block<ol type="a" id="30bc6454-6b5f-468f-8544-55a022b5308d" class="numbered-list" start="1"><li>inside will be more key value pairs</li></ol></li></ol><p id="bdef24b9-0019-4a2c-b28c-3d08bb9c9c88" class="">
+    </p><p id="a270fead-5bf4-42ce-8a76-d0310760fb7e" class=""><strong>Example</strong></p><figure id="9272669e-12b0-46b1-8823-e49b122805d9" class="image"><a href="Deploying%20Your%20First%20Terraform%20Configuration%20a9181028f31c4472bddab811a0f51c7c/Screenshot_2023-02-02_at_1.08.43_pm.png"><img style="width:846px" src="Deploying%20Your%20First%20Terraform%20Configuration%20a9181028f31c4472bddab811a0f51c7c/Screenshot_2023-02-02_at_1.08.43_pm.png"/></a></figure><p id="c48af140-9b02-4807-b67d-7162eaf34707" class="">
+    </p><ul id="892ba5af-8dfa-442c-8678-c3213600c9fe" class="bulleted-list"><li style="list-style-type:disc">HCL has a defined syntax for referring to other objects<figure id="086b5297-2b83-4994-acbf-9f415a47f8e9" class="image"><a href="Deploying%20Your%20First%20Terraform%20Configuration%20a9181028f31c4472bddab811a0f51c7c/Screenshot_2023-02-02_at_1.10.14_pm.png"><img style="width:978px" src="Deploying%20Your%20First%20Terraform%20Configuration%20a9181028f31c4472bddab811a0f51c7c/Screenshot_2023-02-02_at_1.10.14_pm.png"/></a></figure></li></ul><ul id="45f386cd-4fe5-4186-a46c-0b72a89ef780" class="bulleted-list"><li style="list-style-type:disc">if you want the whole resource, skip the attribute option<ul id="e81c5034-9efa-4b18-950d-6f72a7e529b4" class="bulleted-list"><li style="list-style-type:circle">e.g from the above example. <p id="ac3ad685-a483-45db-962b-ec871d4f842f" class=""><em>aws_instance.web_server.name </em></p></li></ul><ul id="5256808c-4d9a-405e-8bd0-955a432693b2" class="bulleted-list"><li style="list-style-type:circle">which will equal “web-server”</li></ul><p id="2b6bf235-1d9d-4195-8885-34e77a77c473" class="">
+    </p></li></ul><p id="79884ab8-9b6b-4701-81e9-b6329c968b59" class="block-color-gray_background">Base configuration file</p><p id="438e5381-2175-48ac-b698-556004694df3" class="">
+    </p><ul id="42f6fe33-5dc5-42a0-be54-4a8aa93a3408" class="bulleted-list"><li style="list-style-type:disc">Comments are supported in HCL by using hash symbol #</li></ul><ul id="dfa90590-de3d-457a-a38e-031f968bffe4" class="bulleted-list"><li style="list-style-type:disc">comments can break file into:<figure id="e4c39722-7327-4153-add5-537ba739d56b" class="image"><a href="Deploying%20Your%20First%20Terraform%20Configuration%20a9181028f31c4472bddab811a0f51c7c/Screenshot_2023-02-02_at_1.15.49_pm.png"><img style="width:1212px" src="Deploying%20Your%20First%20Terraform%20Configuration%20a9181028f31c4472bddab811a0f51c7c/Screenshot_2023-02-02_at_1.15.49_pm.png"/></a></figure></li></ul><p id="355d35c2-81a1-4064-b9e6-86b36dc0f388" class="">
+    </p><ol type="1" id="983ac0b7-24e9-4b3c-a4a1-cd5cd7bf3082" class="numbered-list" start="1"><li>Providers<ol type="a" id="0be52809-52a0-4c5d-9a42-058947149f21" class="numbered-list" start="1"><li>identify provider, with key value pairs storing AWS account details and how we will access, and also specifying region</li></ol></li></ol><ol type="1" id="e15f6d69-8628-4568-9dc9-19a8648db64a" class="numbered-list" start="2"><li>Data<ol type="a" id="ed9fd4e9-9869-4ec6-8044-426d02ad7290" class="numbered-list" start="1"><li>lists the data sources<ol type="i" id="dfb3a95c-c022-43e2-82e3-955bdb7c8c14" class="numbered-list" start="1"><li>in example, data source type is an AWS Service Manager parameter with the name label ami</li></ol><ol type="i" id="0cf2652b-fb64-4b99-954b-b380fd693228" class="numbered-list" start="2"><li>within config block we have a key called name and the value is the path of a parameter, which in this case grabs the latest Amazon Linux AMI ID for region we’re in</li></ol><ol type="i" id="c6d98807-0768-42e0-a0c2-fb5cf7a079d7" class="numbered-list" start="3"><li>this value will be used later when we create our AWS Ec2 instance</li></ol><p id="dd3c3d67-b8c2-426a-946f-41a9de744280" class="">
+    </p></li></ol><figure id="935c0b00-d96a-43d9-8d2f-54eea194b298" class="image"><a href="Deploying%20Your%20First%20Terraform%20Configuration%20a9181028f31c4472bddab811a0f51c7c/Screenshot_2023-02-02_at_1.24.08_pm.png"><img style="width:1094px" src="Deploying%20Your%20First%20Terraform%20Configuration%20a9181028f31c4472bddab811a0f51c7c/Screenshot_2023-02-02_at_1.24.08_pm.png"/></a></figure></li></ol><ol type="1" id="b2f9f4e9-40c1-4378-b4f9-7ff03f042a57" class="numbered-list" start="3"><li>Resources<ol type="a" id="16791675-60f1-4376-9ea4-50d749ccdace" class="numbered-list" start="1"><li>creates each individual resource<ol type="i" id="b4eb0c7c-0e1d-4aa5-8035-0439142baccd" class="numbered-list" start="1"><li>in example we start with Networking, </li></ol><ol type="i" id="66a893cb-e049-4792-ae17-62a89512570f" class="numbered-list" start="2"><li>creating a VPC with specified Cidr block and dns hostnames setting</li></ol><ol type="i" id="71fe02a5-adc1-4c35-89ad-4b56b6742be3" class="numbered-list" start="3"><li>creating an internet gateway linked to vpc using vpc.id</li></ol><ol type="i" id="01a16558-4793-414c-9fa2-31858a755cbc" class="numbered-list" start="4"><li>creating a subnet in vpc with a specfied CIDR block and public IP address</li></ol><ol type="i" id="e107acc9-96e8-4039-b04a-9c78e2c30b4d" class="numbered-list" start="5"><li>and more… such as a route table, in which we can create within a nested block a particular route to populate the table</li></ol></li></ol><p id="308af7f0-c080-40f0-8a21-edd9aca45a8d" class="">
+    </p><ul id="079ac9cd-4e46-45d0-af51-39421d1aa6ff" class="bulleted-list"><li style="list-style-type:disc">To find out what arguments and attributes are available for a resource i.e. <em><em><em><em><em><em><em><em>.vpc.id </em></em></em></em></em></em></em></em><ul id="a76ea240-130f-4ee3-a7cb-98c4c2130bd6" class="bulleted-list"><li style="list-style-type:circle">read the documentation<ul id="02d4030d-00c7-4d57-b123-9bce7985517f" class="bulleted-list"><li style="list-style-type:square">at <a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs">https://registry.terraform.io/providers/hashicorp/aws/latest/docs</a></li></ul></li></ul></li></ul><p id="0f7b7fbf-9e5c-455a-affe-a10046732e03" class="">
+    </p><p id="4674cb43-be32-4b24-860a-d02b9b26fa3b" class="block-color-gray_background">Terraform Workflow</p><ul id="c2dec8e4-0213-4db2-aa72-1cf67f66283b" class="bulleted-list"><li style="list-style-type:disc">terraform makes use of provider plugins as noted</li></ul><ul id="2783ad56-a6a2-4588-8221-672396f126b3" class="bulleted-list"><li style="list-style-type:disc">before it uses plugins it gets them</li></ul><p id="2023514f-c2d4-4c07-9146-c137801cc955" class="">
+    </p><ol type="1" id="0456c485-ba7b-4b3a-bd41-3ad9ffbc6e9d" class="numbered-list" start="1"><li>this is done by in initialisation process</li></ol><p id="40cf0350-6316-45a7-8687-ca6d141ed174" class=""><strong>$&gt; terraform init</strong></p><ul id="0f04461f-0e20-4f63-b814-7d954d34f5b4" class="bulleted-list"><li style="list-style-type:disc">init looks for config files inside current working directory</li></ul><ul id="2f18c79d-41a5-4527-a193-2cbb326bcc9f" class="bulleted-list"><li style="list-style-type:disc">examines them to find any needed plugins</li></ul><ul id="b26beff6-7430-4889-ac68-68875369a2b0" class="bulleted-list"><li style="list-style-type:disc">try and download those plugins from public Terraform Registry</li></ul><ul id="7fd71a53-df46-4d00-aefd-33cdff8f0568" class="bulleted-list"><li style="list-style-type:disc">unless an alternate location is specified</li></ul><ul id="caddb0cd-edd8-4144-8a63-ea7e33701a0d" class="bulleted-list"><li style="list-style-type:disc">also prepares the back end of the state data file, <ul id="6b2e6472-6661-4b0e-98a8-5ec04fde2dc8" class="bulleted-list"><li style="list-style-type:circle">if not specified Terraform creates this in cd</li></ul></li></ul><ul id="b40776e4-e416-417e-9721-b5a4910f05e4" class="bulleted-list"><li style="list-style-type:disc">once complete, ready to deploy infra</li></ul><p id="4c842801-778d-4bb5-ac4b-11ab54726790" class="">
+    </p><ol type="1" id="0554bd56-147f-4112-a0a5-e113a8b87831" class="numbered-list" start="2"><li>next step is plan out deployment with terraform plan</li></ol><p id="ec463e28-e777-4beb-b9ef-266b96426fb0" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>$&gt; terraform plan</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><ul id="fce21f18-d773-49d0-9786-f194f9e77d85" class="bulleted-list"><li style="list-style-type:disc">in this step terraform looks at current config, state date contents, determine differences, and make plan to update target env to match desired config</li></ul><ul id="e4333818-7bf6-4680-9657-9d408f2bad7c" class="bulleted-list"><li style="list-style-type:disc">terraform prints out plan so you can verify changes to be made</li></ul><ul id="3eb09e08-5058-4d95-b8aa-339d758bcb46" class="bulleted-list"><li style="list-style-type:disc">not absolutely necessary to run, but pretty useful</li></ul><ul id="ab01c61b-6d2e-4835-8400-faac84ea45f4" class="bulleted-list"><li style="list-style-type:disc">you can save the changes of the plan to a file and then feed into terraform for next step</li></ul><ul id="43c369a4-1d3b-4b9a-a057-12b0dce6cea1" class="bulleted-list"><li style="list-style-type:disc">terraform indicates what will be created with a green + sign</li></ul><p id="0fe13a46-67a8-45c3-a73e-314859afa56d" class="">
+    </p><figure id="8b6b833b-6063-4adf-a206-387975d1b7c1" class="image"><a href="Deploying%20Your%20First%20Terraform%20Configuration%20a9181028f31c4472bddab811a0f51c7c/Screenshot_2023-02-02_at_2.29.18_pm.png"><img style="width:1370px" src="Deploying%20Your%20First%20Terraform%20Configuration%20a9181028f31c4472bddab811a0f51c7c/Screenshot_2023-02-02_at_2.29.18_pm.png"/></a></figure><ol type="1" id="73446550-9cdf-43ef-b4cf-adb09097e55a" class="numbered-list" start="3"><li>Next step is making changes in target env, done with terraform apply</li></ol><p id="347b56ed-4e77-4589-9b9e-32612a09af3b" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>$&gt; terraform apply</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><ul id="ffc48156-6734-4d58-93bd-4fadf6a2df19" class="bulleted-list"><li style="list-style-type:disc">executes changes saved in plan using provider plugins</li></ul><ul id="994778c5-6c3a-4bd2-99fb-74ec6d0d3c48" class="bulleted-list"><li style="list-style-type:disc">resources are created or modified</li></ul><ul id="4431133b-5d75-4f77-aa03-7fc42573161b" class="bulleted-list"><li style="list-style-type:disc">state data is then updated</li></ul><ul id="45513692-48d1-44ea-878c-1a08ed9dee3e" class="bulleted-list"><li style="list-style-type:disc">if no changes are needed, terraform notifies us and makes none</li></ul><p id="424860dd-1afc-4938-943c-6cad027a281b" class="">
+    </p><ol type="1" id="3e966888-b676-4133-af1a-b4f28a48d918" class="numbered-list" start="4"><li>One last command, when done with env is terraform destroy</li></ol><p id="cc8af0ea-a3b7-4d5e-a880-ba05372699b7" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>$&gt; terraform destroy</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><ul id="c07bb70f-0bf2-47d3-8fb6-df99025cc210" class="bulleted-list"><li style="list-style-type:disc">a dangerous command!</li></ul><ul id="b1bd202b-695f-423b-9385-78b686b0ab7a" class="bulleted-list"><li style="list-style-type:disc">the red minus sign indicates what resources will be destroyed</li></ul><figure id="c58c831c-c612-49cf-8331-13e72f129d35" class="image"><a href="Deploying%20Your%20First%20Terraform%20Configuration%20a9181028f31c4472bddab811a0f51c7c/Screenshot_2023-02-02_at_2.28.02_pm.png"><img style="width:1174px" src="Deploying%20Your%20First%20Terraform%20Configuration%20a9181028f31c4472bddab811a0f51c7c/Screenshot_2023-02-02_at_2.28.02_pm.png"/></a></figure><p id="ac0befec-ab61-4b93-8735-01c234d6e72e" class="">
+    </p><p id="4a4119f0-f685-41c2-b59d-6cef4577f007" class="block-color-gray_background">Summary</p><ol type="1" id="1a285cc5-192a-497f-a309-25914ff513fc" class="numbered-list" start="1"><li>Terraform is infrastructure automation</li></ol><ol type="1" id="3b2b87f9-41f8-460e-b621-34138c468fe5" class="numbered-list" start="2"><li>Terraform is a single binary which can be used on almost any OS</li></ol><ol type="1" id="878b313b-dceb-4961-95c6-010d26d71d32" class="numbered-list" start="3"><li>Configurations used by Terraform is HCL or JSON</li></ol><ol type="1" id="407c84cf-9a38-49f9-a792-74a20266f501" class="numbered-list" start="4"><li>basic workflow is: init, plan and apply (and maybe destroy)</li></ol><p id="17140544-e67f-493b-86a6-25e39a5b46ff" class="">
+    </p><p id="460819a8-d893-40e4-ab47-0a07d605f79d" class="">
+    </p></li></ol><p id="819b8cae-f76d-41cf-b547-e2057f26f863" class="">
+    </p><p id="c4c56d07-8870-42d5-bfe4-4dfb8c060eab" class="">
+    </p><p id="d449c9bd-3571-4b37-84e4-bc4b6166188f" class="">
+    </p><p id="ebcf7c23-6ecb-4066-9d90-e7f62d9756c5" class="">
+    </p><p id="f670a36f-0c6d-4876-9abf-436c95582bcf" class="">
+    </p></div></article></body></html>

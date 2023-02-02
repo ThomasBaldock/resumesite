@@ -1,0 +1,37 @@
+<html>
+<head>
+    <link href='https://fonts.googleapis.com/css?family=Playfair+Display:400,700,900,400italic,700italic,900italic|Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="test.css">
+    <title>Hello World</title>
+    <meta name="viewport" content="width=device-width">
+    <script>
+      fetch('https://57vvf01f32.execute-api.ap-southeast-2.amazonaws.com/Prod/put')
+            .then(() => fetch('https://57vvf01f32.execute-api.ap-southeast-2.amazonaws.com/Prod/get'))
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('visitorCount').innerText = data['counter']
+            })
+      </script>
+</head>
+<body>
+<div class="links"><a href=mailto:thomas.m.baldock@gmail.com>Email</a> &emsp; <a href="https://www.linkedin.com/in/thomas-m-baldock" target="_blank">LinkedIn</a>  &emsp; <a href="https://github.com/ThomasBaldock" target="_blank">Github</a> &emsp; <a href="/blog">Blog</a> &emsp; <a href="/study-notes">Study Notes</a>  </div>
+<div class="head">
+<div class="thomasbaldockheader"><a href="/" style="text-decoration: none">Thomas Baldock</a></div>
+<div class="subhead"> Melbourne, Australia - 
+  <div class="display-date">
+      <span id="day">day</span>,
+      <span id="month">month</span>
+      <span id="daynum">00</span>
+      <span id="year">0000</span>
+    </div></div>
+    <div class="visitorcount"><span style="font-style: italic;">View number: <span id="visitorCount">loading...</span></div>
+</div>
+<div class="badges"><img src="images/cloud-practioner-badge.png" alt="Certified Cloud Practioner Badge" width="100" height="100"><img src="images/restart-graduate-badge.png" alt="AWS Re/Start Graduate Badge" width="100" height="100"></div><br>
+<div class="contentb">
+  <div class="collumnb">
+
+    <h3><a href="/01-terraform-getting-started">01 Terraform - Getting Started</aside></a></h3>
+</div>
+<script src="date.js"></script>
+</body>
+</html>
