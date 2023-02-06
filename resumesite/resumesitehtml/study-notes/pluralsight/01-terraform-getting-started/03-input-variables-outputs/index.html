@@ -1,0 +1,685 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Using Input Variables and Outputs</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="316e7420-8ea2-460a-af0d-f69e61144322" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🚥</span></div><h1 class="page-title">Using Input Variables and Outputs</h1></header><div class="page-body"><p id="66135e88-db7d-464a-8393-0f1b94ce45c4" class="block-color-gray_background">Overview</p><ul id="55f949a3-0234-4d51-b2c2-d95386bcec26" class="bulleted-list"><li style="list-style-type:disc">Supplying Inputs<ul id="acbb7ae8-cd88-4dc1-9955-4c06090a8eec" class="bulleted-list"><li style="list-style-type:circle">providing values to Terraform for use in configuration</li></ul></li></ul><ul id="d7b4a835-7ef8-46d0-91a3-ca8cdaa62487" class="bulleted-list"><li style="list-style-type:disc">Constructing values<ul id="427cb810-1fa2-4617-b011-927f3b1902c2" class="bulleted-list"><li style="list-style-type:circle">construct internal values inside of configuration for re-use</li></ul></li></ul><ul id="1db0c4d3-5696-43d9-b3fd-21d9f9e05551" class="bulleted-list"><li style="list-style-type:disc">Specifying Outputs<ul id="ec59d7a6-70b2-41d8-b559-3ee154acf7b1" class="bulleted-list"><li style="list-style-type:circle">export information from configuration once deployed</li></ul></li></ul><ul id="6c523da8-48d5-4664-afcd-ac07d4337768" class="bulleted-list"><li style="list-style-type:disc">Validate configurations<ul id="e73da624-50d0-4c0c-a89c-4cdbfa0ca295" class="bulleted-list"><li style="list-style-type:circle">validate configurations before deployment to ensure everything is correct</li></ul></li></ul><p id="8a49ae7c-0ddd-451f-b639-3863459f5586" class="">
+</p><h2 id="c1572245-4513-49bf-a7dc-b8a8cff68615" class="block-color-gray_background">Working with Data in Terraform </h2><ul id="12ee8aea-c24f-440c-b443-93975f5cee86" class="bulleted-list"><li style="list-style-type:disc">we can transform values inside config and return values as output<ul id="a34567c8-0785-4d07-b3af-4b9b94b59549" class="bulleted-list"><li style="list-style-type:circle">like working with variables in C, and then returning a value to indicate error or success</li></ul></li></ul><ol type="1" id="57565b0c-d991-4738-b389-049b812dc743" class="numbered-list" start="1"><li> <strong>Input variables</strong><ol type="a" id="d20bd534-13cb-48ee-8719-6f91a0a7a3a9" class="numbered-list" start="1"><li>which pass info to terraform configuration</li></ol><ol type="a" id="b3de7039-4c66-4fd7-b2d1-f4a18432bb8c" class="numbered-list" start="2"><li>defined inside configuration, and supplied when terraform is executed, like adding arguments when running a c program?</li></ol></li></ol><ol type="1" id="6f79c012-2ab7-4815-be86-a89edb14b721" class="numbered-list" start="2"><li><strong>Local values, or locals</strong><ol type="a" id="62435b53-eece-42e9-bfa8-0627bf757656" class="numbered-list" start="1"><li>computed values inside the config which can be referenced throughout</li></ol><ol type="a" id="e0a74070-e56c-4448-b862-faaa1bae8bb5" class="numbered-list" start="2"><li>like variables</li></ol><ol type="a" id="018d57cf-9121-45b5-9cc0-95f733c5fe3f" class="numbered-list" start="3"><li>aren’t inputted, but can be based on input variables or internal references</li></ol></li></ol><ol type="1" id="1c4429ce-a9f2-46c0-9aaf-4756ce19e808" class="numbered-list" start="3"><li>Data is returned by Terraform with <strong>output values</strong><ol type="a" id="bcd369ed-a81a-4ba7-86f0-be4686c2ad83" class="numbered-list" start="1"><li>outputs defined in config</li></ol><ol type="a" id="d65f7873-abef-4cb5-9ca6-f0781f62dcea" class="numbered-list" start="2"><li>depends on reference</li></ol><ol type="a" id="bce069af-d6c8-4a8b-a2af-8a8b152c9b66" class="numbered-list" start="3"><li>can be constructed from one or more elements, like locals</li></ol></li></ol><p id="1a4cf958-b1da-42b7-8e78-29df123d47db" class="">
+</p><p id="46622ba2-bf06-42c9-98f8-4863262dfb81" class="block-color-gray_background">Input variable syntax</p><ul id="f3c6cbdd-2d8b-43f6-aab6-862d523664cb" class="bulleted-list"><li style="list-style-type:disc">variables are defined inside a block, like everything else in terraform</li></ul><ul id="2484c6f4-0340-4b48-a5a9-30eb3615a2a8" class="bulleted-list"><li style="list-style-type:disc">starts with variable keyword, followed by name label</li></ul><ul id="6d6fa386-c5bf-4b26-b13f-0546b9ebad21" class="bulleted-list"><li style="list-style-type:disc">all other properties are defined in block</li></ul><ul id="e9718c74-71f7-4fdb-8e33-bf932c3a3148" class="bulleted-list"><li style="list-style-type:disc">preferred to have arguments inside block, but they all are optional<figure id="fbeaec9a-e3d3-4fb4-84ff-c890f615337b" class="image" style="text-align:left"><a href="Using%20Input%20Variables%20and%20Outputs%20316e74208ea2460aaf0df69e61144322/Screenshot_2023-02-06_at_3.36.34_pm.png"><img style="width:384px" src="Using%20Input%20Variables%20and%20Outputs%20316e74208ea2460aaf0df69e61144322/Screenshot_2023-02-06_at_3.36.34_pm.png"/></a></figure></li></ul><ul id="f55a69be-6ab7-4eb8-a5eb-f5d28bf65d43" class="bulleted-list"><li style="list-style-type:disc">The <strong>type argument </strong>defines the data type<ul id="80c23d78-780e-474d-b4ff-612c8737aba9" class="bulleted-list"><li style="list-style-type:circle">error checking</li></ul></li></ul><ul id="36a4fad7-b935-4eb7-a7c5-e49ac7be6c6c" class="bulleted-list"><li style="list-style-type:disc"><strong>Description argument</strong> provides context for user if error</li></ul><ul id="9f488043-3f74-4e5e-99f1-d1d8b2791ffa" class="bulleted-list"><li style="list-style-type:disc"><strong>Default arguments</strong> sets default if none inputted</li></ul><ul id="c75e0c42-8de9-4511-b077-18fd94b638fa" class="bulleted-list"><li style="list-style-type:disc">If no default set and nothing inputted, Terraform will prompt user at command line to supply a value</li></ul><ul id="c6a71d67-7e86-4f28-ac61-94c6f6e0a02c" class="bulleted-list"><li style="list-style-type:disc">The <strong>sensitive argument</strong> accepts a boolean value, if set to true, will not show variable in logs or terminal output<ul id="22891273-2668-4cbc-93d9-969fb046b17a" class="bulleted-list"><li style="list-style-type:circle">for passwords, or API keys</li></ul><ul id="cc0d8a38-7967-4f94-9ff0-3011b848145f" class="bulleted-list"><li style="list-style-type:circle">buy default, all variables are not sensitive</li></ul></li></ul><p id="18ab8602-9c8a-4d5a-9784-edc148600eb4" class="">Example</p><figure id="68d89317-2708-4f4f-bcab-6eab7604002c" class="image" style="text-align:left"><a href="Using%20Input%20Variables%20and%20Outputs%20316e74208ea2460aaf0df69e61144322/Screenshot_2023-02-06_at_3.40.19_pm.png"><img style="width:624px" src="Using%20Input%20Variables%20and%20Outputs%20316e74208ea2460aaf0df69e61144322/Screenshot_2023-02-06_at_3.40.19_pm.png"/></a></figure><ul id="0dc479cd-a8e8-4b5f-9de5-d640789daf9c" class="bulleted-list"><li style="list-style-type:disc">To refer to the value stored in variable<ul id="449eb7d6-7a73-418d-9454-d56c48523951" class="bulleted-list"><li style="list-style-type:circle">use the var identifier </li></ul><p id="c4442614-4d9d-4473-9d01-7f43cbf0d2c0" class="">e.g.</p><ul id="1c0c8d3e-79bb-4af9-a2ab-4af85de3768a" class="bulleted-list"><li style="list-style-type:circle">var.&lt;name_label&gt;</li></ul><ul id="79766c83-a412-456b-a2d1-16b94d745126" class="bulleted-list"><li style="list-style-type:circle">var.aws_region</li></ul></li></ul><p id="a90fd49e-3c65-43d1-a400-230ac348d039" class="">
+</p><p id="993b6891-92d3-4f90-9d12-2cc7877604a4" class="block-color-gray_background">Terraform Data Types</p><ol type="1" id="14d8a477-c978-48fd-a4ef-bb802858cb95" class="numbered-list" start="1"><li><strong>Primitive</strong><ol type="a" id="e72f173a-04aa-4f30-9b37-12702201f55e" class="numbered-list" start="1"><li>string, number, boolean</li></ol></li></ol><ol type="1" id="fd0bd631-f28b-4c1a-809f-bfa87b6c04f2" class="numbered-list" start="2"><li><strong>Collection</strong><ol type="a" id="152e8a42-2987-49a4-8274-b090877374ee" class="numbered-list" start="1"><li>list (ordered group), set (unordered), map (group of key-value pairs)</li></ol><ol type="a" id="076568b1-0ad8-4d0e-ab7b-aceb076cbd76" class="numbered-list" start="2"><li>a grouping of the primitive data types, like an array in C</li></ol><ol type="a" id="6bbd36f7-2fc0-4e54-8e6a-85239dcc3f9e" class="numbered-list" start="3"><li>for each collection, all values must be same data type</li></ol></li></ol><ol type="1" id="221cc8b6-ca22-4eb9-a4f6-6ec1e4619358" class="numbered-list" start="3"><li><strong>Structural</strong><ol type="a" id="99508514-e339-4b36-a995-b6a158eaf62c" class="numbered-list" start="1"><li>similar to collection, but allow you to mix data types</li></ol><ol type="a" id="2516a6a6-7bae-47d4-8465-d487bfeb879a" class="numbered-list" start="2"><li>like a struct in C</li></ol><ol type="a" id="f246fde5-0ad8-4fa3-9b36-5ea83029fdae" class="numbered-list" start="3"><li>Tuples (like lists), objects (like maps)</li></ol><ol type="a" id="a07a21d0-24d0-45e3-8791-ceafd16dfa33" class="numbered-list" start="4"><li>not used in basic configs</li></ol></li></ol><p id="7ee16519-db20-4656-8ec7-b4f16c67c529" class="">
+</p><figure id="94a1255f-4a0b-4c10-b2da-cbde90e3e578" class="image"><a href="Using%20Input%20Variables%20and%20Outputs%20316e74208ea2460aaf0df69e61144322/Screenshot_2023-02-06_at_3.48.34_pm.png"><img style="width:1558px" src="Using%20Input%20Variables%20and%20Outputs%20316e74208ea2460aaf0df69e61144322/Screenshot_2023-02-06_at_3.48.34_pm.png"/></a></figure><p id="f2849e60-bdd0-4873-bc5b-58f235ff786c" class="">
+</p><p id="956324ed-af41-4320-8fda-81ecd95a8f1f" class="block-color-gray_background">Referencing Collection values in a list</p><ul id="7a568348-2918-45b2-896b-6d099aea2130" class="bulleted-list"><li style="list-style-type:disc">type arguments takes the form of collection type and data type stored in it</li></ul><ul id="d23aa2a8-aeb4-4ebd-8735-38688949ce6c" class="bulleted-list"><li style="list-style-type:disc">lists are ordered data type, so we can refer to element by a number</li></ul><ul id="017ec88f-9d86-497c-9871-8019dc7e452e" class="bulleted-list"><li style="list-style-type:disc">first number is referenced by 0</li></ul><p id="30451643-6908-4e2d-84b7-88d052c45ff2" class="">
+</p><figure id="51436b15-8d65-49d9-b2ed-696ffa879f3d" class="image"><a href="Using%20Input%20Variables%20and%20Outputs%20316e74208ea2460aaf0df69e61144322/Screenshot_2023-02-06_at_3.50.46_pm.png"><img style="width:1804px" src="Using%20Input%20Variables%20and%20Outputs%20316e74208ea2460aaf0df69e61144322/Screenshot_2023-02-06_at_3.50.46_pm.png"/></a></figure><ul id="85c6db51-a931-40a1-96fa-2213935ed2f3" class="bulleted-list"><li style="list-style-type:disc">this reference would return “us-east-1”</li></ul><p id="e7f530c6-6e17-4a21-938c-c59fa07c1476" class="">
+</p><p id="53f17c19-e4b4-48f7-9244-1394c560ae98" class="block-color-gray_background">Referencing Collection values in a map</p><p id="3e2b806f-b8b2-48f2-a662-f5a430afe989" class="">
+</p><figure id="350eb1b1-d0bd-45df-8174-69a4b2009feb" class="image"><a href="Using%20Input%20Variables%20and%20Outputs%20316e74208ea2460aaf0df69e61144322/Screenshot_2023-02-06_at_3.53.18_pm.png"><img style="width:2076px" src="Using%20Input%20Variables%20and%20Outputs%20316e74208ea2460aaf0df69e61144322/Screenshot_2023-02-06_at_3.53.18_pm.png"/></a></figure><p id="5cea87a7-1455-42f7-9d4e-df61b1c1c45c" class="block-color-gray_background">Globomantics Scenario</p><p id="7f642c97-16fe-4ecc-9fb3-7843377e0ded" class="">Potential improvements<div class="indented"><ol type="1" id="acb11568-0569-4910-a30d-ec55fad73abe" class="numbered-list" start="1"><li>Remove AWS credentials</li></ol><ol type="1" id="f847e92f-894c-40e1-a96e-6c9d319f7ad8" class="numbered-list" start="2"><li>Replace hard coded values to make config dynamic and reusable!</li></ol><ol type="1" id="9ab087c9-1704-421e-8417-3a6fce675b22" class="numbered-list" start="3"><li>Tags for company, project and billing</li></ol><ol type="1" id="d7367524-d64e-4ae7-b9ce-6348730be475" class="numbered-list" start="4"><li>Generate output of public DNS hostname</li></ol></div></p><p id="33b56e85-169f-4198-854b-be8fe573dd5a" class="">
+</p><p id="e3bb3dd7-91a5-4c07-90bc-e83be61c518d" class="block-color-gray_background">Local Values Syntax</p><figure id="716aa551-7485-41ec-a712-9a9279a1f285" class="image" style="text-align:left"><a href="Using%20Input%20Variables%20and%20Outputs%20316e74208ea2460aaf0df69e61144322/Screenshot_2023-02-06_at_4.20.47_pm.png"><img style="width:192px" src="Using%20Input%20Variables%20and%20Outputs%20316e74208ea2460aaf0df69e61144322/Screenshot_2023-02-06_at_4.20.47_pm.png"/></a></figure><p id="ee3b6c9a-d876-466f-8e53-6eae9b92e5c7" class="">Example</p><figure id="25607926-6422-4a33-ab41-988c121576a8" class="image" style="text-align:left"><a href="Using%20Input%20Variables%20and%20Outputs%20316e74208ea2460aaf0df69e61144322/Screenshot_2023-02-06_at_4.22.10_pm.png"><img style="width:432px" src="Using%20Input%20Variables%20and%20Outputs%20316e74208ea2460aaf0df69e61144322/Screenshot_2023-02-06_at_4.22.10_pm.png"/></a></figure><ul id="f96a0770-7cc6-4074-8d2b-4aeaf379fc15" class="bulleted-list"><li style="list-style-type:disc">local value computed inside config</li></ul><ul id="c906de3e-7603-4574-9c3f-c05fd592d86a" class="bulleted-list"><li style="list-style-type:disc">cant be submitted</li></ul><ul id="62c8e40e-2aa7-4343-bd43-aa8b994d00d4" class="bulleted-list"><li style="list-style-type:disc">all that’s needed outside block is locals</li></ul><ul id="fd171362-02d7-47f7-8ee2-0144e0f4f5f8" class="bulleted-list"><li style="list-style-type:disc">inside block are key-value pairs, any terraform supported data-type</li></ul><ul id="69d70cea-4b98-4fdf-a514-93a722ff3578" class="bulleted-list"><li style="list-style-type:disc">a value can be a maps defining even more key-value pairs</li></ul><ul id="5b1c56db-4ffd-434a-9ece-1138a524fc73" class="bulleted-list"><li style="list-style-type:disc">you can refer to other values from inside confider for values in local</li></ul><ul id="7029f94c-7534-4641-b049-fad9e437a600" class="bulleted-list"><li style="list-style-type:disc">can reference the locals block multiple times inside configuration if you want<ul id="d878f07a-a3b7-4737-8d0b-d070f3854e47" class="bulleted-list"><li style="list-style-type:circle">however, each key must be unique through config locals block</li></ul></li></ul><p id="014ce580-e057-49e9-8557-f852765b3363" class="">
+</p><p id="aa999cda-503e-4181-b791-5d39c0b85791" class="block-color-gray_background">Terraform locals reference</p><p id="c24e169a-eb26-4a26-885e-8e6d9a61350d" class="">starts with local keyword, not plura</p><ul id="646d0aac-6f9b-42e1-bdba-783866630928" class="bulleted-list"><li style="list-style-type:disc">e.g<p id="a7fa431a-48b9-4c05-b9c6-8e33c6a12ab7" class="">local.&lt;name_label&gt;</p><p id="8e59151d-e117-47c7-b208-0ad1cb0722f7" class="">local.instance_prefix</p><p id="f1a4e722-d9ee-41c5-a41b-4312dcb7ddd6" class="">local.common_tags.company</p><p id="fb21d778-cdde-4f96-957c-e91c2745a227" class="">local.common_tags gets entire map</p><p id="7c3a5f4d-3c60-4a06-9337-b4565db37698" class="">
+</p></li></ul><figure id="bbe42936-954e-4c19-9432-9b0f91a404fa" class="image"><a href="Using%20Input%20Variables%20and%20Outputs%20316e74208ea2460aaf0df69e61144322/Screenshot_2023-02-06_at_4.34.40_pm.png"><img style="width:730px" src="Using%20Input%20Variables%20and%20Outputs%20316e74208ea2460aaf0df69e61144322/Screenshot_2023-02-06_at_4.34.40_pm.png"/></a></figure><p id="e1006295-92a0-46c2-a03b-47375d2c25e2" class="">The above image shows how to use interpolation syntax to reference two variables together as a string</p><p id="cfeb3ad4-8f7c-4c86-b309-dd53c053f7d7" class="">
+</p><p id="0ba9b8bd-801a-4065-a6dd-688886493be7" class="block-color-gray_background">Output Values Syntax</p><figure id="0535afc7-1e4b-4698-81f6-a8d59dd5dfc8" class="image" style="text-align:left"><a href="Using%20Input%20Variables%20and%20Outputs%20316e74208ea2460aaf0df69e61144322/Screenshot_2023-02-06_at_4.45.59_pm.png"><img style="width:432px" src="Using%20Input%20Variables%20and%20Outputs%20316e74208ea2460aaf0df69e61144322/Screenshot_2023-02-06_at_4.45.59_pm.png"/></a></figure><ul id="f94d5ae0-4700-4e6a-95cd-96bdc69950c6" class="bulleted-list"><li style="list-style-type:disc">starts with output keyword with name_label</li></ul><ul id="eee6e8f9-94d8-42f1-b355-738497c234e9" class="bulleted-list"><li style="list-style-type:disc">inside config block, only required argument is the output value<ul id="f29af844-5514-4776-b818-ad6697f81e44" class="bulleted-list"><li style="list-style-type:circle">can be any supported terraform data type</li></ul><ul id="d26e230c-2c79-4330-8c76-3b786172814a" class="bulleted-list"><li style="list-style-type:circle">optional arguments include <ul id="6f7dab8b-098d-46fb-b130-88a749a211e0" class="bulleted-list"><li style="list-style-type:square">description, not very useful as only seen when looking at config code</li></ul><ul id="90750026-09bd-460a-9646-51fd33dd6b33" class="bulleted-list"><li style="list-style-type:square">sensitive, pass value from one module to another without printing to terminal or logs</li></ul></li></ul></li></ul><p id="1ddcf9a3-5775-47c3-828e-171216642f86" class="">EXAMPLE</p><figure id="d9879926-7a27-4e0f-afe8-e0fa5fed3180" class="image"><a href="Using%20Input%20Variables%20and%20Outputs%20316e74208ea2460aaf0df69e61144322/Screenshot_2023-02-06_at_4.46.48_pm.png"><img style="width:994px" src="Using%20Input%20Variables%20and%20Outputs%20316e74208ea2460aaf0df69e61144322/Screenshot_2023-02-06_at_4.46.48_pm.png"/></a></figure><p id="7ba67b45-3362-468a-9482-86d35fcdbaf0" class="">
+</p><p id="67cbd4a8-dfaa-44f3-afdc-30aeb9cd8e6f" class="block-color-gray_background">Validate and Update the configuration</p><ul id="5862bce7-f5cb-4550-93bf-67540a8c60c5" class="bulleted-list"><li style="list-style-type:disc">find out if config is syntactically correct</li></ul><ul id="7065bf9d-6646-4101-b78b-e88aa4569e61" class="bulleted-list"><li style="list-style-type:disc">a command called validate can help</li></ul><ul id="57e4eb2b-5d5c-4911-94c0-12581d916e42" class="bulleted-list"><li style="list-style-type:disc">before you run command you will need to run terraform init</li></ul><ul id="def87e39-b2ae-47bd-8f61-5a15020688e8" class="bulleted-list"><li style="list-style-type:disc">checks syntax and logic<ul id="e6cbdea2-0d79-4e50-9aff-1f0ae6fd15fd" class="bulleted-list"><li style="list-style-type:circle">if it finds any errors, it will print out the error and line where it found the issue</li></ul><ul id="a6c64c65-43b7-4bc8-ba6e-940d6bed945f" class="bulleted-list"><li style="list-style-type:circle">sometimes makes a suggestion</li></ul></li></ul><ul id="c12c77d6-6728-4918-afe8-9cd61ab4d17e" class="bulleted-list"><li style="list-style-type:disc">does not validate state, only the content of config</li></ul><ul id="711d5f90-d357-4799-a262-b256f1b0f1e9" class="bulleted-list"><li style="list-style-type:disc">does not guarantee updated deployment will be successful<ul id="d0a06554-3eab-4b45-bc0a-ff3931e11e09" class="bulleted-list"><li style="list-style-type:circle">fail due to insufficient capacity, incorrect instance size, overlapping address space, etc.</li></ul><p id="735c3b48-ee8f-4d55-bf71-c53343e8c821" class=""><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em>terraform </em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em><mark class="highlight-yellow"><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em>validate</em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></mark></p><p id="df02c43f-4044-401f-8a0c-dc94c56ddc4c" class="">
+</p></li></ul><p id="ae2a8530-f6d8-431e-9baf-fc92fe868f1e" class="block-color-gray_background">Supplying Variable Values</p><ol type="1" id="65148d1c-5609-4f9d-ad26-077cdddd9dfa" class="numbered-list" start="1"><li>using defaults</li></ol><ol type="1" id="875d6c24-4133-43b2-9ed9-6c38efed22e0" class="numbered-list" start="2"><li>or in the command line, with - var flag</li></ol><ol type="1" id="561fe8a8-6f18-477d-a9cd-4361fa3e7317" class="numbered-list" start="3"><li>or in a -var-file flag and all values in that file</li></ol><ol type="1" id="a33364e0-4d99-4c24-85af-f35b67fa25db" class="numbered-list" start="4"><li>terraform.tfvars or terraform.tfvars.json, if in ssme directory as config file</li></ol><ol type="1" id="d4c49eb0-c314-4ad7-b6ce-250a15a5eeb7" class="numbered-list" start="5"><li>.auto.tfvars or .auto.tfvars.json, if in same directory as config file</li></ol><ol type="1" id="50e3cfd0-b1c7-4bab-a0c7-0de55a53ee4c" class="numbered-list" start="6"><li>Environment variable TF_VAR_</li></ol><p id="8cb4a239-296b-4b13-b1a6-796408deb61a" class="">
+</p><ul id="d2f9462b-95b3-4259-8caf-e48f157feb54" class="bulleted-list"><li style="list-style-type:disc">If you don’t provide a value using any of these methods at runtime, Terraform will prompt you for a value</li></ul><p id="9b11aefe-d62a-4738-9050-9fa7b44f01d0" class=""><strong>The Evaluation preference</strong></p><figure id="3cc398d6-d013-446f-89c7-4e6c845ff1a7" class="image"><a href="Using%20Input%20Variables%20and%20Outputs%20316e74208ea2460aaf0df69e61144322/Screenshot_2023-02-06_at_5.12.29_pm.png"><img style="width:1642px" src="Using%20Input%20Variables%20and%20Outputs%20316e74208ea2460aaf0df69e61144322/Screenshot_2023-02-06_at_5.12.29_pm.png"/></a></figure><p id="23d5452f-6379-48cd-b36c-0b2aae8afb45" class="block-color-gray_background">Summary</p><ul id="5458eff4-120a-4f65-9633-024ef4978e51" class="bulleted-list"><li style="list-style-type:disc">configuration is now more variable</li></ul><ul id="94a8cdfb-ea82-48ab-bbb6-bdd5a1c0b014" class="bulleted-list"><li style="list-style-type:disc">supplied date through input variables, more secure and repeatable</li></ul><ul id="d5b55f5d-d0a8-4d9b-88e9-658c2af3eeb4" class="bulleted-list"><li style="list-style-type:disc">there are many ways to submit values</li></ul><ul id="cde78f42-a679-4528-868b-69094c256b37" class="bulleted-list"><li style="list-style-type:disc">receive data through outputs</li></ul><ul id="21fdc1cb-50ea-4feb-adb3-e6d7c43ea976" class="bulleted-list"><li style="list-style-type:disc">validate config before deployment to catch errors in logic and syntax</li></ul><p id="537fe27f-7c95-40d9-b8ef-4b0f138d57f6" class="">
+</p></div></article></body></html>

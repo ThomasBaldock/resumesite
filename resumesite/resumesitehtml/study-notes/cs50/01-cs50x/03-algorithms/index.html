@@ -1,0 +1,683 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Lecture 3 - Algorithms</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="e1ae4555-879e-48eb-ad71-80834d222886" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🔍</span></div><h1 class="page-title">Lecture 3 - Algorithms</h1></header><div class="page-body"><p id="40547f5b-614c-47a3-8dce-15c1015fc54c" class="block-color-gray_background">Introduction</p><ul id="8ac7454c-9b7f-49f6-8811-132fcfae74a8" class="bulleted-list"><li style="list-style-type:disc">.Reminded that computer languages help us to complete the below process</li></ul><p id="d324e9ff-79a7-49af-8550-6546b7471cb8" class="">
+</p><p id="8c881fb0-db6a-470f-9c33-65b59462136f" class="">input → □ → output
+</p><ul id="c385c1af-ecad-4d8e-9674-d1db7c8f0940" class="bulleted-list"><li style="list-style-type:disc">Recalled how we recalled memory as a grid of bits last week, where each of these bits or memory locations with a number or “address”.</li></ul><ul id="9d7cde48-24cb-4c4f-851a-c8647ba399be" class="bulleted-list"><li style="list-style-type:disc">In these locations we can store ints, chars, and bool values but also strings and arrays<ul id="d1e780a1-2234-4d11-828f-35e035997a42" class="bulleted-list"><li style="list-style-type:circle">string: array of characters</li></ul><ul id="57e44f81-a3ec-4ffb-99a8-5481b6f794fb" class="bulleted-list"><li style="list-style-type:circle">array: an continuous block of memory storing multiple values</li></ul></li></ul><ul id="888636ee-c283-45f3-b709-487c11942956" class="bulleted-list"><li style="list-style-type:disc">This week we focus less on representing each data types and more on the the central step in the above process - the algorithms.</li></ul><ul id="3a0cf00f-bc80-4a5d-bc85-65458b1fd90c" class="bulleted-list"><li style="list-style-type:disc">Computers deal with data in different ways then humans. Where we can see all values at once and jump straight to relevant data, for computers data is effectively hidden from its view and can only be viewed methodically as it doesn’t have the same bird’s eye view</li></ul><ul id="2244beac-7ccb-47eb-aa01-ee021d342024" class="bulleted-list"><li style="list-style-type:disc">We returned to our first lecture’s topic which included ‘searching’<ul id="88c1a0e6-1812-4d95-9f6c-ed962e8fed4c" class="bulleted-list"><li style="list-style-type:circle">ie searching for a phone number in an address book’</li></ul></li></ul><ul id="63905cf5-9ed0-4a17-9d51-e7fe6da75841" class="bulleted-list"><li style="list-style-type:disc">in an example searching for a value in array<p id="354ce3e8-fa25-43f2-a09d-4f0a18afcb47" class=""><strong>input</strong> array of ‘hidden values’ → searching <strong>algorithm</strong> → <strong>output</strong> a boolean response of true or false if found</p><p id="8e6ccc75-7a94-4be8-962a-6f0ec077a195" class="">
+</p></li></ul><p id="9d000a39-0828-48db-9732-f5174819e28d" class="block-color-gray_background">Running Time</p><ul id="0cd9031b-b3de-42e4-b54d-bc555f333a9f" class="bulleted-list"><li style="list-style-type:disc">When comparing  algorithms, we talk about ‘correctness’ but can also talk about ‘design’<ul id="17eaedb2-786b-4ed5-b7a6-d2e8b6e0a21e" class="bulleted-list"><li style="list-style-type:circle">design: easy to understand</li></ul><ul id="ab91f6b5-ab5d-4f41-865c-25d9363458d9" class="bulleted-list"><li style="list-style-type:circle">design: doesn’t use too much memory</li></ul><ul id="fa90b7e6-82a2-416a-b596-4b1b0dd24afc" class="bulleted-list"><li style="list-style-type:circle">overall it means, quality of performance i.e. efficiency or better known as running times, can be measured in time or steps</li></ul></li></ul><ul id="cbf84059-ee26-4241-b02d-bc2f4de7b19f" class="bulleted-list"><li style="list-style-type:disc">Running time of code is normally done with Big O Notation.<ul id="5425ac8e-3fb3-44bf-bc0a-150b613eb850" class="bulleted-list"><li style="list-style-type:circle">the running time of an algorithm is ‘in the order of’ such and such</li></ul><ul id="df9a30d0-def7-4f35-8537-f1a0794f6847" class="bulleted-list"><li style="list-style-type:circle">it way to approximately gauge an algorithm without getting into fine detail of executing code.<figure id="56db7988-d8b8-4caa-9ffb-2d5f99a75404" class="image"><a href="Lecture%203%20-%20Algorithms%20e1ae4555879e48ebad7180834d222886/image.png"><img style="width:576px" src="Lecture%203%20-%20Algorithms%20e1ae4555879e48ebad7180834d222886/image.png"/></a></figure></li></ul></li></ul><ul id="8959d380-38ab-4633-b5ab-96e4047495b3" class="bulleted-list"><li style="list-style-type:disc">So in above example, because the shapes and lines are pretty similar for red and yellow, computer scientists would consider they are effectively the same efficiency, O(n). However, the third line, the green, because it has it’s own shape and is much more distinct, is represented with a better efficiency or shorter runtime, the order of log <em><em>n.</em></em></li></ul><ul id="0feb0361-0875-4fad-be69-def41777b260" class="bulleted-list"><li style="list-style-type:disc">A second way we can represent an algorithm is with Ω(n), called Omega of n. Where big O of represents the upper bound, or max steps, Omega of n discusses lower bound, or shortest possible runtime.</li></ul><ul id="1644d5b9-cb8b-426c-8bc6-417470eb2046" class="bulleted-list"><li style="list-style-type:disc">Big θ, or ‘theta of’, represents an algorithm where big O and big theta are the same</li></ul><p id="e728f0ff-35c4-49e4-8c1a-6c7c34cb1f2e" class="">
+</p><p id="bc00ddbe-3868-4faf-bd83-770bf8550ceb" class="block-color-gray_background">Searching</p><ul id="915cd15f-a27b-4ce9-b7e3-c8c773fb9221" class="bulleted-list"><li style="list-style-type:disc"><strong>Linear searching</strong>, involves simply iterating through code, memory bit by memory bit, on an unsorted list, until either the entire array is searched or the target value is found</li></ul><ul id="7bd3dc43-4510-4984-9b73-d8f2dab27aae" class="bulleted-list"><li style="list-style-type:disc">This is slow but can but has an omega of 1 because by chance target value could be first in array</li></ul><ul id="0389300e-590b-48ef-8958-c8246280fc51" class="bulleted-list"><li style="list-style-type:disc">Another method of searching is <strong>binary search,</strong> but this requires an array to be sorted before it can be searched.</li></ul><ul id="4c2b3efd-3c22-4fe4-87ed-905fe3906449" class="bulleted-list"><li style="list-style-type:disc">This method involves going to midpoint of array, and dismissing the half of the values which are above or below the target value, depending on what the midpoint turns out to be. Each subsequent step uses the same method, so effectively, after each guess, the array is half the size, meaning the answer is more and more likely to be found<ul id="aa9052ed-0ccd-4e58-8165-f2c3eb66de5c" class="bulleted-list"><li style="list-style-type:circle">such a method is represented by Big O of log <em>n</em>.</li></ul></li></ul><ul id="b36f50db-bb2d-41b9-b8e0-58ac71c27887" class="bulleted-list"><li style="list-style-type:disc">Big O is more relevant because we like to know what the worst case scenario is for users, because the occasional lucky guess is rare. However, knowing the range can be useful.</li></ul><ul id="d515d971-ff62-44a3-bf36-8eae62297390" class="bulleted-list"><li style="list-style-type:disc">While binary searching appears to be the best option, however, because of the need to sort, it may not always be the best.</li></ul><ul id="928b1792-060f-4571-965f-e0b0f152dd9c" class="bulleted-list"><li style="list-style-type:disc">Deciding factor could be how many times you will need to search array, if it’s many, then sorting is probably worth it for the shorter runtimes in subsequent searches.</li></ul><ul id="3720633e-d902-4420-a384-13eed857ba77" class="bulleted-list"><li style="list-style-type:disc">But if its just searched once, maybe a sort is not worthwhile</li></ul><ul id="497cf819-3307-4205-9c79-a80765508ddf" class="bulleted-list"><li style="list-style-type:disc">Factors include resources like: time to run the code, time to write more complex or simpler code, amount of memory available for algorithm</li></ul><p id="d4e75c83-7df7-4749-8993-81b4178880a4" class="">
+</p><p id="672498a5-cfb9-4ad5-a005-7442d0cbf133" class="block-color-gray_background">String compare.</p><ul id="bafd3ee4-78a6-4ec7-a898-709843e0885a" class="bulleted-list"><li style="list-style-type:disc">a function from the string.h library of C. strcmp allows C to compare two strings.</li></ul><ul id="b7590017-d1e4-4d46-89ba-9d2875fe8ecd" class="bulleted-list"><li style="list-style-type:disc">the syntax is:<ul id="651d1d1f-3421-4293-be64-ba56d0c66d84" class="bulleted-list"><li style="list-style-type:circle"><code>int strcmp(string s1, string s2);</code></li></ul></li></ul><ul id="2257196a-2695-470e-83a5-5088649a56ae" class="bulleted-list"><li style="list-style-type:disc">if the strings match, this comparison needs to equal zero, any other, either positive or negative, will mean strings do not match</li></ul><p id="75163543-4599-4c1a-90ce-5f911f7d6599" class="">
+</p><p id="13dc4596-fd6e-4d65-9a7d-bdeeee0a1d97" class="block-color-gray_background">Data Structures</p><ul id="64c0dd0d-f3d3-4e89-b25b-2fe072075c8b" class="bulleted-list"><li style="list-style-type:disc">A <strong><strong><strong><strong><strong><strong>struct</strong></strong></strong></strong></strong></strong> is a data structure which can store multiple values.<figure id="6db41f3b-dca7-45b1-b0c3-3a07a8b8e1d7" class="image"><a href="Lecture%203%20-%20Algorithms%20e1ae4555879e48ebad7180834d222886/Screenshot_2023-02-06_at_1.44.46_pm.png"><img style="width:240px" src="Lecture%203%20-%20Algorithms%20e1ae4555879e48ebad7180834d222886/Screenshot_2023-02-06_at_1.44.46_pm.png"/></a></figure></li></ul><ul id="725fac6c-6d2f-437e-99e9-d1c61cce9c35" class="bulleted-list"><li style="list-style-type:disc">To utilise this structure, we could write the following function initialising the people array with the new datatype ‘person’ as defined above</li></ul><figure id="990e5404-ba0f-455b-817d-a2edf31891a1" class="image" style="text-align:left"><a href="Lecture%203%20-%20Algorithms%20e1ae4555879e48ebad7180834d222886/Screenshot_2023-02-06_at_1.46.03_pm.png"><img style="width:384px" src="Lecture%203%20-%20Algorithms%20e1ae4555879e48ebad7180834d222886/Screenshot_2023-02-06_at_1.46.03_pm.png"/></a></figure><ul id="a3e0037f-f7ae-4378-899f-1b96b1766171" class="bulleted-list"><li style="list-style-type:disc">Structs have many uses, such as in some programs, which requires values of larger amount than can be represented by 32 or 64-bit machines, can create big int structures which store an array of values to represent large, individual values.</li></ul><p id="bc3e854c-e0ec-4df6-be0d-01693af37851" class="">
+</p><p id="4a1698fb-0491-4010-9c41-c1944537db19" class="block-color-gray_background">Sorting</p><p id="985d9913-b648-41e4-bc43-2a91f92f0dd0" class="">
+</p><figure id="b7bae327-68e5-4636-bc8a-66c60bbdd9ed" class="image"><a href="Lecture%203%20-%20Algorithms%20e1ae4555879e48ebad7180834d222886/Screenshot_2023-02-06_at_1.53.08_pm.png"><img style="width:1484px" src="Lecture%203%20-%20Algorithms%20e1ae4555879e48ebad7180834d222886/Screenshot_2023-02-06_at_1.53.08_pm.png"/></a></figure><p id="9d1d1aa8-978c-4c30-8a9c-1d43554019c4" class="">We learnt about three different methods for sorting numbers</p><ol type="1" id="9fbc1647-0ee5-43ef-ac97-980d88c5dc2b" class="numbered-list" start="1"><li>Selection Sort<ol type="a" id="7835a475-3374-48a8-845e-6a149d3946a9" class="numbered-list" start="1"><li>Selection sort will begin by looking for the smallest number in the list and swap that number with our current position in the list.</li></ol><ol type="a" id="9b832381-ce8e-446e-83ca-f4b908b6df2f" class="numbered-list" start="2"><li><code>  5 2 7 4 1 6 3 0</code><ol type="i" id="c93097e3-65f1-4420-a928-9ea074dbf8bd" class="numbered-list" start="1"><li>the algorithm will run through and identify the zero as the smallest, so it will get moved to the left</li></ol></li></ol><ol type="a" id="63ef5e09-cfcd-419f-a78a-372c8d68a739" class="numbered-list" start="3"><li><code>0 | 2 7 4 1 6 3 5</code><ol type="i" id="d8af378d-935f-496c-9beb-426b40b4128b" class="numbered-list" start="1"><li>because algo knows 0 is smallest, it will start from the next value and search for smallest value</li></ol><ol type="i" id="9d74e5f0-f0ad-463e-afdc-ad69683f87a2" class="numbered-list" start="2"><li>once it finds the one, it has to continue searching, because although its obvious this is the smallest value to a human, the machine has no way of knowing there is not another zero in array, so it has to methodically go through all values</li></ol></li></ol><ol type="a" id="7388cd78-6663-48b6-b114-e3bdc7cf92f5" class="numbered-list" start="4"><li><code>0 1 | 7 4 2 6 3 5</code><ol type="i" id="207352b0-2396-4bae-9045-ed7225b15e38" class="numbered-list" start="1"><li>this same process will continue until all are sorted</li></ol></li></ol></li></ol><ol type="1" id="592606dc-5c00-4c77-843a-f793639e059c" class="numbered-list" start="2"><li>Bubble Sort<ol type="a" id="b1eeabc4-6e8c-4f9b-acea-f391662a5c35" class="numbered-list" start="1"><li><em>Bubble sort </em>is another sorting algorithm that works by repeatedly swapping elements to “bubble” larger elements to the end. In other words, it works through the list and sorts the two numbers next to each other to make sure they are in the correct order, breaking the list down into bubbles of two values.</li></ol><ol type="a" id="77f85b35-3686-486f-a7eb-fe8ac3c721df" class="numbered-list" start="2"><li><code>5 2 7 4 1 6 3 0</code><p id="71d8f2d0-2331-4020-baf8-513942950fce" class=""><code>^ ^</code><div class="indented"><p id="1cd128ab-33e4-498b-9c1b-cc9c4d2aa89c" class=""><em>if this list was to be sorted, first the five and two would be checked, and the five would get swapped to the right side</em></p></div></p></li></ol><ol type="a" id="151deca7-598e-4a1b-a758-dc18d5496807" class="numbered-list" start="3"><li><code>2 5 7 4 1 6 3 0</code><p id="d5b65007-1646-4174-bc93-cba69194b686" class="">    <code>^ ^</code><div class="indented"><p id="d4cde708-dc68-4676-8675-bc992c567104" class=""><em>then the five and seven, which would need no changes</em></p></div></p></li></ol><ol type="a" id="a36f6853-e72b-41c8-8de7-f2ec697b0436" class="numbered-list" start="4"><li><code>2 5 7 4 1 6 3 0</code><p id="eecbfd23-e441-4b89-b8fa-c80bd088aff2" class="">       <code>^ ^</code><div class="indented"><p id="6e1f20d3-8b97-4b67-986a-a250b1ffb632" class=""><em>then the seven and four would be checked, and the seven would get moved to the right</em></p></div></p></li></ol><ol type="a" id="a705ad8c-5862-44ae-b104-5a48eb9ae5ae" class="numbered-list" start="5"><li><code>2 5 4 7 1 6 3 0</code><p id="3b6cc9a9-d57b-4d0f-9a75-dcff3fa26527" class="">           <code>^ ^</code><div class="indented"><p id="ac540e54-6c18-451d-9beb-7a7c58566014" class=""><em>and so on, with this first run through ending up with the 7 all the way to the right. In the second run-through, the algorithm would go all the way up to second last value, because it already knows the 7 is in correct position</em></p></div></p></li></ol></li></ol><p id="ccb8298c-926b-492a-bdb7-20e8cd925301" class="block-color-gray_background">Recursion</p><ul id="92c250de-8061-4708-a531-d71a84b3f6f8" class="bulleted-list"><li style="list-style-type:disc">is a programming technique whereby a function calls itself</li></ul><ul id="db9e937a-ec70-4b61-874c-37d71670615c" class="bulleted-list"><li style="list-style-type:disc">In the below image we have a function which prints the mario pyramid from previous week’s exercise.</li></ul><figure id="535592ea-1edd-440e-84c2-9fe0a75ec97f" class="image" style="text-align:left"><a href="Lecture%203%20-%20Algorithms%20e1ae4555879e48ebad7180834d222886/Screenshot_2023-02-06_at_2.43.01_pm.png"><img style="width:432px" src="Lecture%203%20-%20Algorithms%20e1ae4555879e48ebad7180834d222886/Screenshot_2023-02-06_at_2.43.01_pm.png"/></a></figure><ul id="7ed3e241-1851-42d1-bde8-57661eb27c65" class="bulleted-list"><li style="list-style-type:disc">However, instead of using nested for loops as we were taught, this example uses recursion to print the pyramid.</li></ul><ul id="d777652a-06a6-4658-8eaa-bbd2bbe49718" class="bulleted-list"><li style="list-style-type:disc">To explain, the function is effectively saying to draw a pyramid of height, you need draw a pyramid of height n - 1 and then print an additional row of n width until n = 0.</li></ul><ul id="6502e6dd-7d08-421b-9791-a5c86cb165e9" class="bulleted-list"><li style="list-style-type:disc">In other words, the function will keep calling itself, printing a row at a time, until n = 0</li></ul><p id="4712efd6-934d-42fd-8322-2cebafa4ca2b" class="">
+</p><p id="a29f4ae9-9ce2-4627-a372-893977c9861f" class="block-color-gray_background">Merge Sort</p><ul id="f7a2944c-06f5-4f51-8516-458bc9b1ca19" class="bulleted-list"><li style="list-style-type:disc">a very efficient sort algorithm.</li></ul><ul id="62adc0f4-3e9a-46a6-ab02-a7ffd36bd085" class="bulleted-list"><li style="list-style-type:disc">uses a similar concept to binary search or the phone book but with a few added steps</li></ul><ol type="1" id="a14d1ab8-c225-4c25-9386-945d15331fe0" class="numbered-list" start="1"><li>First, merge sort asks, “is this one number?” The answer is “no,” so the algorithm continues.<p id="ac3f136e-16e6-46fd-98f1-cab277e49a57" class=""><code>7254</code></p></li></ol><ol type="1" id="9cd531cd-c87b-4921-b6eb-94740514ff5d" class="numbered-list" start="2"><li>Second, merge sort will now split the numbers down the middle (or as close as it can get)<p id="576b2fad-e7b2-4b91-a8fe-d6729a9144c0" class=""><code>72|54</code></p></li></ol><ol type="1" id="e22d686d-287c-46ff-a34c-c74844219af3" class="numbered-list" start="3"><li>Third, merge sort would look at these numbers on the left and ask, “is this one number?” Since the answer is no, it would then split the numbers on the left down the middle.<p id="7bc5cb3e-cea5-419f-9b81-0385ae59fb4f" class=""><code>7|2</code></p></li></ol><ol type="1" id="9f375beb-deae-47f1-a0ba-95d0afec6d72" class="numbered-list" start="4"><li>Fourth, merge sort will again ask , “is this one number?” The answer is yes this time! Therefore, it will quit this task and return to the last task it was running at this point.<p id="c1fead54-9d83-4bfc-9edb-a60d28c46aa1" class=""><code>72|54</code></p></li></ol><ol type="1" id="e25c63c5-a9e4-4bc9-9184-1cf2f30ab744" class="numbered-list" start="5"><li>Fifth, merge sort will sort the numbers on the left.<p id="72e96f56-59cb-4109-873b-ff173da95230" class=""><code>27|54</code></p></li></ol><ol type="1" id="5d9291a3-af45-4046-bc4d-9f8727347660" class="numbered-list" start="6"><li>Now, the left side has been sorted a similar process will occur with the right-hand numbers. This will result in.<p id="6e087c67-7130-49ba-a6ed-2a0e9478ff68" class=""><code>27|45</code></p></li></ol><ol type="1" id="fecb37d0-d8b6-4862-97b5-bfe26fa1a605" class="numbered-list" start="7"><li>Both halves are now sorted. Finally, the algorithm will merge both sides. It will look at the first number on the left and the first number on the right. It will put the smaller number first, then the second smallest. The algorithm will repeat this for all numbers, resulting in:<p id="4ebcb564-99c7-467a-9ef5-c692e54f14e3" class=""><code>2457</code></p></li></ol><ul id="bd3c4f24-7534-412a-b041-176f42bc79a3" class="bulleted-list"><li style="list-style-type:disc">Merge sort is a very efficient sort algorithm with a worst case of O(n log <em>n</em>). The best case is still Ω(n log <em>n</em>)because the algorithm still must visit each place in the list. Therefore, merge sort is θ(n log <em>n</em>) since the best case and worst case are the same.</li></ul><p id="3f0dd6f3-f620-43b9-8262-679b94b2ab23" class="">
+</p><p id="195486f9-011c-4e46-87d9-b591fd2b2d67" class="block-color-gray_background">Summary</p><ul id="35f5feb8-56a6-4562-8a1a-9c385710c4e3" class="bulleted-list"><li style="list-style-type:disc">Algorithms.</li></ul><ul id="e7e58a53-7759-4ff0-82da-549655251585" class="bulleted-list"><li style="list-style-type:disc">Big <em>O</em> notation.</li></ul><ul id="246fcb93-a8f9-40d4-bbc3-ddc1c9689f5c" class="bulleted-list"><li style="list-style-type:disc">Binary search and linear search.</li></ul><ul id="c50b74a0-f129-4a2c-9c40-e32ad1335682" class="bulleted-list"><li style="list-style-type:disc">Various sort algorithms, including bubble sort, selection sort, and merge sort.</li></ul><ul id="1fe53f2f-6f43-4175-ba6d-78dfe501696c" class="bulleted-list"><li style="list-style-type:disc">Recursion.</li></ul><p id="8be9bdfe-d210-4772-ac18-7e38fc82b589" class="">
+</p><p id="6f83ffea-29fa-496d-a0ab-0670dcf81017" class="">Selection sort top, merge sort middle, bubble sort bottom<div class="indented"><figure id="e74b4ca5-5c7c-41a4-aa7c-127e11c9d100" class="image"><a href="Lecture%203%20-%20Algorithms%20e1ae4555879e48ebad7180834d222886/Screen_Recording_2023-02-06_at_3_04_56_pm_AdobeExpress(1).gif"><img style="width:336px" src="Lecture%203%20-%20Algorithms%20e1ae4555879e48ebad7180834d222886/Screen_Recording_2023-02-06_at_3_04_56_pm_AdobeExpress(1).gif"/></a></figure></div></p><p id="bb582739-f8dd-4867-894c-132579ced2de" class="">
+</p><p id="33320c3e-7102-4762-b00c-2e67cf03cedf" class="">
+</p><p id="9e0af123-aba4-4cdb-94e1-9a4c51104283" class="">
+</p></div></article></body></html>
