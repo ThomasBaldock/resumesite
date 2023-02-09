@@ -29,8 +29,14 @@
 <div class="badges"><img src="images/cloud-practioner-badge.png" alt="Certified Cloud Practioner Badge" width="100" height="100"><img src="images/restart-graduate-badge.png" alt="AWS Re/Start Graduate Badge" width="100" height="100"></div><br>
 <div class="contentb">
   <div class="collumnb">
+    <div class="blogtitle"><a href="/blog/cs-3-algorithms" style="text-decoration: none">Thursday, 9th of Febuary</a></div>
+    <span class="blogheadline">THE BIG A WORD</span><br><br> 
+    <p>I have decided to take a new approach with my blog posts because I am now using Notion as a tool to manage information and take notes for my courses. From now on, I'll only document my experience with the problem sets in my remaining CS50x blog posts. My summary of the week's learning will instead be found in study notes. This week, we returned to the topic of algorithms, which were introduced in Week 0 as the components that transform inputs into outputs. With a deeper understanding of data types and arrays, we can now perform more advanced transformations and improve the efficiency of our code.<br><br>
+    This week's lecture notes can be found <a href="/study-notes/cs50/01-cs50x/03-algorithms"> here</a>. Our lecture and lab discussed Big O notation as we compared the efficiency of different sorting algorithms. However, our problem sets focused on consistent and successful sorts rather than speed.<br><br> 
+    I encountered my biggest challenge this week when small errors in my code resulted in inaccurate answers. My understanding of how to write "correct" code was high and while it also appeared legitimate, as no errors were presented when compiling, I was not achieving the expected results. I learned that understanding style and form is not the same as accuracy. I need to pay closer attention to how my algorithms handle information in each step and use debugging tools to track the flow of my algorithms.<br><br>
+    My main takeaway from the week is that I need to be mindful of the information flow in my algorithms and use debugging tools, such as local variables and watch expressions, to ensure efficiency and accuracy. I'm making this week's blog more of a diary entry to keep myself accountable and stay on track, as I have also taken on a part-time cybersecurity course and don't want to fall behind.<br><br></p>
     
-    <div class="blogtitle"><a href="/blog/cs-3-arrays" style="text-decoration: none">Tuesday, 17th of January 2023</a></div>
+    <div class="blogtitle"><a href="/blog/cs-2-arrays" style="text-decoration: none">Tuesday, 17th of January 2023</a></div>
     <span class="blogheadline">An Awry Array</span><br><br>
     <img src="images/compuer-chip.png" alt="Computer-image" class="cloudhead"><br>
     
@@ -58,59 +64,11 @@
     
     Perhaps as some foreshadowing from our teachers of what lay ahead with this week's problem sets, we were told about the inevitability of writing mistakes, or bugs, when coding. We were then provided with some debugging techniques to eliminate these errors. <br><br>
     
-    The first involved printing variables often as a way of checking the values stored by variables at certain points of process.<br><br>
-    
-    A more sophisticated tool we were shown was the in-built debugger in our IDE which allows you to set breakpoints in code, keeps track of the values of each variable and control the flow of the program with Step Over a breakpoint button, and the Step Into and Step Out (of a function) buttons.<br><br>
-    
-    In my AWS bootcamp, which included a week spent on Python, we learnt how to use this debugger. However, I have been reticent to use it because in my past coding experiences, I have managed to eliminate bugs with either the printing technique or through a 'brute force' method of staring at my code hoping for a revelation. I was glad for this refresher and needed to have my eyes opened to its benefits again. However, it was not until I encountered the roadblock at the end of this blog post that I allowed them to fully open.<br><br>
-    
-    A third technique were taught was 'rubber-ducking'. This involves talking through problems with someone else, and in the absence of a living person, turning to an inanimate object. The concept is that by talking through your code line by line helps trigger the light-bulb moment when you come to something that sounds illogical.<br><br>
-    
-    We then returned to the concept of data types touched on in Week 0. In this week, we learnt how these different types utilise system resources. <br><br>
-    
-    We then used a diagram overlaid an image of a memory chip to visualise how data is stored in memory. In this grid we saw that each data type takes up a different amount of space in memory. <br><br>
-    
-    We then considered how three variables in a program would be stored in memory. We learnt they would be stored consecutively. <br><br>
-    
-    We were then taught about arrays which follows the same principle. An array is a way of storing data together in a way that makes it more accessible to the program. Despite linking the data together however, in memory, it's treated in a similar way as if the data was seperate variables and takes up the same amount of space.<br><br>
-    
-    Building on this, we learnt that strings aren't really their own data type. They're actually arrays of one-byte char(acters). The one difference between a string and a typical array is the presence of an unusual zero character at the end of strings position in-memory. This char is called the NUL character and it occurs in the language C as an indicator of when a string ends and another begins.<br><br>
-    
-    We then learnt about different C libraries and some of their useful functions that we can draw on by including a call for the library in the header of our program. Some useful functions include the get_string() function from the cs50.h library, which turns user input into a string, and the strlen() function from the string.h library, which measure the length of a string, excluding the NUL character. <br><br>
-    
-    We finished the weeks lecture by returning full circle to a discussion about how command line arguments that can be used by commands, like make and Clang can also be used with our programs.<br><br>
-    
-    In all our C programs so far, we have been starting our programs in this fashion<br><br>
-    
-    #include < studio.h >  <br>
-    
-    int main(void)<br>
-    
-    In this example, the void specifies that the command to run the program, doesn't take any command line arguments.<br><br>
-    
-    However it is possible to specify your program to need arguments!<br><br>
-    
-    This can be done with this opening, with void becoming…<br><br>
-    
-    int main (int argc, string argv[])<br><br>
-    
-    Argument count (argc) is the number of command line arguments given by user, and Argument Vector (argv) is an array of the characters passed as arguments, (notably including the program command as one of the arguments). This can be used to load programs with values without the need for responding to prompts, making the process of running programs much more convenient.<br><br>
-    
-    The last topic we covered were exit statuses. We learnt these can be used for automating testing of code or determining if a program has succeeded or failed. This explains why we’ve begun all our program with int main. It is because when the program finishes, as is necessary for all variables in c, to specify the data type of the value which will be returned. <br><br>
-    
-    In our programs, as we haven't coded any value to be returned, the 0 status, meaning success, is what has been returned. We learnt how we can instead build our code to be fault tolerant, in so much as if there is an error in input for the program, the program returns a value, ie 1, indicating the error. This can be implemented to stop a program running completely when an error is detected, saving time and restarting correctly faster. This final bit of teaching helped me to understand how error codes - of which we all are probably familiar - are produced.<br><br>
-    
-    <strong>Problem Sets</strong><br><br>
-  
-    The first lab was the easiest task for the week. We were supplied an array called POINTS and we tasked with calculating the Scraable score for any word inputted by the user. It was quite an easy task and involved us matching each letter with their corresponding position in the 26 value points array. The trick was treat all values of the text as either all uppercase or lowercase, it didn't matter which, so long as they were the same. From there, you convered the string characters to their decimal value, and then subtracted the decimal number which was the postion of either the capital A or lowercase a on the ASCII chart. From there, that number could be used to call the corresponding position in the POINT's array. <br><br>
-    
-    This week's first problem set tasked us with finding the reading level of any given text using the Coleman-Liau index.<br><br>
-
-    <a href="/blog/cs-3-arrays.html">Read more.</a><br><br>
+    <a href="/blog/cs-2-arrays.html">Read more.</a><br><br>
 
     <hr class="descriptionline"><br>
 
-    <div class="blogtitle"><a href="/blog/cs-2-c" style="text-decoration: none">Wednesday, 7th of December</a></div>
+    <div class="blogtitle"><a href="/blog/cs-1-c" style="text-decoration: none">Wednesday, 7th of December</a></div>
     <span class="blogheadline">The Man and the C</span><br><br>
     <img src="images/mario.png" alt="Mario" class="cloudhead"><br>
     <p>
@@ -122,32 +80,7 @@
       After this demo we learnt about Integrated Development Environments which can be used write, translate and run code and terminal windows. And building on our understanding of the binary system - which computers use to represent and process information - we learnt the difference between source code and machine code.<br><br>
       In this week's study, for example, source code is written in the high-level, moderately human-readable language C, however, in it's initial form, it is not able to give instructions to a computer. The source code, in order for the computer to understand it, needs to be translated - or compiled - into machine code by a program called a compiler. In the IDE provided by this course, we can compile our source code by using the 'make' command.<br><br>
       After an overview of Linux concepts necessary for this weeks problems sets we moved onto working through some basic programs in C, in order to introduce to us to the syntax and style requirements of C and how it uses data types, functions, arguments, loops, operators, etc.<br><br>
-      One element of C's style is the ability it has to condense code into more succint instructions. One such example is a generic while loops that involves counter incrementing.
-      <img src="images/example-while-loop-long.png" alt="Long While Loop" class="architecture"><br>
-      Which with some rearranging can be displayed in this shortened format.
-      <img src="images/example-while-loop-short.png" alt="Shortened While Loop" class="architecture"><br>
-      To end the lecture, we discussed the limitations of 32-bit and less-so 64-bit systems when representing real numbers with precision, and how this imprecision leads to integer overflow. This happens when an arithmetic operation requires a value which is outside the range of a computer's capacity to represent with bits i.e. numbers larger than approx. ± 2.2 billion cannot be represented by 32-bits). We discussed some solutions to these problems, or, in other words, how to make code more “correct”.<br><br>
-      <strong>Problem Sets</strong><br><br>
-  To complete the week's work we needed to complete to problem sets. The first involved, recreating the pyramid in the original Super Mario Bros using ASCII art. The second tasked us with calculating the minimum number of coins needed when dispensing change.<br><br>
-  The second task had most of the code provided, and just needed me to make some changes, inputing simple arithmetic into several pre-formed functions. It was more of an exercise in repetition to drill in familiarity with the syntax of C, so not much explanation is necessary.<br><br>
-  The first task - recreating the Mario pyramid using # as bricks - was a greater challenge, and worth recounting.<br><br>
-  <img src="images/pyramid-game.png" alt="The Mario Pyramid" class="cloudhead"><br>
-  In the lecture we were shown how to create a square grid of n x n size, with n being a size inputted by user. <br><br>
-  <img src="images/grid.png" alt="Grid coded with C" class="cloudhead"><br>
-  The code looked like this.<br><br>
-  <img src="images/grid-code.png" alt="Code which prints Grid" class="architecture"><br>
-  This code works by nesting one loop within another. The outer loop (using int i) is responsible for beginning each row, while the row number is less than n. The inner loop (using int j) prints a number of # corresponding to n.<br><br>
-  I inferred the code we would need to print the Mario pyramid would follow a similar scheme. After several failed attempts to print the pyramids out right, I decided to break down my task into segments. In the first segment, I decided to simply try to print the correct number of # I would need per line (ie row one would need one #, row two needed two #, etc.), looking like the image below.<br><br>
-  <img src="images/pyramid-wrong.png" alt="Wrong Pyramid" class="cloudhead"><br>
-  This was the code for the back-to-front pyramid<br><br>
-  <img src="images/pyramid-wrong-code.png" alt="Wrong Pyramid" class="architecture"><br>
-  Once I had this pyramid, it took a litle head-scratching for me to work out how to print the mirror image. I realised that I needed to add a step within the loop, one that printed a space using the inverse of the formula to print hashes. This diagram, replacing spaces with periods, shows this correlation. In row 1, 7 periods would need to be printed, and one hash.<br><br>
-  <img src="images/correct-pyramid-periods.png" alt="Pyramid with Periods" class="cloudhead"><br>
-  The code I ended up with looked like this.
-  <img src="images/correct-pyramid-code.png" alt="Code for correct Pyramid" class="architecture"><br>
-  Resulting in the correct solution.<br><br>
-  <img src="images/correct-pyramid.png" alt="The Mario Pyramid Printed with C" class="cloudhead"><br>
-  This was another rewarding week!<br><br>
+      <a href="/blog/cs-1-c.html">Read more.</a><br><br>
     <hr class="descriptionline"><br>
     
     <h3>Thursday, 6th of October</h3>
@@ -155,7 +88,7 @@
     <iframe width="485" height="273" src="https://www.youtube.com/embed/caXPtlRzH80" class="game" title="The Cloud Developer Workbook - 01 - Getting Started" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><br>
     <hr class="descriptionline"><br>
 
-    <div class="blogtitle"><a href="/blog/intro-to-cs-scratch-project" style="text-decoration: none">Wednesday, 5th of October</a></div>
+    <div class="blogtitle"><a href="/blog/cs-0-scratch" style="text-decoration: none">Wednesday, 5th of October</a></div>
     <span class="blogheadline">The Shell Game</span><br><br> 
     <img src="images/conjurer.jpg" alt="The Shell Game" class="cloudhead"><br>
       <p>Just a quick one here. I have started <a href="https://www.edx.org/course/introduction-computer-science-harvardx-cs50x" target="_blank">cs50's Introduction to Computer Science</a> and made it through week 0. In this block we were introduced to the fundamental concepts of computer science.<br><br>

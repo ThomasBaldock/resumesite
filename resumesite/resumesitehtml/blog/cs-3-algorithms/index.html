@@ -1,0 +1,44 @@
+<html>
+<head>
+    <link href='https://fonts.googleapis.com/css?family=Playfair+Display:400,700,900,400italic,700italic,900italic|Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="test.css">
+    <title>Hello World</title>
+    <meta name="viewport" content="width=device-width">
+    <script>
+      fetch('https://57vvf01f32.execute-api.ap-southeast-2.amazonaws.com/Prod/put')
+            .then(() => fetch('https://57vvf01f32.execute-api.ap-southeast-2.amazonaws.com/Prod/get'))
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('visitorCount').innerText = data['counter']
+            })
+      </script>
+</head>
+<body>
+<div class="links"><a href=mailto:thomas.m.baldock@gmail.com>Email</a> &emsp; <a href="https://www.linkedin.com/in/thomas-m-baldock" target="_blank">LinkedIn</a>  &emsp; <a href="https://github.com/ThomasBaldock" target="_blank">Github</a> &emsp; <a href="/blog">Blog</a>  &emsp; <a href="/study-notes">Study Notes</a> </div>
+<div class="head">
+<div class="thomasbaldockheader"><a href="/" style="text-decoration: none">Thomas Baldock</a></div>
+<div class="subhead"> Melbourne, Australia - 
+  <div class="display-date">
+      <span id="day">day</span>,
+      <span id="month">month</span>
+      <span id="daynum">00</span>
+      <span id="year">0000</span>
+    </div></div>
+    <div class="visitorcount"><span style="font-style: italic;">View number: <span id="visitorCount">loading...</span></div>
+</div>
+<div class="badges"><img src="images/cloud-practioner-badge.png" alt="Certified Cloud Practioner Badge" width="100" height="100"><img src="images/restart-graduate-badge.png" alt="AWS Re/Start Graduate Badge" width="100" height="100"></div><br>
+<div class="contentb">
+  <div class="collumnb">
+    <hr class="descriptionline"><br>
+    <hr class="descriptionline">
+  <h3>Thursday, 9th of Febuary</h3>
+      <span class="blogheadline">THE BIG A WORD</span><br><br> 
+      <p>I have decided to take a new approach with my blog posts because I am now using Notion as a tool to manage information and take notes for my courses. From now on, I'll only document my experience with the problem sets in my remaining CS50x blog posts. My summary of the week's learning will instead be found in study notes. This week, we returned to the topic of algorithms, which were introduced in Week 0 as the components that transform inputs into outputs. With a deeper understanding of data types and arrays, we can now perform more advanced transformations and improve the efficiency of our code.<br><br>
+      This week's lecture notes can be found <a href="/study-notes/cs50/01-cs50x/03-algorithms"> here</a>. Our lecture and lab discussed Big O notation as we compared the efficiency of different sorting algorithms. However, our problem sets focused on consistent and successful sorts rather than speed.<br><br> 
+      I encountered my biggest challenge this week when small errors in my code resulted in inaccurate answers. My understanding of how to write "correct" code was high and while it also appeared legitimate, as no errors were presented when compiling, I was not achieving the expected results. I learned that understanding style and form is not the same as accuracy. I need to pay closer attention to how my algorithms handle information in each step and use debugging tools to track the flow of my algorithms.<br><br>
+      My main takeaway from the week is that I need to be mindful of the information flow in my algorithms and use debugging tools, such as local variables and watch expressions, to ensure efficiency and accuracy. I'm making this week's blog more of a diary entry to keep myself accountable and stay on track, as I have also taken on a part-time cybersecurity course and don't want to fall behind.<br><br></p>
+</div>
+<hr class="descriptionline">
+<script src="date.js"></script>
+</body>
+</html>
