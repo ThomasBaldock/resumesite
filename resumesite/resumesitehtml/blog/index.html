@@ -29,6 +29,24 @@
 <div class="badges"><img src="images/cloud-practioner-badge.png" alt="Certified Cloud Practioner Badge" width="100" height="100"><img src="images/restart-graduate-badge.png" alt="AWS Re/Start Graduate Badge" width="100" height="100"></div><br>
 <div class="contentb">
   <div class="collumnb">
+
+    <div class="blogtitle"><a href="/blog/cs-4-memory" style="text-decoration: none">Thursday, 16th of Febuary</a></div>
+    <span class="blogheadline">COMMITTING TO MEMORY</span><br><br>
+
+      <h3></h3>
+      <h3>Labs<br>
+      Smiley</h3>
+      <p>
+      For this first lab exercise we needed to transform a smiley face represented by black and white pixels by changing the black pixels into a new colour.<br><br>
+      The majority of the code was already provided for us. All we needed to do was provide the code for the colourise function inside of a helpers.c file, which was called in the main function of the colourise file. To link the helpers function to the main function in colourise file, the colourise function was initialised in the beginning of the helpers file, instead of the usual main. These two c files were then linked by the makefile also provided to us already.<br><br>
+      Once I wrapped my head around this new approach, I set about planning my approach. I realised that the three input parapets of the colourise function gave us hint on how to approach lab. We were given the image height width and the array of pixels. Immediately my mind want to a solution that involved for loops which iterated through values up to the height and width, much like our solutions to previous tasks like the Mario Pyramid. By this point, such a solution comes easily.<br><br>
+      The difficulty I faced in this lab was identifying how to represent the 24-bit colour of each pixel. I overlooked the information in the Lab background which explained to us how the RGBTriple structure was made. <br><br>
+      <img src="images/image1.jpg" alt="Correct structure" class="cloudhead"><br><br>
+      I knew that I needed to use a for loop, and for each pixel which was found to be black, using an if statement to change it into the colour I desired. My first attempt at representing the pixels was using (0,0,0). I then tried to use a hexadecimal system, binding all 3 bytes together (0x000000). After several errors, searching online for answers, I reread the lab background and found the RGBTRIPLE structure which put my on the right track.<br><br>
+      Using the hint which told me that each individual colour of a pixel could be called by pixel.rgbtBlue, I had both the correct strategy and syntax needed to successfully complete the lab.<br><br>
+      </p>
+      <a href="/blog/cs-4-memory">Read more.</a><br><br>
+
     <div class="blogtitle"><a href="/blog/cs-3-algorithms" style="text-decoration: none">Thursday, 9th of Febuary</a></div>
     <span class="blogheadline">THE BIG A WORD</span><br><br> 
     <p>I have decided to take a new approach with my blog posts because I am now using Notion as a tool to manage information and take notes for my courses. From now on, I'll only document my experience with the problem sets in my remaining CS50x blog posts. My summary of the week's learning will instead be found in study notes. This week, we returned to the topic of algorithms, which were introduced in Week 0 as the components that transform inputs into outputs. With a deeper understanding of data types and arrays, we can now perform more advanced transformations and improve the efficiency of our code.<br><br>
@@ -41,33 +59,22 @@
     <img src="images/compuer-chip.png" alt="Computer-image" class="cloudhead"><br>
     
     In week 2 of edX's CS50x, we returned to our study of the programming language C. This week we took a deeper look at the building-blocks of computers and how a programming language works from the bottom up.<br><br>  
-    
     I went into this week confidently after last week's success but struck the wall in the last problem set. I will explain in detail later however I learnt many things - not just about that particular problem set - but also how to approach issues more generally.<br><br> 
-    
     We started the week returning to the concept of compiling. In Week 1 we had used been using the make utility to 'compile' our source code. This week we learnt that this utility is not actually a compiler, rather, it is a command which executes the compiler for C, called Clang, along with some arguments pre-programmed by CS50x. <br><br>
-    
     I did some research of my own to better understand this utility. I discovered outside of the Integrated Development Environment provided by CS50, the make utility needs a makefile to provide the process with the necessary instructions and commands. <br><br>
-    
     I recalled I used a Makefile when I completed the Cloud Resume challenge. You can read about my Cloud Resume here. This file was used by Amazon Web Services Serverless Application Model (AWS SAM), which is a Command Line Interface tool which can build serverless applications on AWS. The Makefile was used to automate the building process when we pushed our code from Github to AWS. Several macros were stored in the file and each one provided AWS SAM with one or more commands, along with any dependencies, which needed to be executed by the compiler. I still don't have a complete grasp of how it works, but being able to link this concept to a previous project strengthened my understanding.<br><br>
-    
     To push this thinking even further, this realisation also gave me a better understanding of how AWS SAM works as well. Effectively, running this tool packages your files in a format with can be understood by the AWS Cloud infrastructure. In other words, we are compiling the code from source code into AWS Cloud machine code.<br><br>
-    
     Back in this week's learning, we investigated the stages that a compiler like Clang goes through. <br><br>
-    
     First is preprocessing. This involves transferring header files into the source code which is to be converted.<br><br>
-    
     Second is a step, also called compiling. In this step, the program is converted into assembly code. This is where architectures like x86 and ARM begin to differ. <br><br>
-    
     The third step, assembling, transforms assembly code into machine code (binary, i.e. 0s and 1s).<br><br>
-    
     The final step, linking, converts the code from included libraries and combines it with the program's machine code. From this point the executable file is outputted.  From my experience, the final result is often called the binary of a program. I had trouble understanding what this mean in the past, so I'm glad for the clarification. <br><br>
-    
     Perhaps as some foreshadowing from our teachers of what lay ahead with this week's problem sets, we were told about the inevitability of writing mistakes, or bugs, when coding. We were then provided with some debugging techniques to eliminate these errors. <br><br>
     
     <a href="/blog/cs-2-arrays">Read more.</a><br><br>
 
     <hr class="descriptionline"><br>
-
+   
     <div class="blogtitle"><a href="/blog/cs-1-c" style="text-decoration: none">Wednesday, 7th of December</a></div>
     <span class="blogheadline">The Man and the C</span><br><br>
     <img src="images/mario.png" alt="Mario" class="cloudhead"><br>

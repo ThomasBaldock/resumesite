@@ -1,0 +1,682 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Lecture 4 - Memory</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="38c23368-ad4f-4a68-8c93-f35d5379a6ef" class="page sans"><header><h1 class="page-title">Lecture 4 - Memory</h1></header><div class="page-body"><p id="6e5f8aaf-2f39-4b3a-9e89-bc594ba404c8" class="block-color-gray_background">Hexadecimals</p><ul id="e53e3b69-3809-4545-8a73-d98d3d7d7ce8" class="bulleted-list"><li style="list-style-type:disc">digital images like all computer information, made up of code, ie pixels</li></ul><ul id="2978b0d3-44f0-4cfa-bbf4-e7a6ac72da1d" class="bulleted-list"><li style="list-style-type:disc">images are made by printing out horizontal line by line, called scan lines</li></ul><ul id="b465cd38-e2fe-402b-a7a5-ee4d45cd419d" class="bulleted-list"><li style="list-style-type:disc">the colour of each pixel is defined by a methods, one being RGB, that is the strength of Red, Green and Blue present in image.</li></ul><ul id="73bc3514-dd4f-4654-8db2-1941738274cd" class="bulleted-list"><li style="list-style-type:disc">these three value’s each range from 0 to 255<ul id="09f3e79a-8d69-4557-b96e-eb9e9f6b34dd" class="bulleted-list"><li style="list-style-type:circle">can also be represented in a hexadecimal system, with 6 total values, where 3 pairs of values each represent one of the colours</li></ul><ul id="6ea78024-e493-4d24-b759-a1e880c1d448" class="bulleted-list"><li style="list-style-type:circle">this is the system used for html and css</li></ul></li></ul><ul id="fe2dcfbd-f06f-4856-8b3a-2399510e7b10" class="bulleted-list"><li style="list-style-type:disc">a hexidecimal system, or base sixteen, uses a 15 numeral system (decimal = 10, binary = 2) across two bits of information<ul id="9239fb16-f466-401a-a8b2-e8f101e70b8a" class="bulleted-list"><li style="list-style-type:circle">0 1 2 3 4 5 6 7 8 9 A B C D E F are the value used</li></ul></li></ul><ul id="801aa0e9-2a26-4205-b678-5224a1487b3d" class="bulleted-list"><li style="list-style-type:disc">in the right digit is 16^0, which equals 1, so the right digit deals with single value</li></ul><ul id="2582b68d-dd44-40a1-a56d-efdcc7072f16" class="bulleted-list"><li style="list-style-type:disc">in the left digit is 16^0, which equals 1, so the left digit deals with multiples of 16</li></ul><p id="ebd937e3-b4cc-4e4a-addf-d8361013c5b1" class="">For example</p><ul id="75148702-e48f-458b-9603-ac8d3f8e9e88" class="bulleted-list"><li style="list-style-type:disc"> 5D would represent 93 (16X5 + 13)</li></ul><ul id="e33b04b8-7389-4912-92ae-5b2ddeaef79d" class="bulleted-list"><li style="list-style-type:disc">C4 would equal 196 (16X12 + 4)</li></ul><p id="9e840ecf-c176-449e-bef8-5c61c14ab7ba" class="">
+</p><p id="08842231-b2cb-442d-8d3d-6eff3c49d3b6" class="block-color-gray_background">Memory addresses </p><ul id="45418da0-2b6f-45ea-8946-b930efcf14c6" class="bulleted-list"><li style="list-style-type:disc">in previous lectures we’ve counted memory bytes as decimal<ul id="4840e9be-e581-4af0-a890-a8f3e941267d" class="bulleted-list"><li style="list-style-type:circle">convention is actually to use hexidecimal</li></ul></li></ul><ul id="a65de79d-1139-44d8-ab9f-a8c1087e065f" class="bulleted-list"><li style="list-style-type:disc">So what number follows the F<ul id="fed98208-1f57-4ef1-9512-cfba64a04813" class="bulleted-list"><li style="list-style-type:circle">the 16? No, because using the above system we know that 10 represents 16 in hexidecimal</li></ul><ul id="fa24b677-9b44-47b3-b424-ce1c4bc9515b" class="bulleted-list"><li style="list-style-type:circle">so 10? well that becomes a little confusing for humans, could presume it is a decimal system</li></ul><ul id="19d04c77-18ed-476a-86d3-3ce1d8770747" class="bulleted-list"><li style="list-style-type:circle">the method that has been established is to put a 0x to distinguish a value as hexadecimal<ul id="48dae35b-53fb-461f-bd1b-e6fefa71e78d" class="bulleted-list"><li style="list-style-type:square">so the value which follows 0xF is 0x10</li></ul><p id="adbc787b-334e-4846-be25-dd7632adb02f" class="">
+</p></li></ul></li></ul><p id="74ac611c-5f19-4c52-ba6b-f1d966fe8a67" class="block-color-gray_background">Pointers</p><figure id="92996eb7-a213-4f9d-9e1c-37adc3eaaf95" class="image"><a href="Lecture%204%20-%20Memory%2038c23368ad4f4a688c93f35d5379a6ef/Screenshot_2023-02-09_at_3.06.57_pm.png"><img style="width:1022px" src="Lecture%204%20-%20Memory%2038c23368ad4f4a688c93f35d5379a6ef/Screenshot_2023-02-09_at_3.06.57_pm.png"/></a></figure><ul id="c25eecbb-dffe-4eaa-b74a-e2895c6370ef" class="bulleted-list"><li style="list-style-type:disc">When we initialise an int in c (remember an int automatically uses 4 bytes aka 32 bits of memory), a somewhat random point in the RAM is allocated to this variable<ul id="4783fbf4-9eb2-4fc1-91fd-c61a45b146c4" class="bulleted-list"><li style="list-style-type:circle">This position will be represented by a hexadecimal value, which is its own variable</li></ul></li></ul><ul id="c25f386d-2a5a-4adb-899a-687fb4e9a2d9" class="bulleted-list"><li style="list-style-type:disc">So we are initialising a value for the variable (decimal) and also the location for this value (the other variable, hexidecimal, representing the specific byte in which value is stored)</li></ul><ul id="e15eaacd-45d9-4b88-8b9e-a83eee6f92c1" class="bulleted-list"><li style="list-style-type:disc">reminder, a double &amp;&amp; can create a conditional where multiple boolean expression must be true</li></ul><ul id="7009a4ad-5872-45e7-bf6f-928c41df59bb" class="bulleted-list"><li style="list-style-type:disc">a single &amp; means the address of, so &amp;variable will give you the hexidecimal address in computers memory of a variable, rather than its decimal value</li></ul><ul id="f2cb659c-a058-4652-9fbf-089c1786e4a9" class="bulleted-list"><li style="list-style-type:disc">if you want to store an address of a value, you need to use an *<ul id="268fd447-ccea-477e-92b0-7632464cdb59" class="bulleted-list"><li style="list-style-type:circle">ie int *variable = hexidecimal address would be used for an int address</li></ul></li></ul><ul id="a8a8cf31-b3cf-48b4-85e6-5fb3b718cf3f" class="bulleted-list"><li style="list-style-type:disc">so a pointer is a variable that points an address of another variable</li></ul><ul id="ddceefca-25d1-400b-b735-8cc8ccf2c77c" class="bulleted-list"><li style="list-style-type:disc">pointers are now automatically 8 bytes (64-bit), regardless to the data type the point to, like a char of 1 byte or an int of 4 bytes because computers are so powerful now, they are able and need to count up huge numbers, which 64-bit is more than capable of handling</li></ul><p id="eb792160-3d8c-4075-96d4-8102cbf46cb0" class="">
+</p><p id="7b6c10d9-15bf-429e-8d1a-ff368d1d01a0" class="block-color-gray_background">A second use for asterix operator</p><p id="c7baae1d-9826-4c4d-89c2-877506509ece" class="">The asterix can also be used when we want to not use the address of a variable, but if we have an address and want to see what the variable it is pointing to</p><figure id="be17ecfb-6da5-444f-b713-34597599ce29" class="image"><a href="Lecture%204%20-%20Memory%2038c23368ad4f4a688c93f35d5379a6ef/Screenshot_2023-02-09_at_3.21.23_pm.png"><img style="width:336px" src="Lecture%204%20-%20Memory%2038c23368ad4f4a688c93f35d5379a6ef/Screenshot_2023-02-09_at_3.21.23_pm.png"/></a></figure><ul id="f373ac3f-49b2-4cd2-b39f-05093d3eaadf" class="bulleted-list"><li style="list-style-type:disc">in this example, the integer at *p returns 50, not the address</li></ul><ul id="50599a54-7130-49a3-a05c-c630edaef09b" class="bulleted-list"><li style="list-style-type:disc">another note for pointers, when to call the pointer of a variable, we use %p, rather than %i, %c, etc.</li></ul><p id="7fedd65c-997d-45a3-93a1-3326ebb643b2" class="">
+</p><p id="d0237053-eade-415a-b930-348bf999f087" class="block-color-gray_background">The String datatype</p><ul id="77a9d6fb-2513-4a14-bc32-ad4050e4716d" class="bulleted-list"><li style="list-style-type:disc">so we learnt that the string data type we have been using is actually an invention of the cs50.h library and not the data type used for a ‘string’ normally.</li></ul><ul id="8ef50e31-36ee-47de-aa27-177320862936" class="bulleted-list"><li style="list-style-type:disc">it is actually char *</li></ul><ul id="312f4e7f-2582-47c2-84fc-a30b9735b077" class="bulleted-list"><li style="list-style-type:disc">given what we just learned about the asterix operator tells us that a string is really a pointer to the beginning of a string, and that string ends when it reaches the NUL character<figure id="9f648fb1-54ba-48d0-8632-092b541d0f24" class="image"><a href="Lecture%204%20-%20Memory%2038c23368ad4f4a688c93f35d5379a6ef/Screenshot_2023-02-09_at_3.34.44_pm.png"><img style="width:528px" src="Lecture%204%20-%20Memory%2038c23368ad4f4a688c93f35d5379a6ef/Screenshot_2023-02-09_at_3.34.44_pm.png"/></a></figure></li></ul><ul id="fe828d42-faab-4e3c-9663-f0db57b02028" class="bulleted-list"><li style="list-style-type:disc">so the variable s equals HI!, however *s equals it’s hexadecimal address (0x123) for %p and the first value of array at %i</li></ul><ul id="a4404344-d862-4ae4-baac-1c51bc49c816" class="bulleted-list"><li style="list-style-type:disc">we now have an equivalent to s[0], s[1], s[2], etc.</li></ul><ul id="d6d60428-aef2-43a6-828e-1e8615bd9f63" class="bulleted-list"><li style="list-style-type:disc">that is *s, *(s+1), *(s+2)</li></ul><ul id="5659ae5f-5c87-4d26-8d89-a7ce7d399d3c" class="bulleted-list"><li style="list-style-type:disc">compiler automatically knows that we need to move up one piece of data, so plus 1 works for chars, ints, floats which are also different byte-sizes</li></ul><p id="87aef568-efcd-45ec-8be5-05f1a1854d75" class="">
+</p><ul id="134a85a4-b6c3-48ce-94cd-52b6d3a714d8" class="bulleted-list"><li style="list-style-type:disc">This explains why string compare doesn’t work as we expect, because we are actually comparing the address of the beginning point of two variables, which can’t be the same</li></ul><p id="ae1667ab-d74c-4628-bc63-58c9879c2728" class="">
+</p><p id="a27d1e99-d24d-4ce4-93ae-f3cfed870818" class="block-color-gray_background">malloc and free</p><p id="7d4550b8-8f57-4eb7-be88-3c32251557f5" class=""><strong>Copying variables</strong> - if we copy one string to another, we aren’t actually creating another copy, we are just copying over the address. So each variable will point to the same data in memory</p><p id="8bd6dd42-dd4a-4630-8629-d5393d194f5b" class="">
+</p><ul id="2ab5640b-ab1f-4770-bcab-d43bba27f38d" class="bulleted-list"><li style="list-style-type:disc">bin order to do this correctly, we first need to allocate the required space using malloc<ul id="7d311298-7814-4978-bee4-f352c81bec8e" class="bulleted-list"><li style="list-style-type:circle">remember we also need to add space for the NUL character, not just all the values of string</li></ul><ul id="ebe5319a-0641-4132-bec3-88dd0fd9b3f4" class="bulleted-list"><li style="list-style-type:circle">it is best to add space dynamically, ie using strlen command</li></ul></li></ul><ul id="75f5de99-d9a7-4876-9e79-6b07593bff24" class="bulleted-list"><li style="list-style-type:disc">once space has been allocated, we can use a for loop or strcpy command form string.h library to copy string</li></ul><ul id="ef6a98cc-2bfc-4d5c-bb38-54a24aac3ba8" class="bulleted-list"><li style="list-style-type:disc">once we have completed our algorithm we must always call free to empty the memory space used and to prevent any data leaks</li></ul><p id="92f844cf-a97e-4004-9374-059996c6d5a8" class="">
+</p><p id="eea2e1bb-27a7-4a4a-ab34-d6fac6e0ae54" class="">The <strong>valgrind </strong>command can be used in the Command Line interface when running program to analyse memory use of program and detect errors</p><p id="7ca116fc-e9cb-4c26-907b-253b9c03178b" class="">
+</p><p id="f14119f9-3cb3-4d58-8e00-ac6e9a5723eb" class="">As i have noticed in debugger, before you initialise values to have a value in program, when initialised they sometimes contain a random number. this is called a <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong> garbage value.</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><ul id="3379873b-5258-480c-80b3-f319e1f7d4fb" class="bulleted-list"><li style="list-style-type:disc">this can happen if there are leftover values that were previously allocated to memory but not cleared by computer</li></ul><ul id="3de0f98d-ce08-4657-bb16-857262537882" class="bulleted-list"><li style="list-style-type:disc">and you then get access to that block of memory but don’t populate it with your own value</li></ul><p id="b5d6200b-e2b4-4168-9829-02b1ae4beb54" class="">
+</p><p id="02c55a94-f14a-48e9-b93d-35db76cceaa1" class="">Copying values always requires some temporary space to hold one of the variables</p><p id="5c6be1a2-ccc1-4ff5-875d-3a5c76a1087d" class="">
+</p><p id="8d05c067-275d-4b47-847a-4266fb03bdc5" class="block-color-gray_background">Scope</p><p id="4a952f19-6de0-4c6a-a063-0f6362c036d9" class="">In previous weeks we covered the concept of scope, because sometimes arrays have only been limited to the function in which they were called or initialised</p><figure id="75535a2a-bec9-4cd4-95b8-e74221c486eb" class="image"><a href="Lecture%204%20-%20Memory%2038c23368ad4f4a688c93f35d5379a6ef/Screenshot_2023-02-09_at_4.16.51_pm.png"><img style="width:192px" src="Lecture%204%20-%20Memory%2038c23368ad4f4a688c93f35d5379a6ef/Screenshot_2023-02-09_at_4.16.51_pm.png"/></a></figure><ul id="6713a74a-cd04-4980-9223-25f657c25113" class="bulleted-list"><li style="list-style-type:disc">memory is used in a convential way<ul id="52c2be17-e7ed-4945-8235-6bbdaab56f4b" class="bulleted-list"><li style="list-style-type:circle">not random</li></ul></li></ul><ul id="97f98c75-d4e5-43a4-8ff6-9c3c795cfd35" class="bulleted-list"><li style="list-style-type:disc">uses different parts of memory for different purposes</li></ul><ul id="4f7dc4d9-d636-4c77-8053-0510abfecc44" class="bulleted-list"><li style="list-style-type:disc">first up is machine code, all zeroes and one used when program compiled and run</li></ul><ul id="a1ad023f-9f3d-4b55-bb7e-edcfb69ecda9" class="bulleted-list"><li style="list-style-type:disc">here we see global variables have their own area which is separate to the rest of the memory used by program, variables outside of main</li></ul><ul id="b18e1c18-42e3-420b-bc70-2628662decbd" class="bulleted-list"><li style="list-style-type:disc">then there is heap, when we use malloc, this is what memory we use</li></ul><ul id="f4cab94a-66e3-4674-ada0-a038e7de64f1" class="bulleted-list"><li style="list-style-type:disc">and stack, so we have been using stack heavily in our programs so far</li></ul><ul id="60936d7d-7a62-4ce7-a45f-b2eeee710170" class="bulleted-list"><li style="list-style-type:disc">buffer overflow is when we run out room in the bottom area, either by filling the stack or heap, which specify the exact cause of overflow</li></ul><p id="84b717e2-f078-4661-ba96-32bcb4da72fe" class="block-color-gray_background">Swapping variable values</p><ul id="b5765047-141b-4377-82e9-148142b14777" class="bulleted-list"><li style="list-style-type:disc">so when passing two variables into another function within main, we are actually making two additional copies of the variables and only using those within the second function, so any changes we make do not impace the originals</li></ul><ul id="f77e2e6e-487d-459a-a27c-0218518d82f9" class="bulleted-list"><li style="list-style-type:disc">in order to swap two variables in another, instead of copying the variables, we can copy the addresses, and therefore be directly changing the original copies, seen in below code<figure id="b2645932-d404-4ea1-8a76-db1640dafb8a" class="image"><a href="Lecture%204%20-%20Memory%2038c23368ad4f4a688c93f35d5379a6ef/Screenshot_2023-02-09_at_4.44.45_pm.png"><img style="width:384px" src="Lecture%204%20-%20Memory%2038c23368ad4f4a688c93f35d5379a6ef/Screenshot_2023-02-09_at_4.44.45_pm.png"/></a></figure></li></ul><p id="e35c88d1-85ab-4562-a818-cdfb870ba715" class="">
+</p><p id="434b9a63-3b2a-4e8e-862d-34bc3a0eccbf" class="block-color-gray_background">scanf, the true get_string/int/float</p><ul id="2b0cb472-7d89-45f0-92f8-2e234c07c8d6" class="bulleted-list"><li style="list-style-type:disc">when we’ve been using get_*** its been a part of cs50.h library also</li></ul><ul id="54bbd5b9-fd07-4e53-9e73-55010f89a250" class="bulleted-list"><li style="list-style-type:disc">the conventional way to get a value is using scanf</li></ul><ul id="bf77c4e9-3825-4b0c-83cc-23399a5966b0" class="bulleted-list"><li style="list-style-type:disc">from stdio.h library</li></ul><ul id="6d72888b-dc14-4503-9dfa-c91bf3d3a3d6" class="bulleted-list"><li style="list-style-type:disc">this scans the user’s computer keystrokes and stores in memory, have to give it at the address of the variable (&amp;variable)</li></ul><ul id="60af9de3-af5a-42b6-89b7-f9655662b78c" class="bulleted-list"><li style="list-style-type:disc">when doing it for char *s, s is already an address so we dont need the &amp;</li></ul><ul id="ec40ed42-5f86-4a93-a659-dc0d3c7e54ca" class="bulleted-list"><li style="list-style-type:disc">scanf is problematic if we don’t dynamically allocate memory to our variables</li></ul><ul id="b07ef6d1-4915-4422-9792-4239e512e436" class="bulleted-list"><li style="list-style-type:disc">incorrect memory allocation can lead to segmentation fault</li></ul><p id="a216b9ac-d56e-41c5-b824-ced63264f9ad" class="">
+</p><p id="0c874b34-aebf-43bc-b147-56a4c2b9030f" class="block-color-gray_background">FILE INPUT / OUTPUT</p><p id="1df82cda-906a-4e2f-952f-d1ec45cfdf14" class="">within see we can use pointers to files and the FILE data type to call files within program, allowing us to open, print and write to files.</p><ul id="f48a696a-a16e-4d9d-b5fd-9fb59b768978" class="bulleted-list"><li style="list-style-type:disc">we will explore in greater detail in coming weeks</li></ul></div></article></body></html>
