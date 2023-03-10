@@ -1,0 +1,688 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Lecture 5 - Data Structures</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="227f6d41-b6d1-4459-8881-1752bfe2d18a" class="page sans"><header><h1 class="page-title">Lecture 5 - Data Structures</h1></header><div class="page-body"><ul id="fcfc0908-d64f-4ad4-8a57-2a655f7bc61d" class="bulleted-list"><li style="list-style-type:disc">we cannot always malloc more memory for an array if the memory after the current array position is already taken</li></ul><ul id="c32a9437-5222-49b5-b872-a4a86b025e98" class="bulleted-list"><li style="list-style-type:disc">one solution is to move array to new location, however that adds operation time of O(n)</li></ul><ul id="95fdfb33-9eb6-4756-9c2f-04eb8925827c" class="bulleted-list"><li style="list-style-type:disc">This problem introduces the challenge in computer science of balancing the form of the memory that are allocated for programs against the worst-case running times<ul id="c23415e8-bcb9-4516-bee3-f51a375cd667" class="bulleted-list"><li style="list-style-type:circle">i.e. we can make improvements for one which usually has a detrimental impact on the other </li></ul></li></ul><p id="4965f060-efcf-488e-a2a2-9192d39c7667" class="">
+</p><ul id="12cd9ee7-27f7-416e-a344-93609aa6438d" class="bulleted-list"><li style="list-style-type:disc">This balancing act comes is manipulated in the data structures used in a program</li></ul><ul id="eeca764d-d18a-41df-bc42-4aecb7f98c4f" class="bulleted-list"><li style="list-style-type:disc">Data structures are complex ways to organise data in memory, allowing information to be stored in the different layouts</li></ul><ul id="8fc0eb37-b721-4196-9ba0-2c2bafa5a070" class="bulleted-list"><li style="list-style-type:disc">Tools needed to build data structures are<ul id="47ea9936-8238-46ef-8e71-523dfa490e8d" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-red">structs</mark>: to create custome data types</li></ul><ul id="40e4cd54-f446-40ea-bb94-637fa42becbb" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-red">.</mark> to access properties in a structure</li></ul><ul id="b9717eb0-def3-4d68-a82d-ba32fcca9059" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-red">*</mark> to go to an address in memory pointed to by a pointer</li></ul><ul id="8b56e2b1-2ab8-4e18-8708-a7d34e9b7b31" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-red">- &gt;</mark> to access propertied in a structure pointed to by a pointer <ul id="8c4907d9-2ca2-45b8-98c5-e55fdf116274" class="bulleted-list"><li style="list-style-type:square">this is a new operator, and it is what linked list uses to go to a new address and look inside of structure.</li></ul></li></ul></li></ul><p id="f11e6cb1-dc11-4812-8299-53c97b890980" class="">
+</p><h2 id="5fc1e6a1-508a-479b-8647-566059975510" class="">Linked Lists</h2><ul id="a5119c23-495f-402d-84a8-08ae96ba788a" class="bulleted-list"><li style="list-style-type:disc">with a linked list we can store a list of values which can be easily grown by storing subsequent values in different parts of memory</li></ul><ul id="e1ca6556-a831-41a6-ba8e-f3ff60093f00" class="bulleted-list"><li style="list-style-type:disc">To track all values in a linked list, we need to allocate enough memory for both the value of each element we want to store and the address of the next element</li></ul><ul id="ad42a474-382f-4df0-bb8e-de18ec11ca50" class="bulleted-list"><li style="list-style-type:disc">the dual values are called a node<ul id="62037515-4e59-43e6-bd6f-650ab59bfe35" class="bulleted-list"><li style="list-style-type:circle">a node contains both an <mark class="highlight-red">item</mark> and a pointer called <mark class="highlight-red">next</mark></li></ul><p id="a9467208-208c-40c2-be51-2dc9b8716061" class="">
+</p></li></ul><p id="8ffa6526-ba37-4ef6-ba23-e3ba47829474" class="">Example structure for a node</p><p id="9239e607-2144-4caf-a010-8ddc3f253cdc" class=""><code>typedef struct node
+{
+    int number;
+    struct node *next;
+}
+node;</code></p><p id="e3498d83-579c-42e2-91d9-3c6c64bfba11" class="">
+</p><ul id="1322e838-477f-43f9-8eea-c1f831b0524e" class="bulleted-list"><li style="list-style-type:disc">The tradeoff of this flexibility is we need to allocate twice as much memory for each element in order to spend less time adding values</li></ul><ul id="f9b68ad2-2edb-4a33-9d42-0ed98798319d" class="bulleted-list"><li style="list-style-type:disc">We can no longer use binary search either</li></ul><ul id="d4efce97-14ff-4cce-bfb9-e3576261d26d" class="bulleted-list"><li style="list-style-type:disc">by convention, an additional element to the null indicating the end of list, is an element which is a pointer to the first item in the list</li></ul><p id="5f32d35a-88dc-4913-877e-75b8d529034c" class="">
+</p><h2 id="41af8d1b-2800-4626-9481-6c2be41b7ff4" class="">Stacks and Queues</h2><ul id="ee896f51-f334-4152-b472-b3835e5fa594" class="bulleted-list"><li style="list-style-type:disc">A <mark class="highlight-red">queue</mark> is one type of data structure<ul id="0637118a-5bf9-4995-9f17-a1dc7ff0590b" class="bulleted-list"><li style="list-style-type:circle">has the form of first in first out</li></ul><ul id="d422724e-18c4-4d60-9382-9af65a9efb5f" class="bulleted-list"><li style="list-style-type:circle">an item can be <em><em><em><em><em><em><em><em>enqueued, </em></em></em></em></em></em></em></em>that is the item can be put in queue</li></ul><ul id="c341bea7-c5b8-4a25-9ef8-5c800cb64496" class="bulleted-list"><li style="list-style-type:circle">an item can be <em><em><em><em><em><em><em><em>dequeued</em></em></em></em></em></em></em></em>, that is the item leaves the queue</li></ul></li></ul><ul id="a7f6a11c-0daf-4fae-8d18-5c898f93bff7" class="bulleted-list"><li style="list-style-type:disc">A <mark class="highlight-red">stack</mark> is another type<ul id="c5414f7b-f56c-4ed0-9810-e0c837b5fe17" class="bulleted-list"><li style="list-style-type:circle">has the form of last in and last out</li></ul><ul id="ae9b8135-9357-473d-8bc1-51e555179b3a" class="bulleted-list"><li style="list-style-type:circle">an item can be pushed on stack, that is put on top of stack</li></ul><ul id="1ce24847-9e75-4c6c-9aa5-59beeec5fcdf" class="bulleted-list"><li style="list-style-type:circle">the top item can be popped off stack, that is taken from the stack</li></ul></li></ul><p id="820e57b1-c76e-4358-ad09-fcb16f4c0547" class="">
+</p><ul id="47d6bbaa-baaa-4748-8b13-e1bdfbb47e9c" class="bulleted-list"><li style="list-style-type:disc">there is a function in C called <mark class="highlight-red">realloc </mark>which can reallocate memory for an array which has run out of contiguous memory space<ul id="dbfc98fe-2508-45e9-8e18-062081dc947a" class="bulleted-list"><li style="list-style-type:circle">this function takes two arguments, the array to be copied and the size of the new array</li></ul><ul id="432d0604-9d4b-4cd4-8604-218e40d7757b" class="bulleted-list"><li style="list-style-type:circle">realloc handles all the following stages for you<ul id="48568d71-945b-4880-b149-7c54320f46c7" class="bulleted-list"><li style="list-style-type:square">creates a new array of requested size</li></ul><ul id="b4567e08-bba2-42f7-a172-539a6fbe9d2c" class="bulleted-list"><li style="list-style-type:square">copies values from array to be copied to new array</li></ul><ul id="eab132e4-8d25-4058-a84f-57cd85bc0f12" class="bulleted-list"><li style="list-style-type:square">creates a pointer for new array</li></ul><ul id="c95524d0-e0bf-4c0d-8f11-7ebfcf76bb99" class="bulleted-list"><li style="list-style-type:square">once copying is done, realloc frees the memory of first array</li></ul><ul id="6f2112fe-292a-4b60-a760-d22a2884fdf4" class="bulleted-list"><li style="list-style-type:square">the pointer for previous array is then changed, pointing now to the new array</li></ul></li></ul><ul id="2bbf1ce8-72a6-4120-b188-5db0d3e11ec1" class="bulleted-list"><li style="list-style-type:circle">useful as amount of data in array changes, realloc can be used to grow or shrink the stack or queue</li></ul></li></ul><p id="0ffeeb20-e251-4c53-b88b-75dda149ac2a" class="">
+</p><h2 id="353d1be4-4258-40a5-8c4e-3febb5cb4602" class="">Trees</h2><ul id="87972263-3add-49b1-a14a-8f11c56844bc" class="bulleted-list"><li style="list-style-type:disc">Binary search trees are another data structure</li></ul><ul id="496ae3e7-7a32-416a-b1b1-5f287367706c" class="bulleted-list"><li style="list-style-type:disc">They store data more efficiently than stacks or queues by allowing faster searching and retrieval
+</li></ul><figure id="2d075e7d-bbc1-413d-9ee6-d8e7176669eb" class="image"><a href="Lecture%205%20-%20Data%20Structures%20227f6d41b6d1445988811752bfe2d18a/Screenshot_2023-03-06_at_5.04.56_pm.png"><img style="width:1700px" src="Lecture%205%20-%20Data%20Structures%20227f6d41b6d1445988811752bfe2d18a/Screenshot_2023-03-06_at_5.04.56_pm.png"/></a></figure><figure id="f0d5223e-4615-4a0a-9faa-5df17973f67f" class="image"><a href="Lecture%205%20-%20Data%20Structures%20227f6d41b6d1445988811752bfe2d18a/Screenshot_2023-03-06_at_5.05.12_pm.png"><img style="width:1700px" src="Lecture%205%20-%20Data%20Structures%20227f6d41b6d1445988811752bfe2d18a/Screenshot_2023-03-06_at_5.05.12_pm.png"/></a></figure><ul id="9635b116-d174-40fe-af81-e5630ccb4527" class="bulleted-list"><li style="list-style-type:disc">searching tree can be implemented by using recursion</li></ul><ul id="fae979f7-e2fd-4895-9b38-8a143ae6dda3" class="bulleted-list"><li style="list-style-type:disc">a tree can offer dynamism because it grows and shrinks easily</li></ul><p id="8b254a91-739c-47b6-8603-bc9ff33fb294" class="">
+</p><h2 id="7a3585ae-0895-4374-8e64-3772b78bd847" class="">Dictionaries</h2><ul id="e9ce23b0-afb2-4063-afbe-8032f5a51df4" class="bulleted-list"><li style="list-style-type:disc">another data structure which have a key and value, much like a word and definition in a language dictionary</li></ul><p id="afb0a59c-8889-41ca-a6f6-2327fb1271cc" class="">
+</p><h2 id="eaecaeab-12c5-4448-9a34-614a5568fce0" class="">Hashing a Hash Tables</h2><ul id="affa4437-d1d0-443b-9496-e5c6b3fcdefb" class="bulleted-list"><li style="list-style-type:disc">hashing is the idea of taking a value or part of it and using that that hash as a shortcut to finding it later</li></ul><ul id="e1a05df0-0c32-4b64-b252-7720169cd9c2" class="bulleted-list"><li style="list-style-type:disc">for example, in a data structure containing fruit, apples could be hashed by using the letter a, putting all fruit with the letter a in that ‘bucket’, and then find the apple data by using the shortcut of looking in the ‘a’ bucket.</li></ul><ul id="6aa06a2e-f268-4734-8174-097368b2a162" class="bulleted-list"><li style="list-style-type:disc">This example demonstrates the concept of bucketising</li></ul><p id="1c326956-3281-4d21-9a1f-d64c977d539f" class="">
+</p><ul id="8f73211e-03e6-413e-b4d4-5bf0604c584c" class="bulleted-list"><li style="list-style-type:disc">A <em><em><em><em><em><em><em><em>hash function </em></em></em></em></em></em></em></em>is an algorithm which reduces a larger value into something small and predictable<ul id="7d7e0f0e-7eab-457a-9232-abd062305426" class="bulleted-list"><li style="list-style-type:circle">generally involves representing a new array item with a number which represents where item should be placed</li></ul><p id="8de828b4-47f6-4236-9c38-22360f5049c8" class="">
+</p></li></ul><ul id="994fc205-6d2e-4f88-8457-49602905d1bd" class="bulleted-list"><li style="list-style-type:disc">A <em><em><em><em><em><em><em><em><em><em><em>hash table </em></em></em></em></em></em></em></em></em></em></em>is a combination of arrays and linked lists. <ul id="eb10806a-fb48-40ba-8c31-1fb22272e460" class="bulleted-list"><li style="list-style-type:circle">it is an array of pointers to nodes</li></ul></li></ul><p id="b69d9bc9-04c9-4d31-8758-1d93409265d7" class=""><div class="indented"><figure id="00b5802d-6b49-4704-9c34-67b0788ab297" class="image"><a href="Lecture%205%20-%20Data%20Structures%20227f6d41b6d1445988811752bfe2d18a/Screenshot_2023-03-06_at_5.14.40_pm.png"><img style="width:1700px" src="Lecture%205%20-%20Data%20Structures%20227f6d41b6d1445988811752bfe2d18a/Screenshot_2023-03-06_at_5.14.40_pm.png"/></a></figure><p id="1b9fa3dc-04ca-4205-b431-360091a7aaa1" class="">
+</p></div></p><h2 id="597e14d4-44db-407c-bc56-9544953781e1" class="">Tries</h2><ul id="bc1fedfc-be17-4648-8286-33b93d9ed3e9" class="bulleted-list"><li style="list-style-type:disc">tries are a form of data structure searchable in real time</li></ul><ul id="361364de-56c6-47b5-be42-9929312a4ff4" class="bulleted-list"><li style="list-style-type:disc">one downside is they use a lot of memory</li></ul><figure id="a98ea9e4-5945-437a-a8e3-eb520e28e354" class="image"><a href="Lecture%205%20-%20Data%20Structures%20227f6d41b6d1445988811752bfe2d18a/Screenshot_2023-03-06_at_5.17.00_pm.png"><img style="width:1700px" src="Lecture%205%20-%20Data%20Structures%20227f6d41b6d1445988811752bfe2d18a/Screenshot_2023-03-06_at_5.17.00_pm.png"/></a></figure><p id="71ff6553-7e3a-45bd-b37b-1c856aa42c24" class="">
+</p></div></article></body></html>

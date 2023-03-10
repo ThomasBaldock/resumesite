@@ -1,0 +1,682 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Adding a New Provider to Your Configuration</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="69d95937-0aeb-4aa6-8f60-840b9a9b6a2e" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🆕</span></div><h1 class="page-title">Adding a New Provider to Your Configuration</h1></header><div class="page-body"><p id="e92c56fe-b339-4664-a1a4-9fc25d94e40f" class="">
+</p><h3 id="daa81253-c490-465b-8b9e-04dcb8b75a3a" class="">Provider plugins are Terraform’s superpower</h3><ul id="a3dff9ee-de0e-41ac-aea1-3fadafcf8298" class="bulleted-list"><li style="list-style-type:disc">a provider is a terraform plugin which allows user manage an external API</li></ul><ul id="75b92ae5-1ee3-493c-884d-6d26cfd0bb67" class="bulleted-list"><li style="list-style-type:disc">these plugins are available in public and private registries or even local file system</li></ul><ul id="4e9c5585-b50f-485c-91cd-29db32ee1cdb" class="bulleted-list"><li style="list-style-type:disc">three types of plugins available<ul id="e900da8f-d5c1-44a1-bb97-08ad783e9da1" class="bulleted-list"><li style="list-style-type:circle">Official: written by Terraform</li></ul><ul id="ee772327-271e-4ec6-961c-91c21f68dbc6" class="bulleted-list"><li style="list-style-type:circle">Verified: written by third-part org, verified as Hashicorp Technology Partner</li></ul><ul id="57bea7dc-5664-4c57-9b58-4a063b5c6ae3" class="bulleted-list"><li style="list-style-type:circle">Community: written by community, not verified</li></ul></li></ul><ul id="e507cadb-08aa-4fb1-ab69-9d888cafb312" class="bulleted-list"><li style="list-style-type:disc">All providers are open-source</li></ul><ul id="e611f18c-6a3d-460d-be5c-a6d78f715b5d" class="bulleted-list"><li style="list-style-type:disc">Providers are a collection of resources and data sources</li></ul><ul id="60feb2dc-2c87-4181-9947-d30d2ac64e1d" class="bulleted-list"><li style="list-style-type:disc">They are versioned, by semantic numbering<ul id="78244513-caf6-42c0-ad81-beb6eaa81163" class="bulleted-list"><li style="list-style-type:circle">in case an update breaks your deployment</li></ul></li></ul><ul id="9997016a-6692-4c97-9b05-9a7b4a50ed59" class="bulleted-list"><li style="list-style-type:disc">Can call multiple instances of same provider<ul id="9f21c66a-8b47-4c71-9490-66a3cd47f4c9" class="bulleted-list"><li style="list-style-type:circle">e.g. as each AWS instance is linked to one region and account, call two instances for multi-region</li></ul></li></ul><h3 id="10da563c-3335-487c-9417-3536d0a00922" class="">Provider Syntax</h3><ul id="aaa23b90-9818-4b77-9acd-1f5ca63bb061" class="bulleted-list"><li style="list-style-type:disc">Provider information is provided in the Terraform configuration block, nested within a required_providers block<ul id="6cdb02dc-64b1-4646-b367-c276b4229c11" class="bulleted-list"><li style="list-style-type:circle">NOTE: not in the provider block</li></ul></li></ul><ul id="25da06ed-67bb-4887-9cf2-f2406011a05e" class="bulleted-list"><li style="list-style-type:disc">Terraform configuration block configures general settings like<ul id="4dac3997-6482-45a2-bd66-e76465dd55b3" class="bulleted-list"><li style="list-style-type:circle">terraform version</li></ul><ul id="ad99a04b-ebf3-47fc-9b2d-f161957fe77b" class="bulleted-list"><li style="list-style-type:circle">back end settings for state data</li></ul><ul id="b69a24d6-5b22-41e9-9d8a-c26c73608f77" class="bulleted-list"><li style="list-style-type:circle">required provider plugins</li></ul><ul id="6a0d9e11-6e62-4b17-9723-1479f878b006" class="bulleted-list"><li style="list-style-type:circle">provider metadata</li></ul><ul id="c2965ae6-9c31-4b37-ad0f-f1c0dd736eab" class="bulleted-list"><li style="list-style-type:circle">experimental language features<figure id="8b5d73ff-ebe6-4c23-bcd1-b798b6283f14" class="image"><a href="Adding%20a%20New%20Provider%20to%20Your%20Configuration%2069d959370aeb4aa68f60840b9a9b6a2e/Screenshot_2023-02-17_at_12.30.58_pm.png"><img style="width:432px" src="Adding%20a%20New%20Provider%20to%20Your%20Configuration%2069d959370aeb4aa68f60840b9a9b6a2e/Screenshot_2023-02-17_at_12.30.58_pm.png"/></a></figure></li></ul></li></ul><ul id="a872798f-bac4-4abe-a120-4b1e481a3ab8" class="bulleted-list"><li style="list-style-type:disc">each key is the name reference for a provider plugin<ul id="ff6673f9-437b-44d1-860d-4c52fe327409" class="bulleted-list"><li style="list-style-type:circle">use standard provider name unless using multiple instances of same provider</li></ul></li></ul><ul id="af488f5f-2e6b-4794-af54-26316daf66a7" class="bulleted-list"><li style="list-style-type:disc">the value is a map defining source of plugin and its version<ul id="26f7d567-0b39-4971-8d6e-aa42eb327667" class="bulleted-list"><li style="list-style-type:circle">terraform registry has shorthand notation</li></ul><ul id="1e95ab7f-ef9a-4899-a0d1-1f95c925872e" class="bulleted-list"><li style="list-style-type:circle">alternate locations require an expanded form<figure id="5789d15a-ca7f-4335-9b91-a085b70eadb1" class="image"><a href="Adding%20a%20New%20Provider%20to%20Your%20Configuration%2069d959370aeb4aa68f60840b9a9b6a2e/Screenshot_2023-02-17_at_12.31.22_pm.png"><img style="width:432px" src="Adding%20a%20New%20Provider%20to%20Your%20Configuration%2069d959370aeb4aa68f60840b9a9b6a2e/Screenshot_2023-02-17_at_12.31.22_pm.png"/></a></figure></li></ul></li></ul><ul id="14ad3ea7-7b33-4a9f-94ae-91716ae696d6" class="bulleted-list"><li style="list-style-type:disc">the ~&gt; before 3.0 indicate to terraform we are happy to use the latest plugin in the form 3.x</li></ul><ul id="7185fcd3-db06-4f9c-9a21-582491d2da03" class="bulleted-list"><li style="list-style-type:disc">deployment breaks normally occur on major releases (going from 3.0 to 4.0) so staying within same major release should keep things stable. Should, depending on provider</li></ul><p id="3239530b-97fa-45cc-91f6-14467f3b7308" class="">
+</p><ul id="140fa823-7971-4f84-9897-58a133b7f002" class="bulleted-list"><li style="list-style-type:disc">Once required providers have been defined, they can be referenced in a provider block<figure id="50c807a5-38c8-43cf-bdb3-a04702a40501" class="image"><a href="Adding%20a%20New%20Provider%20to%20Your%20Configuration%2069d959370aeb4aa68f60840b9a9b6a2e/Screenshot_2023-02-17_at_12.37.46_pm.png"><img style="width:480px" src="Adding%20a%20New%20Provider%20to%20Your%20Configuration%2069d959370aeb4aa68f60840b9a9b6a2e/Screenshot_2023-02-17_at_12.37.46_pm.png"/></a></figure></li></ul><p id="235fac60-1a3a-4431-80f9-ae86516cf624" class="">
+</p><ul id="408e1423-3ac1-4ba3-a2da-7577e68f89d8" class="bulleted-list"><li style="list-style-type:disc">We did some housekeeping with our configuration</li></ul><ul id="d394ebb1-7999-40b0-9b50-67fae665a9bb" class="bulleted-list"><li style="list-style-type:disc">we defined the required providers and removed the access key variables as we will define them as Env Variables</li></ul><ul id="c2fd453b-9ba0-4c20-9bc8-8c7eb3e868ae" class="bulleted-list"><li style="list-style-type:disc">because we have added new providers, we need to run <em>terraform init </em>again before updating because we will need to download these new plugins, which is done during the init stage</li></ul><p id="39ac8e4e-9d88-4dd4-b99d-0fb344faaa62" class="">
+</p><ul id="a3093bf0-f478-4f0a-b1d3-76a1eed44c3e" class="bulleted-list"><li style="list-style-type:disc">there is a Official Random provider which added randomness to terraform configuration files<ul id="a46b2ae0-1d54-436a-8de6-0c3d3e01b912" class="bulleted-list"><li style="list-style-type:circle">one use case would be adding a unique identifier to ensure a S3 bucket’s name is globally unique</li></ul></li></ul><p id="b13d41af-42a8-461b-bdb0-7955794c3361" class="">
+</p><h3 id="1854856f-4beb-485b-8f4f-4e5db4fbba99" class="">Planning and Dependencies</h3><ul id="8148483f-e574-4d2c-8d02-5054768433c0" class="bulleted-list"><li style="list-style-type:disc">when terraform is running deployment to match config, it needs to plan</li></ul><ul id="870e1086-e8c3-4e93-a81e-4af1b1c86193" class="bulleted-list"><li style="list-style-type:disc">happens during a plan, apply or destroy</li></ul><p id="f688dcc3-c69a-4bf6-90ef-c886f0cf73d5" class="">
+</p><ul id="a1de8695-d4ab-45f7-b1f7-59f032200734" class="bulleted-list"><li style="list-style-type:disc">to create the plan of action, Terraform<ul id="36d8bbac-4caa-4cb8-9146-ebe0d503ad42" class="bulleted-list"><li style="list-style-type:circle">first, refreshes and inspects the state data</li></ul><ul id="7045abd0-3b99-4968-baf4-6884fcce5b71" class="bulleted-list"><li style="list-style-type:circle">second, parse config and build a dependency graph based on the data sources and resources in code</li></ul><ul id="4355f7ba-e373-4831-ab29-3bd6e7e6c523" class="bulleted-list"><li style="list-style-type:circle">then compares graph with state data and makes the list of additions, updates and deletions</li></ul><ul id="c655e35b-95a7-48fb-ac33-68fce6b1d04c" class="bulleted-list"><li style="list-style-type:circle">tries to make as many changes at the same time as others, except those that are dependent on others completing first<ul id="fdaa4822-aafc-4c69-99bc-64416609fbce" class="bulleted-list"><li style="list-style-type:square">makes decision about the order of changes by checking for references within a resource block to other resources</li></ul><ul id="1882d80a-bad2-4079-be0a-39fde59a6de0" class="bulleted-list"><li style="list-style-type:square">this is automatically done by terraform in most cases</li></ul><ul id="11d86411-de51-4a30-b4a7-5d5e703610ce" class="bulleted-list"><li style="list-style-type:square">when it’s not worked out by terraform, using the <em>depends_on </em>ensures a resource will wait till another has been successfully created</li></ul></li></ul><h3 id="0530e968-1309-4687-88bd-f4ddb2450236" class="">Post Deployment Configuration</h3></li></ul><ul id="9ac0cd60-0799-4996-a70d-4f0593c1a4de" class="bulleted-list"><li style="list-style-type:disc">sometimes configuration needs to be performed after deployment<ul id="c501ec0d-e6e7-4b63-9898-4f3e072355ca" class="bulleted-list"><li style="list-style-type:circle">such as, loading application onto a virtual machine</li></ul><ul id="67c02fc7-d970-42b4-bd18-3e50da84504c" class="bulleted-list"><li style="list-style-type:circle">configuring a database cluster</li></ul><ul id="d46b5c68-2667-457b-911f-3317d38c3da2" class="bulleted-list"><li style="list-style-type:circle">generating files on an NFS share</li></ul></li></ul><ul id="7cd27273-7ab9-4e30-916e-214e71738f76" class="bulleted-list"><li style="list-style-type:disc">if you want to stay in Terraform env, there are many providers and resources that can help<ul id="52fa4c0d-c114-4ebe-8032-12f655595c75" class="bulleted-list"><li style="list-style-type:circle">File resource</li></ul><ul id="3f2c9805-a5bf-4ed9-a923-f204eb4fde0d" class="bulleted-list"><li style="list-style-type:circle">mySQL provider</li></ul></li></ul><ul id="bad782d9-ec65-40e2-a191-0de5473a8a64" class="bulleted-list"><li style="list-style-type:disc">another option is to pass data to servers and their OS specifically when they startup<ul id="68622342-b498-4f8a-9853-91910b819452" class="bulleted-list"><li style="list-style-type:circle">all major cloud providers offer this</li></ul><ul id="70ca435a-bf58-4c57-9122-f090063e78f4" class="bulleted-list"><li style="list-style-type:circle">downside is terraform cannot track if successfully passed or not</li></ul></li></ul><ul id="bf487038-449f-453f-8223-0f062a3b8604" class="bulleted-list"><li style="list-style-type:disc">can also leverage configuration management software<ul id="fa66bd7f-30a1-4852-b839-75b92e3d871e" class="bulleted-list"><li style="list-style-type:circle">e.g Ansible, Puppet, Chef</li></ul><ul id="2e43b6f7-2200-4707-b82d-6acc31a403e7" class="bulleted-list"><li style="list-style-type:circle">these can bake the config management software into an image for a machine and get terraform use that image when it creates instance</li></ul></li></ul><ul id="87e0690b-acb8-4749-91e4-c15ed8d31a0e" class="bulleted-list"><li style="list-style-type:disc">Last option is Terraform Provisioners<ul id="ee4c533c-4fcd-4fef-b422-31f378f2438c" class="bulleted-list"><li style="list-style-type:circle">last option</li></ul></li></ul><p id="c651a425-13c3-4ef8-94dd-5ae7a93533f2" class="">
+</p><ul id="bab43286-4003-4158-9021-62c2ba431a9e" class="bulleted-list"><li style="list-style-type:disc">Provisioners are defined as part of resource</li></ul><ul id="9486d747-2ee4-43bc-9db7-1544c1505152" class="bulleted-list"><li style="list-style-type:disc">executed during resource creation or destruction</li></ul><ul id="0d3da689-e6bb-4394-b655-941e254143a7" class="bulleted-list"><li style="list-style-type:disc">each resource can have multiple provisioners</li></ul><ul id="0ce624cc-0a04-45ae-b72c-1295890fec42" class="bulleted-list"><li style="list-style-type:disc">to run a provisioner without a resource, run within a <em>null_resource</em></li></ul><ul id="3c331691-3371-45b7-9d5c-12b4ce00dd63" class="bulleted-list"><li style="list-style-type:disc">if provisioner fails, can tell terraform to fail all resource or continue on</li></ul><p id="18ee1304-3ba5-4e6e-8c7d-5a77e1c6b153" class="">
+</p><ul id="4684ec91-0a21-4252-bef0-f10b80648ab6" class="bulleted-list"><li style="list-style-type:disc">Provisioner is a last result because Terraform can’t fully understand or manage them</li></ul><ul id="df19fa44-98e5-4a88-8b43-386eba493cd3" class="bulleted-list"><li style="list-style-type:disc">You need to check for errors, idempotence and consistency</li></ul><p id="fdaec5f2-75e8-429b-87df-d52da2a02180" class="">
+</p><ul id="65bbeda9-674c-4fc8-be60-ae202335bbda" class="bulleted-list"><li style="list-style-type:disc">Three types of Provisioners<ol type="1" id="9926a097-d1fc-43ed-897a-6fe91b8877d9" class="numbered-list" start="1"><li>File: create files and directories on remote system</li></ol><ol type="1" id="91a633e3-2ee9-4f9e-bb84-ce9aab8ec7b2" class="numbered-list" start="2"><li>Local-exec: run a script on the local machine executing terraform run<ol type="a" id="069e93a1-de88-4c4d-879a-4ce43fdacb83" class="numbered-list" start="1"><li>used for functionality which may not yet be in a provider</li></ol><ol type="a" id="500327dd-6031-41dc-8cbf-48506c9f20ba" class="numbered-list" start="2"><li>most common provisioner</li></ol></li></ol><ol type="1" id="63a5a428-fb86-4674-abe0-0bda2b60bc7f" class="numbered-list" start="3"><li>Remote-exec: run a script on a remote system</li></ol><p id="dc644ea2-58cc-4099-9e82-a7f76cf45877" class="">
+</p></li></ul><ul id="c7dc505f-3af4-4686-8578-6baf39b6fbc2" class="bulleted-list"><li style="list-style-type:disc">In most cases, a file provisioner or remote-exec provisioner can be replaced by passing data to instance on creation through user data in aws or similar for other cloud providers</li></ul><p id="25d0d101-8a47-4d08-9796-e445d23b04e6" class="">
+</p><p id="81d7371a-a4a3-4202-b57e-f1a2e8a3d80f" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Formatting </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>of terraform files can be done using<div class="indented"><p id="d66bc640-fbc0-423a-b7f5-bd6b2fe6b5c8" class=""><em><em><em><em><em><em><em><em><em><em><em><em><em>terraform fmt</em></em></em></em></em></em></em></em></em></em></em></em></em></p></div></p><p id="82500c07-5005-45c8-a4cf-cdce00136d7f" class="">which automatically makes the changes to the files to bring them in line with Hashicorp standard for HC configuration files</p><p id="c7659a77-7018-42fc-a7b1-28969e0e1ae0" class="">
+</p><h3 id="feb5db68-9fcb-448c-82f4-331b890e8f8d" class="">Summary</h3><ul id="31fdb78c-525f-4992-af50-9135a0829e69" class="bulleted-list"><li style="list-style-type:disc">We learnt how to add a new provider</li></ul><ul id="a6ea6e8f-208f-4981-9649-3627d8389e66" class="bulleted-list"><li style="list-style-type:disc">how to specify proper version and source in provider’s block</li></ul><ul id="7de63fdf-fa1e-43b7-a371-372a2e2c0303" class="bulleted-list"><li style="list-style-type:disc">learnt about Terraform’s dependency graph</li></ul><ul id="88e14925-fc3e-4fed-b01e-68fff190c3ef" class="bulleted-list"><li style="list-style-type:disc">learnt how to perform post deployment configuration</li></ul><p id="f0f57fdd-1b14-477f-aa26-223be1b93dce" class="">
+</p></div></article></body></html>
